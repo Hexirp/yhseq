@@ -13,10 +13,12 @@ module Numeric.YHSeq.V011.Type
 
   type Diff = Integer
 
-  type Parent = [Integer]
+  type Parent = Integer
+
+  type ParentList = [Parent]
 
   type Depth = Integer
 
-  type DPNTuple = (Diff, Parent, Depth)
+  type DPNTuple = (Diff, ParentList, Depth)
 
   type DPN = [DPNTuple]
