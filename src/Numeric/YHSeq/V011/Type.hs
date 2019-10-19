@@ -7,7 +7,7 @@ module Numeric.YHSeq.V011.Type
 
   import Prelude
 
-  import Data.LIst
+  import Data.List
 
   type Seq = [Integer]
 
