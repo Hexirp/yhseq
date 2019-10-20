@@ -1,8 +1,18 @@
 module Numeric.YHSeq.V011.Type
-  ( last
-  , map
-  , reverse
-  , concat
+  ( Seq
+  , Index
+  , Diff
+  , ParentIndex
+  , ParentList
+  , Depth
+  , DPNTuple
+  , DPN
+  , index
+  , index1
+  , idx
+  , indexSeq
+  , indexDPN
+  , indexPList
   ) where
 
   import Prelude
