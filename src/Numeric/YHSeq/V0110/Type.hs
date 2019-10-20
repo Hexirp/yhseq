@@ -11,11 +11,13 @@ module Numeric.YHSeq.V011.Type
 
   type Seq = [Integer]
 
+  type Index = Integer
+
   type Diff = Integer
 
-  type Parent = Integer
+  type ParentIndex = Index
 
-  type ParentList = [Parent]
+  type ParentList = [ParentIndex]
 
   type Depth = Integer
 
@@ -41,13 +43,13 @@ module Numeric.YHSeq.V011.Type
         then xv
         else index xs (n - 1)
 
-  indexSeq :: Seq -> Integer -> Integer
+  indexSeq :: Seq -> Index -> Integer
   indexSeq = index1
 
-  indexDPN :: DPN -> Integer -> DPNTuple
+  indexDPN :: DPN -> Index -> DPNTuple
   indexDPN = index1
 
-  indexPList :: ParentList -> Integer -> Parent
+  indexPList :: ParentList -> Index -> ParentIndex
   indexPList = index
 
   idx :: [a] -> Integer -> a
