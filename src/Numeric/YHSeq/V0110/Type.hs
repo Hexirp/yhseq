@@ -48,15 +48,6 @@ module Numeric.YHSeq.V011.Type
       then xv
       else index1' xs (n - 1)
 
-  indexSeq :: Seq -> Index -> Integer
-  indexSeq = index1
-
-  indexDPN :: DPN -> Index -> DPNTuple
-  indexDPN = index1
-
-  indexPList :: ParentList -> Index -> ParentIndex
-  indexPList = index
-
   idx :: [a] -> Integer -> a
   idx x n = if n < 0
     then error "idx: negative index"
@@ -70,3 +61,12 @@ module Numeric.YHSeq.V011.Type
     else case x of
       []      -> a
       xv : xs -> idx' xv xs (n - 1)
+
+  indexSeq :: Seq -> Index -> Integer
+  indexSeq = index1
+
+  indexDPN :: DPN -> Index -> DPNTuple
+  indexDPN = index1
+
+  indexPList :: ParentList -> Index -> ParentIndex
+  indexPList = index
