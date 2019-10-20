@@ -27,20 +27,26 @@ module Numeric.YHSeq.V011.Type
   index :: [a] -> Integer -> a
   index x n = if n < 0
     then error "index: negative index"
-    else case x of
-      [] -> error "index: index too large"
-      xv : xs -> if n == 0
-        then xv
-        else index xs (n - 1)
+    else index' x n
+
+  index' :: [a] -> Integer -> a
+  index' x n = case x of
+    [] -> error "index: index too large"
+    xv : xs -> if n == 0
+      then xv
+      else index' xs (n - 1)
 
   index1 :: [a] -> Integer -> a
   index1 x n = if n < 1
     then error "index1: not positive index"
-    else case x of
-      [] -> error "index1: index too large"
-      xv : xs -> if n == 1
-        then xv
-        else index xs (n - 1)
+    else index1' x n
+
+  index1' :: [a] -> Integer -> a
+  index1' x n = case x of
+    [] -> error "index1: index too large"
+    xv : xs -> if n == 1
+      then xv
+      else index1' xs (n - 1)
 
   indexSeq :: Seq -> Index -> Integer
   indexSeq = index1
