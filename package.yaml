@@ -1,7 +1,7 @@
 name:                yhseq
 version:             0.1.0.0
 github:              "Hexirp/yhseq"
-license:             BSD3
+license:             Apache-2.0
 author:              "Hexirp"
 maintainer:          "https://github.com/Hexirp/yhseq"
 copyright:           "(C) Hexirp 2019"
