@@ -31,7 +31,7 @@ module Numeric.YHSeq.V011.Type
 
   index' :: [a] -> Integer -> a
   index' x n = case x of
-    [] -> error "index: index too large"
+    []      -> error "index: index too large"
     xv : xs -> if n == 0
       then xv
       else index' xs (n - 1)
@@ -43,7 +43,7 @@ module Numeric.YHSeq.V011.Type
 
   index1' :: [a] -> Integer -> a
   index1' x n = case x of
-    [] -> error "index1: index too large"
+    []      -> error "index1: index too large"
     xv : xs -> if n == 1
       then xv
       else index1' xs (n - 1)
@@ -61,12 +61,12 @@ module Numeric.YHSeq.V011.Type
   idx x n = if n < 0
     then error "idx: negative index"
     else case x of
-      [] -> error "idx: empty list"
+      []      -> error "idx: empty list"
       xv : xs -> idx' xv xs n
 
   idx' :: a -> [a] -> Integer -> a
   idx' a x n = if n == 0
     then a
     else case x of
-      [] -> a
+      []      -> a
       xv : xs -> idx' xv xs (n - 1)
