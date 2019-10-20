@@ -6,7 +6,6 @@ module Numeric.YHSeq.V011.Type
   ) where
 
   import Prelude
-
   import Data.List
 
   type Seq = [Integer]
