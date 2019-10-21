@@ -8,6 +8,9 @@ module Numeric.YHSeq.V0110.Type
   , Depth
   , DPNTuple
   , DPN
+  , length
+  , lengthSeq
+  , lengthDPN
   , index
   , index1
   , idx
