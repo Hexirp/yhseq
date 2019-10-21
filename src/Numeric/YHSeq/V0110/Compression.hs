@@ -23,3 +23,13 @@ module Numeric.YHSeq.V0110.Compression where
       LT -> error "mtP: irregular value of mtD"
       EQ -> 0
       GT -> searchParentAnc s x n
+
+  searchParent :: Seq -> Index -> ParentIndex
+  searchParent s x = searchParent' s x (x - 1)
+
+  searchParent' :: Seq -> Index -> ParentIndex -> ParentIndex
+  searchParent' s x p = if p <= 0
+    then 0
+    else if mtD s p n < mtD s x n
+      then p
+      else searchParent' s x (p - 1)
