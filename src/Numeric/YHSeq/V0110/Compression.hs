@@ -99,15 +99,15 @@ module Numeric.YHSeq.V0110.Compression where
   searchParent' s x n p = case p `compare` 0 of
     LT -> error "searchParent: impossible case"
     EQ -> 0
-    GT -> if mtD s p n < mtD s x n && isAncestor s x n p
+    GT -> if mtD s p n < mtD s x n && isAnc s x n p
       then p
       else searchParent' s x n (p - 1)
 
-  isAncestor :: Seq -> Index -> Depth -> ParentIndex -> Bool
-  isAncestor s x n p = if x <= 0
-    then error "isAncestor: non-positive index"
+  isAnc :: Seq -> Index -> Depth -> ParentIndex -> Bool
+  isAnc s x n p = if x <= 0
+    then error "isAnc: non-positive index"
     else case n `compare` 0
-      LT -> error "isAncestor: non-positive depth"
+      LT -> error "isAnc: non-positive depth"
       EQ -> True
       GT -> p `elem` anc s x (n - 1)
 
