@@ -29,7 +29,7 @@ module Numeric.YHSeq.V0110.Compression where
 
   searchParent' :: Seq -> Index -> ParentIndex -> ParentIndex
   searchParent' s x p = if p <= 0
-    then 0
+    then error "searchParent: no parent"
     else if mtD s p n < mtD s x n
       then p
       else searchParent' s x (p - 1)
