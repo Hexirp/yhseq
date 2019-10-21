@@ -42,7 +42,7 @@ module Numeric.YHSeq.V0110.Compression where
       else searchParent' s x (p - 1)
 
   searchParentAnc :: Seq -> Index -> Depth -> ParentIndex
-  searcnParentAnc s x n = if x <= 0
+  searchParentAnc s x n = if x <= 0
     then error "searchParentAnc: non-positive index"
     else case n `compare` 1 of
       LT -> error "searchParentAnc: non-positive depth"
