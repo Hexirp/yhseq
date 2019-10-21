@@ -56,3 +56,14 @@ module Numeric.YHSeq.V0110.Compression where
     GT -> if mtD s p n < mtD s x n && p `elem` anc s x (n - 1)
       then p
       else searchParentAnc' s x n (p - 1)
+
+  anc :: Seq -> Index -> Depth -> [ParentIndex]
+  anc s x n = if x <= 0
+    then error "anc: non-positive index"
+    else anc' s x n
+
+  anc' :: Seq -> Index -> Depth -> [ParentIndex]
+  anc' s x n = case x `compare` 0 of
+    LT -> error "anc: impossible case"
+    EQ -> []
+    GT -> x : anc' s (mtP s x n) n
