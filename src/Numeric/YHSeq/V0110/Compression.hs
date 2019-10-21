@@ -113,7 +113,7 @@ module Numeric.YHSeq.V0110.Compression where
 
   anc' :: Seq -> Index -> Depth -> [ParentIndex]
   anc' s x n = case x `compare` 0 of
-    LT -> error "anc: impossible case"
+    LT -> error "anc: irregular value of mtP"
     EQ -> []
     GT -> x : anc' s (mtP s x n) n
 
