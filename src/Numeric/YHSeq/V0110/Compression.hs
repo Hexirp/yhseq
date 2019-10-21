@@ -5,7 +5,7 @@ module Numeric.YHSeq.V0110.Compression where
 
   mtD :: Seq -> Index -> Depth -> Diff
   mtD s x n = case n `compare` 1 of
-    LT -> error "mtD: not positive depth"
+    LT -> error "mtD: non-positive depth"
     EQ -> indexSeq s x
     GT -> case mtP s x (n - 1) `compare` 0 of
       LT -> error "mtD: irregular value of mtP"

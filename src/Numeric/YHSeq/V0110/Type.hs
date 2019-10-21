@@ -47,7 +47,7 @@ module Numeric.YHSeq.V0110.Type
 
   index1 :: [a] -> Integer -> a
   index1 x n = if n < 1
-    then error "index1: not positive index"
+    then error "index1: non-positive index"
     else index1' x n
 
   index1' :: [a] -> Integer -> a
