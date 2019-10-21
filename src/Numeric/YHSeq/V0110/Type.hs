@@ -33,6 +33,16 @@ module Numeric.YHSeq.V0110.Type
 
   type DPN = [DPNTuple]
 
+  length :: [a] -> Integer
+  length []      = 0
+  length (_ : s) = length s + 1
+
+  lengthSeq :: Seq -> Integer
+  lengthSeq = length
+
+  lengthDPN :: DPN -> Integer
+  lengthDPN = length
+
   index :: [a] -> Integer -> a
   index x n = if n < 0
     then error "index: negative index"
