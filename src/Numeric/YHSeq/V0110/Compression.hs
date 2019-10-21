@@ -1,3 +1,5 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
 module Numeric.YHSeq.V0110.Compression
   ( mtD
   , mtP
