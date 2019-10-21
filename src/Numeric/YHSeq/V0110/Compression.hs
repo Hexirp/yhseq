@@ -107,7 +107,9 @@ module Numeric.YHSeq.V0110.Compression where
   anc :: Seq -> Index -> Depth -> [ParentIndex]
   anc s x n = if x <= 0
     then error "anc: non-positive index"
-    else anc' s x n
+    else if n <= 0
+      then error "anc: non-positive depth"
+      else anc' s x n
 
   anc' :: Seq -> Index -> Depth -> [ParentIndex]
   anc' s x n = case x `compare` 0 of
