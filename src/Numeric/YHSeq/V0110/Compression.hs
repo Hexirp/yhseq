@@ -11,3 +11,12 @@ module Numeric.YHSeq.V0110.Compression where
       LT -> error "mtD: irregular value of mtP"
       EQ -> 0
       GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
+
+  mtP :: Seq -> Index -> Depth -> ParentIndex
+  mtP s x n = case n `compare` 1 of
+    LT -> error "mtP: non-positive depth"
+    EQ -> case mtD s x n `compare` 1 of
+      LT -> error "mtP: irregular value of mtD"
+      EQ -> 0
+      GT -> searchParent s x
+    GT -> searchParentAnc s x n
