@@ -6,7 +6,6 @@ module Numeric.YHSeq.V0110.Compression
   , anc
   ) where
 
-  import Prelude
   import Numeric.YHSeq.V0110.Type
 
   mtD :: Seq -> Index -> Depth -> Diff

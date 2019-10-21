@@ -1,5 +1,6 @@
 module Numeric.YHSeq.V0110.Type
-  ( Seq
+  ( module Prelude
+  , Seq
   , Index
   , Diff
   , ParentIndex
@@ -15,7 +16,7 @@ module Numeric.YHSeq.V0110.Type
   , indexPList
   ) where
 
-  import Prelude
+  import Prelude hiding (length)
 
   type Seq = [Integer]
 
