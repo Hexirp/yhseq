@@ -81,6 +81,6 @@ module Numeric.YHSeq.V0110.Compression
   nonEmptyDepth s = nonEmptyDepth' s 1
 
   nonEmptyDepth' :: Seq -> Depth -> Depth
-  nonEmptyDepth' s x = let x' = x + 1 in if mtD (length s) x' == 0
+  nonEmptyDepth' s x = if mtD (length s) (x + 1) == 0
     then x
-    else nonEmptyDepth' s x'
+    else nonEmptyDepth' s (x + 1)
