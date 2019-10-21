@@ -37,7 +37,7 @@ module Numeric.YHSeq.V0110.Compression where
   searchParent' s x p = case p `compare` 0 of
     LT -> error "searchParent: impossible case"
     EQ -> error "searchParent: no parent"
-    GT -> if mtD s p n < mtD s x n
+    GT -> if mtD s p 1 < mtD s x 1
       then p
       else searchParent' s x (p - 1)
 
