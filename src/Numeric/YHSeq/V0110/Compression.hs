@@ -67,3 +67,59 @@ module Numeric.YHSeq.V0110.Compression where
     LT -> error "anc: impossible case"
     EQ -> []
     GT -> x : anc' s (mtP s x n) n
+
+  {-
+
+  mtD :: Seq -> Index -> Depth -> Diff
+  mtD s x n = if x <= 0
+    then error "mtD: non-positive index"
+    else case n `compare` 1 of
+      LT -> error "mtD: non-positive depth"
+      EQ -> indexSeq s x
+      GT -> case mtP s x (n - 1) `compare` 0 of
+        LT -> error "mtD: irregular value of mtP"
+        EQ -> 0
+        GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
+
+  mtP :: Seq -> Index -> Depth -> ParentIndex
+  mtP s x n = if x <= 0
+    then error "mtP: non-positive index"
+    else if n <= 0
+      then error "mtP: non-positive depth"
+      else searchParent s x n
+
+  searchParent :: Seq -> Index -> Depth -> ParentIndex
+  searcnParent s x n = if x <= 0
+    then error "searchParent: non-positive index"
+    else if n <= 0
+      then error "searchParent: non-positive depth"
+      else searchParent' s x n (x - 1)
+
+  searchParent' :: Seq -> Index -> Depth -> ParentIndex -> ParentIndex
+  searchParent' s x n p = case p `compare` 0 of
+    LT -> error "searchParent: impossible case"
+    EQ -> 0
+    GT -> if mtD s p n < mtD s x n && isAncestor s x n p
+      then p
+      else searchParent' s x n (p - 1)
+
+  isAncestor :: Seq -> Index -> Depth -> ParentIndex -> Bool
+  isAncestor s x n p = if x <= 0
+    then error "isAncestor: non-positive index"
+    else case n `compare` 0
+      LT -> error "isAncestor: non-positive depth"
+      EQ -> True
+      GT -> p `elem` anc s x (n - 1)
+
+  anc :: Seq -> Index -> Depth -> [ParentIndex]
+  anc s x n = if x <= 0
+    then error "anc: non-positive index"
+    else anc' s x n
+
+  anc' :: Seq -> Index -> Depth -> [ParentIndex]
+  anc' s x n = case x `compare` 0 of
+    LT -> error "anc: impossible case"
+    EQ -> []
+    GT -> x : anc' s (mtP s x n) n
+
+  -}
