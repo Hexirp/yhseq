@@ -86,22 +86,15 @@ module Numeric.YHSeq.V0110.Compression where
     then error "mtP: non-positive index"
     else if n <= 0
       then error "mtP: non-positive depth"
-      else searchParent s x n
+      else mtP' s x n (x - 1)
 
-  searchParent :: Seq -> Index -> Depth -> ParentIndex
-  searcnParent s x n = if x <= 0
-    then error "searchParent: non-positive index"
-    else if n <= 0
-      then error "searchParent: non-positive depth"
-      else searchParent' s x n (x - 1)
-
-  searchParent' :: Seq -> Index -> Depth -> ParentIndex -> ParentIndex
-  searchParent' s x n p = case p `compare` 0 of
-    LT -> error "searchParent: impossible case"
+  mtP' :: Seq -> Index -> Depth -> ParentIndex -> ParentIndex
+  mtP' s x n p = case p `compare` 0 of
+    LT -> error "mtP: impossible case"
     EQ -> 0
     GT -> if mtD s p n < mtD s x n && isAnc s x n p
       then p
-      else searchParent' s x n (p - 1)
+      else mtP' s x n (p - 1)
 
   isAnc :: Seq -> Index -> Depth -> ParentIndex -> Bool
   isAnc s x n p = if x <= 0
