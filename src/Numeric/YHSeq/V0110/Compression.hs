@@ -19,4 +19,7 @@ module Numeric.YHSeq.V0110.Compression where
       LT -> error "mtP: irregular value of mtD"
       EQ -> 0
       GT -> searchParent s x
-    GT -> searchParentAnc s x n
+    GT -> case mtD s x n `compare` 0 of
+      LT -> error "mtP: irregular value of mtD"
+      EQ -> 0
+      GT -> searchParentAnc s x n
