@@ -88,3 +88,9 @@ module Numeric.YHSeq.V0110.Compression
 
   cl :: Seq -> Integer
   cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
+
+  compressionDepth :: Seq -> Depth
+  compressionDepth s = case cl s `compare` 1 of
+    LT -> error "compressionDepth: irregular value of cl"
+    EQ -> nonEmptyDepth s - 1
+    GT -> nonEmptyDepth s
