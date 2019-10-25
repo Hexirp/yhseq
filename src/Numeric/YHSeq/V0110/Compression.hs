@@ -105,3 +105,6 @@ module Numeric.YHSeq.V0110.Compression
   btm' s x n = if not (mtD s x (n + 1) > 0)
     then n
     else btm' s x (n + 1)
+
+  cN :: Seq -> Index -> Depth
+  cN s x = compressionDepth s `min` btm s x
