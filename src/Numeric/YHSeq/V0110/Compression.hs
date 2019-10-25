@@ -130,3 +130,8 @@ module Numeric.YHSeq.V0110.Compression
   cD s x = if x <= 0
     then error "cD: non-positive index"
     else mtD s x (cN s x)
+
+  cP :: Seq -> Index -> ParentList
+  cP s x = if x <= 0
+    then error "cP: non-positive index"
+    else map (\p -> mtP s x p) $ enumFromTo (cM s x) (cN s x)
