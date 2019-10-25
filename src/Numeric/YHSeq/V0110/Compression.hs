@@ -6,7 +6,7 @@ module Numeric.YHSeq.V0110.Compression
   , searchParent
   , searchParentAnc
   , anc
-  , notEmptyDepth
+  , nonEmptyDepth
   , cl
   , compressionDepth
   , cM
