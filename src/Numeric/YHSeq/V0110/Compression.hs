@@ -107,7 +107,9 @@ module Numeric.YHSeq.V0110.Compression
     else btm' s x (n + 1)
 
   cN :: Seq -> Index -> Depth
-  cN s x = compressionDepth s `min` btm s x
+  cN s x = if x <= 0
+    then error "cN: non-positive index"
+    else compressionDepth s `min` btm s x
 
   cU :: Seq -> Index -> Depth
   cU s x = if x <= 0
