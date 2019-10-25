@@ -6,6 +6,17 @@ module Numeric.YHSeq.V0110.Compression
   , searchParent
   , searchParentAnc
   , anc
+  , notEmptyDepth
+  , cl
+  , compressionDepth
+  , cM
+  , cU
+  , btm
+  , cD
+  , cP
+  , cN
+  , seqClass
+  , compress
   ) where
 
   import Numeric.YHSeq.V0110.Type
