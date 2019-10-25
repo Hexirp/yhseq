@@ -82,9 +82,9 @@ module Numeric.YHSeq.V0110.Compression
   nonEmptyDepth s = nonEmptyDepth' s 1
 
   nonEmptyDepth' :: Seq -> Depth -> Depth
-  nonEmptyDepth' s x = if not (mtD s (lengthSeq s) (x + 1) > 0)
-    then x
-    else nonEmptyDepth' s (x + 1)
+  nonEmptyDepth' s n = if not (mtD s (lengthSeq s) (n + 1) > 0)
+    then n
+    else nonEmptyDepth' s (n + 1)
 
   cl :: Seq -> Integer
   cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
