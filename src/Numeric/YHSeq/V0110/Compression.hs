@@ -135,3 +135,10 @@ module Numeric.YHSeq.V0110.Compression
   cP s x = if x <= 0
     then error "cP: non-positive index"
     else map (\p -> mtP s x p) $ enumFromTo (cM s x) (cN s x)
+
+
+  seqClass :: Seq -> Integer
+  seqClass = cl
+
+  compress :: Seq -> DPN
+  compress s = map (\x -> (cD s x, cP s x, cN s x)) $ enumFromTo 1 (lengthSeq s)
