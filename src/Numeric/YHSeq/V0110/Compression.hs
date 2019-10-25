@@ -94,3 +94,14 @@ module Numeric.YHSeq.V0110.Compression
     LT -> error "compressionDepth: irregular value of cl"
     EQ -> nonEmptyDepth s - 1
     GT -> nonEmptyDepth s
+
+
+  btm :: Seq -> Index -> Depth
+  btm s x = if x <= 0
+    then error "btm: non-positive index"
+    else btm' s x 1
+
+  btm' :: Seq -> Index -> Depth -> Depth
+  btm' s x n = if not (mtD s x (n + 1) > 0)
+    then n
+    else btm' s x (n + 1)
