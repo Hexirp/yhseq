@@ -125,3 +125,8 @@ module Numeric.YHSeq.V0110.Compression
   cM s x = if x <= 0
     then error "cM: non-positive index"
     else cN s x `min` cU s x
+
+  cD :: Seq -> Index -> Diff
+  cD s x = if x <= 0
+    then error "cD: non-positive index"
+    else mtD s x (cN s x)
