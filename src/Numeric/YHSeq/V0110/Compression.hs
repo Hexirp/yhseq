@@ -120,3 +120,8 @@ module Numeric.YHSeq.V0110.Compression
   cU' s x n = if not (mtP s x 1 == mtP s x (n + 1) && n + 1 <= btm s x)
     then n
     else cU' s x (n + 1)
+
+  cM :: Seq -> Index -> Depth
+  cM s x = if x <= 0
+    then error "cM: non-positive index"
+    else cN s x `min` cU s x
