@@ -17,7 +17,7 @@ module Numeric.YHSeq.V0110.Decompression
   reP :: DPN -> Index -> Depth -> Diff
   reP z x n = if n > indexN z x
     then 0
-    else idx (reverse $ indexD z x) (indexN z x - n)
+    else idx (reverse $ indexP z x) (indexN z x - n)
 
   decompress :: DPN -> Seq
   decompress z = map (\x -> reD z x 1) (enumFromTo 1 (lengthDPN z))
