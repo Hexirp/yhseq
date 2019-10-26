@@ -93,5 +93,14 @@ module Numeric.YHSeq.V0110.Type
   indexDPN :: DPN -> Index -> DPNTuple
   indexDPN = index1
 
+  indexD :: DPN -> Index -> Diff
+  indexD = \x -> case indexDPN x of (d, _, _) -> d
+
+  indexP :: DPN -> Index -> ParentList
+  indexP = \x -> case indexDPN x of (_, p, _) -> p
+
+  indexN :: DPN -> Index -> Depth
+  indexN = \x -> case indexDPN x of (_, _, n) -> n
+
   indexPList :: ParentList -> Index -> ParentIndex
   indexPList = index
