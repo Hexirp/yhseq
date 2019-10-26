@@ -18,6 +18,9 @@ module Numeric.YHSeq.V0110.Type
   , idx
   , indexSeq
   , indexDPN
+  , indexD
+  , indexP
+  , indexN
   , indexPList
   ) where
 
