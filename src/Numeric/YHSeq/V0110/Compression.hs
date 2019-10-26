@@ -198,6 +198,62 @@ module Numeric.YHSeq.V0110.Compression
     then error "cP: non-positive index"
     else map (\p -> mtP s x p) $ enumFromTo (cM s x) (cN s x)
 
+  {-
+
+  btm :: Seq -> Index -> Depth
+  btm s x = if x <= 0
+    then error "btm: non-positive index"
+    else btm' s x 1
+
+  btm' :: Seq -> Index -> Depth -> Depth
+  btm' s x n = if not (mtD s x (n + 1) > 0)
+    then n
+    else btm' s x (n + 1)
+
+  nonEmptyDepth :: Seq -> Depth
+  nonEmptyDepth s = btm s 1
+
+  cl :: Seq -> Integer
+  cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
+
+  compressionDepth :: Seq -> Depth
+  compressionDepth s = case cl s `compare` 1 of
+    LT -> error "compressionDepth: irregular value of cl"
+    EQ -> nonEmptyDepth s - 1
+    GT -> nonEmptyDepth s
+
+  cN :: Seq -> Index -> Depth
+  cN s x = if x <= 0
+    then error "cN: non-positive index"
+    else compressionDepth s `min` btm s x
+
+  cU :: Seq -> Index -> Depth
+  cU s x = if x <= 0
+    then error "cU: non-positive index"
+    else cU' s x 1
+
+  cU' :: Seq -> Index -> Depth -> Depth
+  cU' s x n = if not (mtP s x 1 == mtP s x (n + 1) && n + 1 <= btm s x)
+    then n
+    else cU' s x (n + 1)
+
+  cM :: Seq -> Index -> Depth
+  cM s x = if x <= 0
+    then error "cM: non-positive index"
+    else cN s x `min` cU s x
+
+  cD :: Seq -> Index -> Diff
+  cD s x = if x <= 0
+    then error "cD: non-positive index"
+    else mtD s x (cN s x)
+
+  cP :: Seq -> Index -> ParentList
+  cP s x = if x <= 0
+    then error "cP: non-positive index"
+    else map (\p -> mtP s x p) $ enumFromTo (cM s x) (cN s x)
+
+  -}
+
 
   seqClass :: Seq -> Integer
   seqClass = cl
