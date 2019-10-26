@@ -1,6 +1,10 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Decompression where
+module Numeric.YHSeq.V0110.Decompression
+  ( reD
+  , reP
+  , decompress
+  ) where
 
   import Numeric.YHSeq.V0110.Type
 
