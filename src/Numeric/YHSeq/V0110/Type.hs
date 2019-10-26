@@ -1,5 +1,8 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
 module Numeric.YHSeq.V0110.Type
-  ( Seq
+  ( module Prelude
+  , Seq
   , Index
   , Diff
   , ParentIndex
@@ -7,6 +10,9 @@ module Numeric.YHSeq.V0110.Type
   , Depth
   , DPNTuple
   , DPN
+  , length
+  , lengthSeq
+  , lengthDPN
   , index
   , index1
   , idx
@@ -15,7 +21,7 @@ module Numeric.YHSeq.V0110.Type
   , indexPList
   ) where
 
-  import Prelude
+  import Prelude hiding (length)
 
   type Seq = [Integer]
 
@@ -32,6 +38,16 @@ module Numeric.YHSeq.V0110.Type
   type DPNTuple = (Diff, ParentList, Depth)
 
   type DPN = [DPNTuple]
+
+  length :: [a] -> Integer
+  length []      = 0
+  length (_ : s) = length s + 1
+
+  lengthSeq :: Seq -> Integer
+  lengthSeq = length
+
+  lengthDPN :: DPN -> Integer
+  lengthDPN = length
 
   index :: [a] -> Integer -> a
   index x n = if n < 0
@@ -76,6 +92,15 @@ module Numeric.YHSeq.V0110.Type
 
   indexDPN :: DPN -> Index -> DPNTuple
   indexDPN = index1
+
+  indexD :: DPN -> Index -> Diff
+  indexD = \x -> case indexDPN x of (d, _, _) -> d
+
+  indexP :: DPN -> Index -> ParentList
+  indexP = \x -> case indexDPN x of (_, p, _) -> p
+
+  indexN :: DPN -> Index -> Depth
+  indexN = \x -> case indexDPN x of (_, _, n) -> n
 
   indexPList :: ParentList -> Index -> ParentIndex
   indexPList = index
