@@ -131,3 +131,6 @@ module Numeric.YHSeq.V0110.Type
     xv : xs -> if a <= n && n <= b
       then xv : slice1' xs a b (n + 1)
       else slice1' xs a b (n + 1)
+
+  sliceDPN :: DPN -> Integer -> Integer -> DPN
+  sliceDPN = slice1
