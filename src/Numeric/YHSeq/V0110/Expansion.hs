@@ -61,3 +61,15 @@ module Numeric.YHSeq.V0110.Expansion where
 
   ris :: DPN -> Integer -> Index -> ParentList -> ParentList
   ris z m y p = map (\q -> rising z m y q) p
+
+
+  newD :: DPN -> Integer -> Index -> Diff
+  newD z m y = indexD z (badRootL z - 1 + y)
+
+  newP :: DPN -> Integer -> Index -> ParentList
+  newP z m y = if y == 1
+    then ris z (m - 1) y (bas z y)
+    else ris z m y (bas z y)
+
+  newN :: DPN -> Integer -> Index -> Depth
+  newN z m y = indexN z (badRootL z - 1 + y)
