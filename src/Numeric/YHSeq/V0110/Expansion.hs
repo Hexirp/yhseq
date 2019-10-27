@@ -79,3 +79,10 @@ module Numeric.YHSeq.V0110.Expansion where
     then badPart z
     else map (\y -> (newD z m y, newP z m y, newZ z m y)) $
       enumFromTo 1 (delta z)
+
+
+  expand :: DPN -> Integer -> Integer
+  expand z c n = case c `compare` 1 of
+    LT -> error "expand: non-positive class"
+    EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
+    GT -> error "expand: is undefined when class is greater than 1"
