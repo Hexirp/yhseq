@@ -44,3 +44,7 @@ module Numeric.YHSeq.V0110.Expansion where
 
   delta :: DPN -> Integer
   delta z = lengthDPN z - badRootL z
+
+  -- ascension matrix
+  amt :: DPN -> Index -> Bool
+  amt z y = badRootL `elem` anc z (badRootL - 1 + y) 1
