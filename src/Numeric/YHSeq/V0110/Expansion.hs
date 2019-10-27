@@ -73,3 +73,9 @@ module Numeric.YHSeq.V0110.Expansion where
 
   newN :: DPN -> Integer -> Index -> Depth
   newN z m y = indexN z (badRootL z - 1 + y)
+
+  copiedBadPart :: DPN -> Integer -> DPN
+  copiedBadPart z m = if m == 0
+    then badPart z
+    else map (\y -> (newD z m y, newP z m y, newZ z m y)) $
+      enumFromTo 1 (delta z)
