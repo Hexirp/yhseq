@@ -15,3 +15,24 @@ module Numeric.YHSeq.V0110.Expansion where
 
   cuttedPart :: DPN -> DPN
   cuttedPart z = sliceDPN (lengthDPN z) (lengthDPN z)
+
+
+  pnt :: DPN -> Index -> Depth -> ParentIndex
+  pnt z x n = if x <= 0
+    then error "pnt: non-positive index"
+    else if n > indexN z x
+      then 0
+      else idx (reverse $ indexP z x) (indexN z x - n)
+
+  anc :: DPN -> Index -> Depth -> [ParentIndex]
+  anc z x n = if x <= 0
+    then error "anc: non-positive index"
+    else if n <= 0
+      then error "anc: non-positive depth"
+      else anc' z x n
+
+  anc' :: DPN -> Index -> Depth -> [ParentIndex]
+  anc' z x n = case x `compare` 0 of
+    LT -> error "anc: irregular value of pnt"
+    EQ -> []
+    GT -> x : anc' z (pnt z x n) n
