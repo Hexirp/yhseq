@@ -41,3 +41,6 @@ module Numeric.YHSeq.V0110.Expansion where
   -- bad root (length)
   badRootL :: DPN -> Index
   badRootL z = badRoot z
+
+  delta :: DPN -> Integer
+  delta z = lengthDPN z - badRootL z
