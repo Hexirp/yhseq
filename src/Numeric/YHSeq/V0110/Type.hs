@@ -22,6 +22,9 @@ module Numeric.YHSeq.V0110.Type
   , indexP
   , indexN
   , indexPList
+  , slice
+  , slice1
+  , sliceDPN
   ) where
 
   import Prelude hiding (length)
