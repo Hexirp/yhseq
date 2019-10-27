@@ -36,3 +36,8 @@ module Numeric.YHSeq.V0110.Expansion where
     LT -> error "anc: irregular value of pnt"
     EQ -> []
     GT -> x : anc' z (pnt z x n) n
+
+
+  -- bad root (length)
+  badRootL :: DPN -> Index
+  badRootL z = badRoot z
