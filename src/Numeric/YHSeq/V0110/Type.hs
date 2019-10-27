@@ -107,3 +107,27 @@ module Numeric.YHSeq.V0110.Type
 
   indexPList :: ParentList -> Index -> ParentIndex
   indexPList = index
+
+  slice :: [a] -> Integer -> Integer -> [a]
+  slice x a b = slice' x a b 0
+  -- slice x a b =
+  --   map fst $
+  --     filter (\x -> let n = snd x in a <= n && n <= b) $
+  --       zipWith (,) x [0..]
+
+  slice' :: [a] -> Integer -> Integer -> Integer -> [a]
+  slice' x a b n = case x of
+    []      -> []
+    xv : xs -> if a <= n && n <= b
+      then xv : slice' xs a b (n + 1)
+      else slice' xs a b (n + 1)
+
+  slice1 :: [a] -> Integer -> Integer -> [a]
+  slice1 x a b = slice1' x a b 1
+
+  slice1' :: [a] -> Integer -> Integer -> Integer -> [a]
+  slice1' x a b n = case x of
+    []      -> []
+    xv : xs -> if a <= n && n <= b
+      then xv : slice1' xs a b (n + 1)
+      else slice1' xs a b (n + 1)
