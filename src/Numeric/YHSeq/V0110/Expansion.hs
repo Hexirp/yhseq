@@ -53,3 +53,9 @@ module Numeric.YHSeq.V0110.Expansion where
   bas z y = if y == 1
     then indexP z (lengthDPN z)
     else indexP z (badRootL z - 1 + y)
+
+  rising :: DPN -> Integer -> Index -> ParentList -> ParentIndex
+  rising z m y p = p + m * delta z * boolToInteger (amt z y)
+
+  ris :: DPN -> Integer -> Index -> ParentList -> ParentList
+  ris z m y p = map (\q -> rising z m y q) p
