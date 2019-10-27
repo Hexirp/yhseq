@@ -48,3 +48,8 @@ module Numeric.YHSeq.V0110.Expansion where
   -- ascension matrix
   amt :: DPN -> Index -> Bool
   amt z y = badRootL `elem` anc z (badRootL - 1 + y) 1
+
+  bas :: DPN -> Index -> ParentList
+  bas z y = if y == 1
+    then indexP z (lengthDPN z)
+    else indexP z (badRootL z - 1 + y)
