@@ -93,13 +93,18 @@ module Numeric.YHSeq.V0110.Compression
   mtD :: Seq -> Index -> Depth -> Diff
   mtD s x n = if x <= 0
     then error "mtD: non-positive index"
-    else case n `compare` 1 of
-      LT -> error "mtD: non-positive depth"
-      EQ -> indexSeq s x
-      GT -> case mtP s x (n - 1) `compare` 0 of
-        LT -> error "mtD: irregular value of mtP"
-        EQ -> 0
-        GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
+    else if n <= 0
+      then error "mtD: non-positive depth"
+      else mtD' s x n (x - 1)
+
+  mtD' :: Seq -> Index -> Depth -> Diff
+  mtD' s x n = case n `compare` 1 of
+    LT -> error "mtD: impossible case"
+    EQ -> indexSeq s x
+    GT -> case mtP s x (n - 1) `compare` 0 of
+      LT -> error "mtD: irregular value of mtP"
+      EQ -> 0
+      GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
 
   mtP :: Seq -> Index -> Depth -> ParentIndex
   mtP s x n = if x <= 0
