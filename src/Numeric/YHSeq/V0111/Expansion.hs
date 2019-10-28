@@ -74,7 +74,7 @@ module Numeric.YHSeq.V0111.Expansion
 
   rising :: DPN -> Integer -> Index -> ParentIndex -> ParentIndex
   rising z m y p = if amt z y
-    then p + m * delta z * amt z y
+    then p + m * delta z
     else p
 
   ris :: DPN -> Integer -> Index -> ParentList -> ParentList
