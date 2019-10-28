@@ -3,8 +3,7 @@
 module Numeric.YHSeq.V0111.Compression
   ( mtD
   , mtP
-  , searchParent
-  , searchParentAnc
+  , isAnc
   , anc
   , nonEmptyDepth
   , cl
