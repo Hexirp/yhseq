@@ -1,6 +1,24 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Expansion where
+module Numeric.YHSeq.V0110.Expansion
+  ( badRoot
+  , goodRoot
+  , badPart
+  , cuttedPart
+  , pnt
+  , anc
+  , badRootL
+  , delta
+  , amt
+  , bas
+  , rising
+  , ris
+  , newD
+  , newP
+  , newN
+  , copiedBadPart
+  , expand
+  ) where
 
   import Numeric.YHSeq.V0110.Type
 
