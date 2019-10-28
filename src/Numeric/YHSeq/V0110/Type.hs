@@ -45,6 +45,8 @@ module Numeric.YHSeq.V0110.Type
 
   type DPN = [DPNTuple]
 
+  type Class = Integer
+
   length :: [a] -> Integer
   length []      = 0
   length (_ : s) = length s + 1
