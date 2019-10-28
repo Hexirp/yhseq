@@ -8,13 +8,13 @@ module Numeric.YHSeq.V0110.Expansion where
   badRoot z = last $ indexP z (lengthDPN z)
 
   goodPart :: DPN -> DPN
-  goodPart z = sliceDPN 1 (badRoot z - 1) z
+  goodPart z = sliceDPN z 1 (badRoot z - 1)
 
   badPart :: DPN -> DPN
-  badPart z = sliceDPN (badRoot z) (lengthDPN z - 1)
+  badPart z = sliceDPN z (badRoot z) (lengthDPN z - 1)
 
   cuttedPart :: DPN -> DPN
-  cuttedPart z = sliceDPN (lengthDPN z) (lengthDPN z)
+  cuttedPart z = sliceDPN z (lengthDPN z) (lengthDPN z)
 
 
   pnt :: DPN -> Index -> Depth -> ParentIndex
