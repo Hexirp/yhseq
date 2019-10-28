@@ -47,7 +47,7 @@ module Numeric.YHSeq.V0110.Expansion where
 
   -- ascension matrix
   amt :: DPN -> Index -> Integer
-  amt z y = if badRootL `elem` anc z (badRootL - 1 + y) 1
+  amt z y = if badRootL `elem` anc z (badRootL z - 1 + y) 1
     then 1
     else 0
 
@@ -56,7 +56,7 @@ module Numeric.YHSeq.V0110.Expansion where
     then indexP z (lengthDPN z)
     else indexP z (badRootL z - 1 + y)
 
-  rising :: DPN -> Integer -> Index -> ParentList -> ParentIndex
+  rising :: DPN -> Integer -> Index -> ParentIndex -> ParentIndex
   rising z m y p = p + m * delta z * amt z y
 
   ris :: DPN -> Integer -> Index -> ParentList -> ParentList
