@@ -81,7 +81,7 @@ module Numeric.YHSeq.V0110.Expansion where
       enumFromTo 1 (delta z)
 
 
-  expand :: DPN -> Class -> Integer -> Integer
+  expand :: DPN -> Class -> Integer -> DPN
   expand z c n = case c `compare` 1 of
     LT -> error "expand: non-positive class"
     EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
