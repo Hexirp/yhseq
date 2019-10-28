@@ -1,12 +1,12 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Decompression
+module Numeric.YHSeq.V0111.Decompression
   ( reD
   , reP
   , decompress
   ) where
 
-  import Numeric.YHSeq.V0110.Type
+  import Numeric.YHSeq.V0111.Type
 
   reD :: DPN -> Index -> Depth -> Diff
   reD z x n = if x <= 0

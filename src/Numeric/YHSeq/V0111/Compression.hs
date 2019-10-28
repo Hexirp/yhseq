@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Compression
+module Numeric.YHSeq.V0111.Compression
   ( mtD
   , mtP
   , searchParent
@@ -19,7 +19,7 @@ module Numeric.YHSeq.V0110.Compression
   , compress
   ) where
 
-  import Numeric.YHSeq.V0110.Type
+  import Numeric.YHSeq.V0111.Type
 
   mtD :: Seq -> Index -> Depth -> Diff
   mtD s x n = if x <= 0

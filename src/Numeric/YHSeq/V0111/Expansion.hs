@@ -1,8 +1,8 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Expansion where
+module Numeric.YHSeq.V0111.Expansion where
 
-  import Numeric.YHSeq.V0110.Type
+  import Numeric.YHSeq.V0111.Type
 
   badRoot :: DPN -> Index
   badRoot z = last $ indexP z (lengthDPN z)
