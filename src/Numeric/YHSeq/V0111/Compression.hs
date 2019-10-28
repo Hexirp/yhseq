@@ -87,7 +87,7 @@ module Numeric.YHSeq.V0111.Compression
   nonEmptyDepth :: Seq -> Depth
   nonEmptyDepth s = btm s 1
 
-  cl :: Seq -> Integer
+  cl :: Seq -> Class
   cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
 
   compressionDepth :: Seq -> Depth
