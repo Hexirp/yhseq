@@ -2,7 +2,7 @@
 
 module Numeric.YHSeq.V0110.Expansion
   ( badRoot
-  , goodRoot
+  , goodPart
   , badPart
   , cuttedPart
   , pnt
