@@ -26,7 +26,7 @@ module Numeric.YHSeq.V0111.Compression
     then error "mtD: non-positive index"
     else if n <= 0
       then error "mtD: non-positive depth"
-      else mtD' s x n (x - 1)
+      else mtD' s x n
 
   mtD' :: Seq -> Index -> Depth -> Diff
   mtD' s x n = case n `compare` 1 of
