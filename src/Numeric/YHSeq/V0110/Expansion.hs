@@ -47,7 +47,7 @@ module Numeric.YHSeq.V0110.Expansion where
 
   -- ascension matrix
   amt :: DPN -> Index -> Integer
-  amt z y = if badRootL `elem` anc z (badRootL z - 1 + y) 1
+  amt z y = if badRootL z `elem` anc z (badRootL z - 1 + y) 1
     then 1
     else 0
 
@@ -77,11 +77,11 @@ module Numeric.YHSeq.V0110.Expansion where
   copiedBadPart :: DPN -> Integer -> DPN
   copiedBadPart z m = if m == 0
     then badPart z
-    else map (\y -> (newD z m y, newP z m y, newZ z m y)) $
+    else map (\y -> (newD z m y, newP z m y, newN z m y)) $
       enumFromTo 1 (delta z)
 
 
-  expand :: DPN -> Integer -> Integer
+  expand :: DPN -> Integer -> Integer -> Integer
   expand z c n = case c `compare` 1 of
     LT -> error "expand: non-positive class"
     EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
