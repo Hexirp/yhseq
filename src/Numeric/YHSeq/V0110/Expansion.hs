@@ -85,4 +85,4 @@ module Numeric.YHSeq.V0110.Expansion where
   expand z c n = case c `compare` 1 of
     LT -> error "expand: non-positive class"
     EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
-    GT -> error "expand: is undefined at 0.1.1.0 when class is greater than 1"
+    GT -> error "expand: is undefined at v0.1.1.0 when class is greater than 1"
