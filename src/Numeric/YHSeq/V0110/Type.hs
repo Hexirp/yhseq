@@ -10,6 +10,7 @@ module Numeric.YHSeq.V0110.Type
   , Depth
   , DPNTuple
   , DPN
+  , Class
   , length
   , lengthSeq
   , lengthDPN
