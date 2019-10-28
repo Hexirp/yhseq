@@ -153,7 +153,7 @@ module Numeric.YHSeq.V0110.Compression
     then n
     else nonEmptyDepth' s (n + 1)
 
-  cl :: Seq -> Integer
+  cl :: Seq -> Class
   cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
 
   compressionDepth :: Seq -> Depth
@@ -260,7 +260,7 @@ module Numeric.YHSeq.V0110.Compression
   -}
 
 
-  seqClass :: Seq -> Integer
+  seqClass :: Seq -> Class
   seqClass = cl
 
   compress :: Seq -> DPN

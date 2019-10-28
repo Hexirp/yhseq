@@ -10,6 +10,7 @@ module Numeric.YHSeq.V0110.Type
   , Depth
   , DPNTuple
   , DPN
+  , Class
   , length
   , lengthSeq
   , lengthDPN
@@ -18,7 +19,13 @@ module Numeric.YHSeq.V0110.Type
   , idx
   , indexSeq
   , indexDPN
+  , indexD
+  , indexP
+  , indexN
   , indexPList
+  , slice
+  , slice1
+  , sliceDPN
   ) where
 
   import Prelude hiding (length)
@@ -38,6 +45,8 @@ module Numeric.YHSeq.V0110.Type
   type DPNTuple = (Diff, ParentList, Depth)
 
   type DPN = [DPNTuple]
+
+  type Class = Integer
 
   length :: [a] -> Integer
   length []      = 0
@@ -94,13 +103,40 @@ module Numeric.YHSeq.V0110.Type
   indexDPN = index1
 
   indexD :: DPN -> Index -> Diff
-  indexD = \x -> case indexDPN x of (d, _, _) -> d
+  indexD x n = case indexDPN x n of { (d, _, _) -> d }
 
   indexP :: DPN -> Index -> ParentList
-  indexP = \x -> case indexDPN x of (_, p, _) -> p
+  indexP x n = case indexDPN x n of { (_, p, _) -> p }
 
   indexN :: DPN -> Index -> Depth
-  indexN = \x -> case indexDPN x of (_, _, n) -> n
+  indexN x n = case indexDPN x n of { (_, _, n) -> n }
 
   indexPList :: ParentList -> Index -> ParentIndex
   indexPList = index
+
+  slice :: Integer -> Integer -> [a] -> [a]
+  slice a b x = slice' a b x 0
+  -- slice a b x =
+  --   map fst $
+  --     filter (\x -> let n = snd x in a <= n && n <= b) $
+  --       zipWith (,) x [0..]
+
+  slice' :: Integer -> Integer -> [a] -> Integer -> [a]
+  slice' a b x n = case x of
+    []      -> []
+    xv : xs -> if a <= n && n <= b
+      then xv : slice' a b xs (n + 1)
+      else slice' a b xs (n + 1)
+
+  slice1 :: Integer -> Integer -> [a] -> [a]
+  slice1 a b x = slice1' a b x 1
+
+  slice1' :: Integer -> Integer -> [a] -> Integer -> [a]
+  slice1' a b x n = case x of
+    []      -> []
+    xv : xs -> if a <= n && n <= b
+      then xv : slice1' a b xs (n + 1)
+      else slice1' a b xs (n + 1)
+
+  sliceDPN :: Integer -> Integer -> DPN -> DPN
+  sliceDPN = slice1
