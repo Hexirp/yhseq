@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110.Expansion
+module Numeric.YHSeq.V0111.Expansion
   ( badRoot
   , goodPart
   , badPart
@@ -20,7 +20,7 @@ module Numeric.YHSeq.V0110.Expansion
   , expand
   ) where
 
-  import Numeric.YHSeq.V0110.Type
+  import Numeric.YHSeq.V0111.Type
 
   badRoot :: DPN -> Index
   badRoot z = last $ indexP z (lengthDPN z)
@@ -64,10 +64,8 @@ module Numeric.YHSeq.V0110.Expansion
   delta z = lengthDPN z - badRootL z
 
   -- ascension matrix
-  amt :: DPN -> Index -> Integer
-  amt z y = if badRootL z `elem` anc z (badRootL z - 1 + y) 1
-    then 1
-    else 0
+  amt :: DPN -> Index -> Bool
+  amt z y = badRootL z `elem` anc z (badRootL z - 1 + y) 1
 
   bas :: DPN -> Index -> ParentList
   bas z y = if y == 1
@@ -75,7 +73,9 @@ module Numeric.YHSeq.V0110.Expansion
     else indexP z (badRootL z - 1 + y)
 
   rising :: DPN -> Integer -> Index -> ParentIndex -> ParentIndex
-  rising z m y p = p + m * delta z * amt z y
+  rising z m y p = if amt z y
+    then p + m * delta z
+    else p
 
   ris :: DPN -> Integer -> Index -> ParentList -> ParentList
   ris z m y p = map (\q -> rising z m y q) p
@@ -103,4 +103,4 @@ module Numeric.YHSeq.V0110.Expansion
   expand z c n = case c `compare` 1 of
     LT -> error "expand: non-positive class"
     EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
-    GT -> error "expand: is undefined at v0.1.1.0 when class is greater than 1"
+    GT -> error "expand: is undefined at 0.1.1.0 when class is greater than 1"
