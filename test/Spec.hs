@@ -1,7 +1,10 @@
 import Prelude
 import Test.Hspec
 
-import qualified Numeric.YHSeq.V0110.Compression as V0110 (mtD, mtP)
+import qualified Numeric.YHSeq.V0110.Compression as V0110 ( mtD
+                                                          , mtP
+                                                          , nonEmptyDepth
+                                                          )
 import qualified Numeric.YHSeq.V0110             as V0110 (fseq)
 
 main :: IO ()
@@ -44,6 +47,20 @@ main = hspec $ do
 
     it "is the same as the calculation result by hand" $ do
       V0110.mtP [1,2] 2 3 `shouldBe` 0
+
+  describe "V0110.nonEmptyDepth" $ do
+
+    it "returns 2 at (1,2)" $ do
+      V0110.nonEmptyDepth [1,2] `shouldBe` 2
+
+    it "returns 3 at (1,2,4)" $ do
+      V0110.nonEmptyDepth [1,2,4] `shouldBe` 3
+
+    it "returns 3 at (1,2,4,8,10,7)" $ do
+      V0110.nonEmptyDepth [1,2,4,8,10,7] `shouldBe` 3
+
+    it "returns 4 at (1,2,4,8,10,8)" $ do
+      V0110.nonEmptyDepth [1,2,4,8,10,8] `shouldBe` 4
 
   describe "V0110.fseq" $ do
 
