@@ -25,7 +25,9 @@ module Numeric.YHSeq.V0110.Type
   , indexPList
   , slice
   , slice1
+  , sliceSeq
   , sliceDPN
+  , dropLast
   ) where
 
   import Prelude hiding (length)
@@ -138,5 +140,18 @@ module Numeric.YHSeq.V0110.Type
       then xv : slice1' a b xs (n + 1)
       else slice1' a b xs (n + 1)
 
+  sliceSeq :: Integer -> Integer -> Seq -> Seq
+  sliceSeq = slice1
+
   sliceDPN :: Integer -> Integer -> DPN -> DPN
   sliceDPN = slice1
+
+  dropLast :: [a] -> [a]
+  dropLast x = case x of
+    []      -> error "dropLast: empty list"
+    xv : xs -> dropLast xv xs
+
+  dropLast' :: a -> [a] -> [a]
+  dropLast' xv xs = case xs of
+    []        -> []
+    xsv : xss -> xv : dropLast' xsv xss
