@@ -35,7 +35,7 @@ module Numeric.YHSeq.V0110 where
   -- predecessor sequence
   pseq :: Seq -> Seq
   pseq s = if isSucc s
-    then take (lengthSeq s - 1) s
+    then dropLast s
     else error "pseq: it is not successor sequence"
 
   -- | It's a very very large function.
