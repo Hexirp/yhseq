@@ -1,6 +1,14 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Numeric.YHSeq.V0110 where
+module Numeric.YHSeq.V0110
+  ( isZero
+  , isSucc
+  , isLimit
+  , scof
+  , fseq
+  , pseq
+  , yhseq
+  ) where
 
   import Numeric.YHSeq.V0110.Type
   import Numeric.YHSeq.V0110.Compression   (seqClass, compress)
