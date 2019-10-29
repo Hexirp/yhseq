@@ -1,11 +1,52 @@
 import Prelude
 import Test.Hspec
 
-import qualified Numeric.YHSeq.V0110 as V0110 (fseq)
+import qualified Numeric.YHSeq.V0110.Compression as V0110 (mtD, mtP)
+import qualified Numeric.YHSeq.V0110             as V0110 (fseq)
 
 main :: IO ()
 main = hspec $ do
+
+  describe "V0110/mountain" $ do
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 1 1 `shouldBe` 1
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 2 1 `shouldBe` 2
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 1 2 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 2 2 `shouldBe` 1
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 1 3 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtD [1,2] 2 3 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 1 1 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 2 1 `shouldBe` 1
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 1 2 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 2 2 `shouldBe` 1
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 1 3 `shouldBe` 0
+
+    it "is the same as the calculation result by hand" $ do
+      V0110.mtP [1,2] 2 3 `shouldBe` 0
+
   describe "V0110.fseq" $ do
+
     it "expand (1,2) to (1,1,1,...)" $ do
       V0110.fseq [1,2] 2 `shouldBe` [1,1,1]
 
