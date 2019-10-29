@@ -46,3 +46,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - yhseq
+    - hspec >= 2.5.0 && < 3.0.0
