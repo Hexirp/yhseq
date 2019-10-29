@@ -1,7 +1,7 @@
 import Prelude
 import Test.Hspec
 
-import Numeric.YHSeq.V0110
+import Numeric.YHSeq.V0110 (fseq)
 
 main :: IO ()
 main = hspec $ do
