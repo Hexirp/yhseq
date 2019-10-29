@@ -12,40 +12,40 @@ main = hspec $ do
 
   describe "V0110/mountain" $ do
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 1 at S = (1,2), x = 1, and n = 1" $ do
       V0110.mtD [1,2] 1 1 `shouldBe` 1
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 2 at S = (1,2), x = 2, and n = 1" $ do
       V0110.mtD [1,2] 2 1 `shouldBe` 2
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 0 at S = (1,2), x = 1, and n = 2" $ do
       V0110.mtD [1,2] 1 2 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 1 at S = (1,2), x = 2, and n = 2" $ do
       V0110.mtD [1,2] 2 2 `shouldBe` 1
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 0 at S = (1,2), x = 1, and n = 3" $ do
       V0110.mtD [1,2] 1 3 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is D = 0 at S = (1,2), x = 2, and n = 3" $ do
       V0110.mtD [1,2] 2 3 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 0 at S = (1,2), x = 1, and n = 1" $ do
       V0110.mtP [1,2] 1 1 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 1 at S = (1,2), x = 2, and n = 1" $ do
       V0110.mtP [1,2] 2 1 `shouldBe` 1
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 0 at S = (1,2), x = 1, and n = 2" $ do
       V0110.mtP [1,2] 1 2 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 1 at S = (1,2), x = 2, and n = 2" $ do
       V0110.mtP [1,2] 2 2 `shouldBe` 1
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 0 at S = (1,2), x = 1, and n = 3" $ do
       V0110.mtP [1,2] 1 3 `shouldBe` 0
 
-    it "is the same as the calculation result by hand" $ do
+    it "is P = 0 at S = (1,2), x = 2, and n = 3" $ do
       V0110.mtP [1,2] 2 3 `shouldBe` 0
 
   describe "V0110.nonEmptyDepth" $ do
