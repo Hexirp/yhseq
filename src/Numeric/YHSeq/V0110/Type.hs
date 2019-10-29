@@ -149,7 +149,7 @@ module Numeric.YHSeq.V0110.Type
   dropLast :: [a] -> [a]
   dropLast x = case x of
     []      -> error "dropLast: empty list"
-    xv : xs -> dropLast xv xs
+    xv : xs -> dropLast' xv xs
 
   dropLast' :: a -> [a] -> [a]
   dropLast' xv xs = case xs of
