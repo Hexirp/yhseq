@@ -47,3 +47,4 @@ tests:
     dependencies:
     - yhseq
     - hspec >= 2.5.0 && < 3.0.0
+    - hspec-discover >= 2.5.0 && < 3.0.0
