@@ -9,12 +9,12 @@ module Numeric.YHSeq.V0110.Compression
   , nonEmptyDepth
   , cl
   , compressionDepth
-  , cM
-  , cU
   , btm
+  , cN
+  , cU
+  , cM
   , cD
   , cP
-  , cN
   , seqClass
   , compress
   ) where
