@@ -1,5 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-
 module Numeric.YHSeq.V0111.Compression
   ( mtD
   , mtP
@@ -17,6 +15,8 @@ module Numeric.YHSeq.V0111.Compression
   , seqClass
   , compress
   ) where
+
+  import Prelude hiding (length)
 
   import Numeric.YHSeq.V0111.Type
 

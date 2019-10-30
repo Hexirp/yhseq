@@ -1,5 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-
 module Numeric.YHSeq.V0110.Expansion
   ( badRoot
   , goodPart
@@ -19,6 +17,8 @@ module Numeric.YHSeq.V0110.Expansion
   , copiedBadPart
   , expand
   ) where
+
+  import Prelude hiding (length)
 
   import Numeric.YHSeq.V0110.Type
 

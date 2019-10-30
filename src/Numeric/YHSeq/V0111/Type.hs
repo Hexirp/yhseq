@@ -1,8 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
 module Numeric.YHSeq.V0111.Type
-  ( module Prelude
-  , Seq
+  ( Seq
   , Index
   , Diff
   , ParentIndex

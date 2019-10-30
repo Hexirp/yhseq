@@ -1,10 +1,10 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-
 module Numeric.YHSeq.V0110.Decompression
   ( reD
   , reP
   , decompress
   ) where
+
+  import Prelude hiding (length)
 
   import Numeric.YHSeq.V0110.Type
 

@@ -1,5 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-
 module Numeric.YHSeq.V0110
   ( isZero
   , isSucc
@@ -9,6 +7,8 @@ module Numeric.YHSeq.V0110
   , pseq
   , yhseq
   ) where
+
+  import Prelude hiding (length)
 
   import Numeric.YHSeq.V0110.Type
   import Numeric.YHSeq.V0110.Compression   (seqClass, compress)
