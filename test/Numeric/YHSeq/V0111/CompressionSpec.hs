@@ -30,6 +30,17 @@ module Numeric.YHSeq.V0111.CompressionSpec (spec) where
       it "is D = 1 at S = (1,2), x = 2, and n = 3 and is broken" $ do
         mtD [1,2] 2 3 `shouldBe` 1
 
+      context "when ignored branches exist" $ do
+
+        it "is D = 10 at S (1,2,4,8,10,8), x = 5, and n = 1" $ do
+          mtD [1,2,4,8,10,8] 5 1 `shouldBe` 10
+
+        it "is D = 2 at S (1,2,4,8,10,8), x = 5, and n = 2" $ do
+          mtD [1,2,4,8,10,8] 5 2 `shouldBe` 2
+
+        it "is D = 1 at S (1,2,4,8,10,8), x = 5, and n = 3" $ do
+          mtD [1,2,4,8,10,8] 5 3 `shouldBe` 1
+
     describe "mtP" $ do
 
       it "is P = 0 at S = (1,2), x = 1, and n = 1" $ do
@@ -49,3 +60,14 @@ module Numeric.YHSeq.V0111.CompressionSpec (spec) where
 
       it "is P = 1 at S = (1,2), x = 2, and n = 3 and is broken" $ do
         mtP [1,2] 2 3 `shouldBe` 1
+
+      context "when ignored branches exist" $ do
+
+        it "is P = 4 at S (1,2,4,8,10,8), x = 5, and n = 1" $ do
+          mtP [1,2,4,8,10,8] 5 1 `shouldBe` 4
+
+        it "is P = 2 at S (1,2,4,8,10,8), x = 5, and n = 2" $ do
+          mtP [1,2,4,8,10,8] 5 2 `shouldBe` 2
+
+        it "is P = 2 at S (1,2,4,8,10,8), x = 5, and n = 3" $ do
+          mtP [1,2,4,8,10,8] 5 3 `shouldBe` 2
