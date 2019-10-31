@@ -54,7 +54,7 @@ module Numeric.YHSeq.V0111.Compression
   isAnc :: Seq -> Index -> Depth -> ParentIndex -> Bool
   isAnc s x n p = if x <= 0
     then error "isAnc: non-positive index"
-    else case n `compare` 0 of
+    else case n `compare` 1 of
       LT -> error "isAnc: non-positive depth"
       EQ -> True
       GT -> p `elem` anc s x (n - 1)
