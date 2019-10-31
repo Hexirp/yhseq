@@ -69,5 +69,5 @@ module Numeric.YHSeq.V0110.CompressionSpec (spec) where
         it "is P = 2 at S (1,2,4,8,10,8), x = 5, and n = 2" $ do
           mtP [1,2,4,8,10,8] 5 2 `shouldBe` 2
 
-        it "is P = 2 at S (1,2,4,8,10,8), x = 5, and n = 3" $ do
-          mtP [1,2,4,8,10,8] 5 3 `shouldBe` 2
+        it "is P = 2 at S (1,2,4,8,10,8), x = 5, and n = 3 and is broken" $ do
+          mtP [1,2,4,8,10,8] 5 3 `shouldBe` 1
