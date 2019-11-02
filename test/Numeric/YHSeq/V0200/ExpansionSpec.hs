@@ -12,5 +12,5 @@ module Numeric.YHSeq.V0200.ExpansionSpec (spec) where
 
     describe "goodPart" $ do
 
-      it "is [1] at [1,2,4]" $ do
+      it "is (1) at (1,2,4)" $ do
         goodPart [1,2,4] `shouldBe` [1]
