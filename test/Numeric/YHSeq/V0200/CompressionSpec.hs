@@ -71,3 +71,14 @@ module Numeric.YHSeq.V0200.CompressionSpec (spec) where
 
         it "is P = 2 at S = (1,2,4,8,10,8), x = 5, and n = 3" $ do
           mtP [1,2,4,8,10,8] 5 3 `shouldBe` 2
+
+    describe "compress" $ do
+
+      it "is equal to the hand-calculated at (1,2,4,5,4)" $ do
+        compress [1,2,4,5,4] `shouldBe`
+          [ (1, [0], 1)
+          , (1, [1], 2)
+          , (2, [2], 2)
+          , (1, [3, 1], 2)
+          , (2, [2], 2)
+          ]
