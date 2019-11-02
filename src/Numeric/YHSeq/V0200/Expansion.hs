@@ -78,7 +78,7 @@ module Numeric.YHSeq.V0200.Expansion
     else p
 
   -- condition: length p <= n
-  rise :: DPN -> Integer -> Index -> ParentIndex -> Depth -> (ParentList, Depth)
+  rise :: DPN -> Integer -> Index -> ParentList -> Depth -> (ParentList, Depth)
   rise z m y p n = case p of
     []      -> ([], n)
     pv : ps -> case rise z m y ps n of
