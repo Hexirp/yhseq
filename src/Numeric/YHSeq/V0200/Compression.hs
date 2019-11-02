@@ -87,7 +87,7 @@ module Numeric.YHSeq.V0200.Compression
     else btm' s x (n + 1)
 
   nonEmptyDepth :: Seq -> Depth
-  nonEmptyDepth s = btm s 1
+  nonEmptyDepth s = btm s (lengthSeq s)
 
   cl :: Seq -> Class
   cl s = mtD s (lengthSeq s) (nonEmptyDepth s)
