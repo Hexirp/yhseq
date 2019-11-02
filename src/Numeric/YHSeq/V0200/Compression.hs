@@ -34,7 +34,10 @@ module Numeric.YHSeq.V0200.Compression
     GT -> case mtP s x (n - 1) `compare` 0 of
       LT -> error "mtD: irregular value of mtP"
       EQ -> 0
-      GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
+      GT -> case mtD s (mtP s x (n - 1)) (n - 1) of
+        LT -> error "mtD: irregular value of mtD"
+        EQ -> 0
+        GT -> mtD s x (n - 1) - mtD s (mtP s x (n - 1)) (n - 1)
 
   mtP :: Seq -> Index -> Depth -> ParentIndex
   mtP s x n = if x <= 0
