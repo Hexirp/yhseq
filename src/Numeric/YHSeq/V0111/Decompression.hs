@@ -12,9 +12,9 @@ module Numeric.YHSeq.V0111.Decompression
   reD z x n = if x <= 0
     then error "reD: non-positive index"
     else case n `compare` indexN z x of
-      LT -> 0
+      LT -> reD z x (n + 1) + reD z (reP z x n) n
       EQ -> indexD z x
-      GT -> reP z x (n + 1) + reD z (reP z x n) n
+      GT -> 0
 
   reP :: DPN -> Index -> Depth -> Diff
   reP z x n = if x <= 0

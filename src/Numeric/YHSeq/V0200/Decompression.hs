@@ -1,4 +1,4 @@
-module Numeric.YHSeq.V0110.Decompression
+module Numeric.YHSeq.V0200.Decompression
   ( reD
   , reP
   , decompress
@@ -6,7 +6,7 @@ module Numeric.YHSeq.V0110.Decompression
 
   import Prelude hiding (length)
 
-  import Numeric.YHSeq.V0110.Type
+  import Numeric.YHSeq.V0200.Type
 
   reD :: DPN -> Index -> Depth -> Diff
   reD z x n = if x <= 0
