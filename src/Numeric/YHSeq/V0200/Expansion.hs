@@ -10,6 +10,7 @@ module Numeric.YHSeq.V0200.Expansion
   , amt
   , bas
   , rising
+  , rise
   , ris
   , newD
   , newP
