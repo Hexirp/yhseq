@@ -1,4 +1,4 @@
-module Numeric.YHSeq.V0200.Type
+module Numeric.YHSeq.V0210.Type
   ( Seq
   , Index
   , Diff

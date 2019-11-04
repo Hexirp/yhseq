@@ -1,4 +1,4 @@
-module Numeric.YHSeq.V0200.Expansion
+module Numeric.YHSeq.V0210.Expansion
   ( badRoot
   , goodPart
   , badPart
@@ -10,7 +10,6 @@ module Numeric.YHSeq.V0200.Expansion
   , amt
   , bas
   , rising
-  , rise
   , ris
   , newD
   , newP
@@ -21,7 +20,7 @@ module Numeric.YHSeq.V0200.Expansion
 
   import Prelude hiding (length)
 
-  import Numeric.YHSeq.V0200.Type
+  import Numeric.YHSeq.V0210.Type
 
   badRoot :: DPN -> Index
   badRoot z = last $ indexP z (lengthDPN z)
@@ -65,29 +64,21 @@ module Numeric.YHSeq.V0200.Expansion
   delta z = lengthDPN z - badRootL z
 
   -- ascension matrix
-  amt :: DPN -> Index -> Depth -> Bool
-  amt z y n = badRootL z `elem` anc z (badRootL z - 1 + y) n
+  amt :: DPN -> Index -> Bool
+  amt z y = badRootL z `elem` anc z (badRootL z - 1 + y) 1
 
   bas :: DPN -> Index -> ParentList
   bas z y = if y == 1
     then indexP z (lengthDPN z)
     else indexP z (badRootL z - 1 + y)
 
-  rising :: DPN -> Integer -> Index -> ParentIndex -> Depth -> ParentIndex
-  rising z m y p n = if amt z y n
+  rising :: DPN -> Integer -> Index -> ParentIndex -> ParentIndex
+  rising z m y p = if amt z y
     then p + m * delta z
     else p
 
-  -- condition: length p <= n
-  rise :: DPN -> Integer -> Index -> ParentList -> Depth -> (ParentList, Depth)
-  rise z m y p n = case p of
-    []      -> ([], n)
-    pv : ps -> case rise z m y ps n of
-      (p', n') -> (rising z m y pv n' : p', n' - 1)
-
-  ris :: DPN -> Integer -> Index -> ParentList -> Depth -> ParentList
-  ris z m y p n = case rise z m y p n of
-    (p', _) -> p'
+  ris :: DPN -> Integer -> Index -> ParentList -> ParentList
+  ris z m y p = map (\q -> rising z m y q) p
 
 
   newD :: DPN -> Integer -> Index -> Diff
@@ -95,8 +86,8 @@ module Numeric.YHSeq.V0200.Expansion
 
   newP :: DPN -> Integer -> Index -> ParentList
   newP z m y = if y == 1
-    then ris z (m - 1) y (bas z y) (indexN z $ badRootL z - 1 + y)
-    else ris z m y (bas z y) (indexN z $ badRootL z - 1 + y)
+    then ris z (m - 1) y (bas z y)
+    else ris z m y (bas z y)
 
   newN :: DPN -> Integer -> Index -> Depth
   newN z m y = indexN z (badRootL z - 1 + y)
