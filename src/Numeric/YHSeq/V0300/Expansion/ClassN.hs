@@ -74,3 +74,7 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
     LT -> error "nan: irregular value of npt"
     EQ -> []
     GT -> x : nan' z (npt z x)
+
+
+  expandN :: DPN -> Integer -> DPN
+  expandN = undefined
