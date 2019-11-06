@@ -7,6 +7,8 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
   , anc
   , npt
   , nan
+  , badSeq
+  , reRootN
   , expandN
   ) where
 
@@ -76,6 +78,13 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
     EQ -> []
     GT -> x : nan' z (npt z x)
 
+
+  badSeq :: DPN -> Seq
+  badSeq = undefined
+
+
+  reRootN :: DPN -> (Seq -> Integer) -> Integer
+  reRootN z k = badRoot z - 1 + k (badSeq z)
 
   expandN :: DPN -> Integer -> DPN
   expandN = undefined

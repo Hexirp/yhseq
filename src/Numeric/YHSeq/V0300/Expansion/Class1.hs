@@ -15,6 +15,7 @@ module Numeric.YHSeq.V0300.Expansion.Class1
   , newP
   , newN
   , copiedBadPart
+  , reRoot1
   , expand1
   ) where
 
@@ -102,6 +103,9 @@ module Numeric.YHSeq.V0300.Expansion.Class1
     else map (\y -> (newD z m y, newP z m y, newN z m y)) $
       enumFromTo 1 (delta z)
 
+
+  reRoot1 :: DPN -> Integer
+  reRoot1 z = badRoot z
 
   expand1 :: DPN -> Integer -> DPN
   expand1 z n = (goodPart z ++) $ concat $ map (\m -> copiedBadPart z m) $
