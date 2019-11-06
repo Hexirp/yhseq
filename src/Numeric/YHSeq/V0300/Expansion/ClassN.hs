@@ -71,3 +71,15 @@ module Numeric.YHSeq.V0300.Expansion.Class1
     GT -> if indexN z p < indexN z x
       then p
       else npt' z x (p - 1)
+
+  -- n (depth) + anc (ancestor)
+  nan :: DPN -> Index -> [NParentIndex]
+  nan z x = if x <= 0
+    then error "nan: non-positive index"
+    else nan' z x
+
+  nan' :: DPN -> Index -> [NParentIndex]
+  nan' z x = case x `compare` 0 of
+    LT -> error "nan: irregular value of npt"
+    EQ -> []
+    GT -> x : nan' z (npt z x)
