@@ -1,21 +1,12 @@
-module Numeric.YHSeq.V0300.Expansion.Class1
+module Numeric.YHSeq.V0300.Expansion.ClassN
   ( badRoot
   , goodPart
   , badPart
   , cuttedPart
   , pnt
   , anc
-  , delta
-  , amt
-  , bas
-  , rising
-  , rise
-  , ris
-  , newD
-  , newP
-  , newN
-  , copiedBadPart
-  , expand1
+  , npt
+  , nan
   ) where
 
   import Prelude hiding (length)
