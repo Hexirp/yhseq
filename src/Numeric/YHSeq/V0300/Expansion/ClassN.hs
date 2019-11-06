@@ -7,6 +7,7 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
   , anc
   , npt
   , nan
+  , expandN
   ) where
 
   import Prelude hiding (length)
