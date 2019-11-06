@@ -7,6 +7,7 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
   , anc
   , npt
   , nan
+  , nRoot
   , badSeq
   , reRootN
   , expandN
@@ -77,6 +78,10 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
     LT -> error "nan: irregular value of npt"
     EQ -> []
     GT -> x : nan' z (npt z x)
+
+  -- n (depth) + root
+  nRoot :: DPN -> Index
+  nRoot z = npt z (lengthDPN z)
 
 
   badSeq :: DPN -> Seq
