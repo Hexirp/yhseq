@@ -2,6 +2,8 @@
 
 ## Unreleased changes
 
+`V0210.Expansion.expand` のエラーメッセージに含まれるバージョン名を修正しました。
+
 ## 0.2.1.0
 
 `V0200.Expansion.rise` をエクスポートリストに追加しました。
