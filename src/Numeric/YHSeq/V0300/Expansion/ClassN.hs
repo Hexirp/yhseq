@@ -5,6 +5,7 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
   , cuttedPart
   , pnt
   , anc
+  , NParentIndex
   , npt
   , nan
   , nRoot

@@ -1,5 +1,6 @@
 module Numeric.YHSeq.V0300
-  ( isZero
+  ( Cofinal
+  , isZero
   , isSucc
   , isLimit
   , scof
