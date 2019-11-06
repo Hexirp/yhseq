@@ -51,6 +51,7 @@ module Numeric.YHSeq.V0300.Expansion.ClassN
     GT -> x : anc' z (pnt z x n) n
 
 
+  -- n (depth) + parent + index
   type NParentIndex = Index
 
   -- n (depth) + pnt (parent)
