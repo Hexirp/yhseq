@@ -2,13 +2,14 @@ module YHSeq where
 
   import Prelude
 
-  data Arguments = Arguments
-    { version :: String
-    , seq     :: String
-    , num     :: String
-    , detail  :: Bool
-    , force   :: Bool
+  -- YHSeq + Arguments
+  data YHSA = YHSA
+    { yhsv :: String -- version
+    , yhss :: String -- sequence
+    , yhsn :: String -- number
+    , yhsd :: Bool -- detail
+    , yhsf :: Bool -- force
     }
 
-  yhseq :: Arguments -> IO ()
+  yhseq :: YHSA -> IO ()
   yhseq = return ()
