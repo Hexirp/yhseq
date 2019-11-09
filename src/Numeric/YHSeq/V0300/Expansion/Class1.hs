@@ -1,26 +1,27 @@
-module Numeric.YHSeq.V0210.Expansion
+module Numeric.YHSeq.V0300.Expansion.Class1
   ( badRoot
   , goodPart
   , badPart
   , cuttedPart
   , pnt
   , anc
-  , badRootL
   , delta
   , amt
   , bas
   , rising
+  , rise
   , ris
   , newD
   , newP
   , newN
   , copiedBadPart
-  , expand
+  , reRoot1
+  , expand1
   ) where
 
   import Prelude hiding (length)
 
-  import Numeric.YHSeq.V0210.Type
+  import Numeric.YHSeq.V0300.Type
 
   badRoot :: DPN -> Index
   badRoot z = last $ indexP z (lengthDPN z)
@@ -56,41 +57,45 @@ module Numeric.YHSeq.V0210.Expansion
     GT -> x : anc' z (pnt z x n) n
 
 
-  -- bad root (length)
-  badRootL :: DPN -> Index
-  badRootL z = badRoot z
-
   delta :: DPN -> Integer
-  delta z = lengthDPN z - badRootL z
+  delta z = lengthDPN z - badRoot z
 
   -- ascension matrix
-  amt :: DPN -> Index -> Bool
-  amt z y = badRootL z `elem` anc z (badRootL z - 1 + y) 1
+  amt :: DPN -> Index -> Depth -> Bool
+  amt z y n = badRoot z `elem` anc z (badRoot z - 1 + y) n
 
   bas :: DPN -> Index -> ParentList
   bas z y = if y == 1
     then indexP z (lengthDPN z)
-    else indexP z (badRootL z - 1 + y)
+    else indexP z (badRoot z - 1 + y)
 
-  rising :: DPN -> Integer -> Index -> ParentIndex -> ParentIndex
-  rising z m y p = if amt z y
+  rising :: DPN -> Integer -> Index -> ParentIndex -> Depth -> ParentIndex
+  rising z m y p n = if amt z y n
     then p + m * delta z
     else p
 
-  ris :: DPN -> Integer -> Index -> ParentList -> ParentList
-  ris z m y p = map (\q -> rising z m y q) p
+  -- condition: length p <= n
+  rise :: DPN -> Integer -> Index -> ParentList -> Depth -> (ParentList, Depth)
+  rise z m y p n = case p of
+    []      -> ([], n)
+    pv : ps -> case rise z m y ps n of
+      (p', n') -> (rising z m y pv n' : p', n' - 1)
+
+  ris :: DPN -> Integer -> Index -> ParentList -> Depth -> ParentList
+  ris z m y p n = case rise z m y p n of
+    (p', _) -> p'
 
 
   newD :: DPN -> Integer -> Index -> Diff
-  newD z m y = indexD z (badRootL z - 1 + y)
+  newD z m y = indexD z (badRoot z - 1 + y)
 
   newP :: DPN -> Integer -> Index -> ParentList
   newP z m y = if y == 1
-    then ris z (m - 1) y (bas z y)
-    else ris z m y (bas z y)
+    then ris z (m - 1) y (bas z y) (indexN z $ badRoot z - 1 + y)
+    else ris z m y (bas z y) (indexN z $ badRoot z - 1 + y)
 
   newN :: DPN -> Integer -> Index -> Depth
-  newN z m y = indexN z (badRootL z - 1 + y)
+  newN z m y = indexN z (badRoot z - 1 + y)
 
   copiedBadPart :: DPN -> Integer -> DPN
   copiedBadPart z m = if m == 0
@@ -99,8 +104,9 @@ module Numeric.YHSeq.V0210.Expansion
       enumFromTo 1 (delta z)
 
 
-  expand :: DPN -> Class -> Integer -> DPN
-  expand z c n = case c `compare` 1 of
-    LT -> error "expand: non-positive class"
-    EQ -> goodPart z ++ concat (map (\m -> copiedBadPart z m) $ enumFromTo 0 n)
-    GT -> error "expand: is undefined at 0.2.1.0 when class is greater than 1"
+  reRoot1 :: DPN -> Integer
+  reRoot1 z = badRoot z
+
+  expand1 :: DPN -> Integer -> DPN
+  expand1 z n = (goodPart z ++) $ concat $ map (\m -> copiedBadPart z m) $
+    enumFromTo 0 n

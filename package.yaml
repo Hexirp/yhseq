@@ -1,5 +1,5 @@
 name:                yhseq
-version:             0.2.1.0
+version:             0.2.1.1
 github:              "Hexirp/yhseq"
 license:             Apache-2.0
 author:              "Hexirp"
@@ -11,8 +11,8 @@ extra-source-files:
 - ChangeLog.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:             Math
+synopsis:            Calculation of Y-sequence Hexirp edition
+category:            Math
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
@@ -20,7 +20,7 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/Hexirp/yhseq#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+- base >= 4.7 && < 4.13
 
 library:
   source-dirs: src

@@ -1,4 +1,4 @@
-module Numeric.YHSeq.V0110
+module Numeric.YHSeq.V0300
   ( Cofinal
   , isZero
   , isSucc
@@ -11,10 +11,10 @@ module Numeric.YHSeq.V0110
 
   import Prelude hiding (length)
 
-  import Numeric.YHSeq.V0110.Type
-  import Numeric.YHSeq.V0110.Compression   (seqClass, compress)
-  import Numeric.YHSeq.V0110.Expansion     (expand)
-  import Numeric.YHSeq.V0110.Decompression (decompress)
+  import Numeric.YHSeq.V0300.Type
+  import Numeric.YHSeq.V0300.Compression   (seqClass, compress)
+  import Numeric.YHSeq.V0300.Expansion     (expand)
+  import Numeric.YHSeq.V0300.Decompression (decompress)
 
   data Cofinal = IsZero | IsSucc | IsLimit
 
