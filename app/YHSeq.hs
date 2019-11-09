@@ -4,8 +4,10 @@ module YHSeq where
 
   data Arguments = Arguments {
     version :: String ,
-    seq :: String ,
-    num :: String }
+    seq     :: String ,
+    num     :: String ,
+    detail  :: Bool ,
+    force   :: Bool }
 
   yhseq :: Arguments -> IO ()
   yhseq = return ()
