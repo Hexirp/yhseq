@@ -7,5 +7,5 @@ module YHSeq where
     seq :: String ,
     num :: String }
 
-  yhseq :: Argments -> IO ()
+  yhseq :: Arguments -> IO ()
   yhseq = return ()
