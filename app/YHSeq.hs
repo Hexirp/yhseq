@@ -12,4 +12,4 @@ module YHSeq where
     }
 
   yhseq :: YHSA -> IO ()
-  yhseq = return ()
+  yhseq _ = return ()
