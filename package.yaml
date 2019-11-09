@@ -20,7 +20,7 @@ category:            Math
 description:         Please see the README on GitHub at <https://github.com/Hexirp/yhseq#readme>
 
 dependencies:
-- base >= 4.7 && < 4.13
+- base >= 4.7.0.0 && < 4.14.0.0
 
 library:
   source-dirs: src
