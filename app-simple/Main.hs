@@ -1,7 +1,9 @@
 module Main where
 
   import Prelude
-  import Numeric.YHSeq.V0210
+  import System.Environment (getArgs)
+
+  import Numeric.YHSeq.V0210 (fseq)
 
   main :: IO ()
   main = do

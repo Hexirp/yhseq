@@ -2,6 +2,8 @@
 
 ## Unreleased changes
 
+単純なコマンド `yhseq-simple` を追加しました。
+
 `VXXXX.Cofinal` の構築子をエクスポートするように変更しました。
 
 ## 0.2.1.2
