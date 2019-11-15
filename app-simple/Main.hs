@@ -17,10 +17,10 @@ module Main where
     args <- getArgs
     opArg <- optparse args
     arg <- parse opArg
-    e <- (try $ calc arg) :: IO (Either ErrorCall [Integer])
-    case e of
-      Left ex -> throwIO ex
-      Right s' -> print s'
+    res <- calc arg `catch` \(e :: ErrorCall) -> do
+      putStrLn "yhseq-simple: Something happened!"
+      throwIO e
+    print res
 
   optparse :: [String] -> IO OpArg
   optparse [seq, num] = return (seq, num)
