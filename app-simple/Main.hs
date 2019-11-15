@@ -1,8 +1,10 @@
 module Main where
 
   import Prelude
+
+  import Control.Exception (ErrorCall, try, evaluate, throwIO)
+
   import System.Environment (getArgs)
-  import System.Exception (ErrorCall, try, evaluate, throwIO)
 
   import Numeric.YHSeq.V0210 (fseq)
 
