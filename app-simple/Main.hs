@@ -17,7 +17,7 @@ module Main where
     args <- getArgs
     opArg <- optparse args
     arg <- parse opArg
-    res <- calc arg `catch` \(e :: ErrorCall) -> do
+    res <- calc arg `catch` \e -> const id (e :: ErrorCall) $ do
       putStrLn "yhseq-simple: Something happened!"
       throwIO e
     print res
