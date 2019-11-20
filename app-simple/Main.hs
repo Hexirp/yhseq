@@ -2,7 +2,7 @@ module Main where
 
   import Prelude
 
-  import Control.Exception (ErrorCall, try, evaluate, throwIO)
+  import Control.Exception (ErrorCall, catch, evaluate, throwIO)
 
   import System.Environment (getArgs)
 
