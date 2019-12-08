@@ -35,8 +35,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - yhseq
-
-executables:
+    - optparse-applicative
   yhseq-simple:
     main:                Main.hs
     source-dirs:         app-simple/
