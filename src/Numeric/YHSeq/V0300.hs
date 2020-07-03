@@ -16,3 +16,10 @@ module Numeric.YHSeq.V0300 where
     , parent     :: Vector (Vector Int)
     , ancestor   :: Vector (Vector IntSet)
     }
+
+  fromSeqToMt :: Sequence -> Mountain
+  fromSeqToMt (Sequence s) = let len_s = V.length s in Mountain
+    { difference = generate len_s (\n -> generate len_s (\x -> diffs n x s))
+    , parent     = generate len_s (\n -> generate len_s (\x -> paets n x s))
+    , ancestor   = generate len_s (\n -> generate len_s (\x -> ances n x s))
+    }
