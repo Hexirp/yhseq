@@ -22,15 +22,15 @@ module Numeric.YHSeq.V0300 where
 
   -- 山から階差を得る
   diffz :: Mountain -> Int -> Int -> Int
-  diffz z x n = (diff z V.! x) V.! n
+  diffz z x n = (diff z V.! (x - 1)) V.! (n - 1)
 
   -- 山から親の情報を得る
   paetz :: Mountain -> Int -> Int -> Int
-  paetz z x n = (paet z V.! x) V.! n
+  paetz z x n = (paet z V.! (x - 1)) V.! (n - 1)
 
   -- 山から先祖の情報を得る
   ancez :: Mountain -> Int -> Int -> IntSet
-  ancez z x n = (ance z V.! x) V.! n
+  ancez z x n = (ance z V.! (x - 1)) V.! (n - 1)
 
   -- 数列から山を構築する
   fromSeqToMt :: Sequence -> Mountain
@@ -39,7 +39,7 @@ module Numeric.YHSeq.V0300 where
       diffs :: Mountain -> Sequence -> Int -> Int -> Int
       diffs z s x n = case n `compare` 1 of
         LT -> undefined
-        EQ -> unSeq s V.! x
+        EQ -> unSeq s V.! (x - 1)
         GT -> case paetz z x (n - 1) `compare` 0 of
           LT -> undefined
           EQ -> 0
@@ -69,10 +69,11 @@ module Numeric.YHSeq.V0300 where
     in
       let
         len_s = V.length (unSeq s)
+        gen_s = \f -> V.map f (V.enumFromTo 1 len_s)
         z = Mountain
-          { diff = V.generate len_s (\x -> V.generate len_s (\n -> diffs z s x n))
-          , paet = V.generate len_s (\x -> V.generate len_s (\n -> paets z x n))
-          , ance = V.generate len_s (\x -> V.generate len_s (\n -> ances z x n))
+          { diff = gen_s (\x -> gen_s (\n -> diffs z s x n))
+          , paet = gen_s (\x -> gen_s (\n -> paets z x n))
+          , ance = gen_s (\x -> gen_s (\n -> ance z x n))
           }
       in
         z
