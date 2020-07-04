@@ -68,9 +68,9 @@ module Numeric.YHSeq.V0300 where
         EQ -> True
         GT -> S.member p (ancez z x (n - 1))
       ances :: Mountain -> Int -> Int -> IntSet
-      ances z x n = case x `compare` 0 of
+      ances z x n = case paetz z x n `compare` 0 of
         LT -> undefined
-        EQ -> S.empty
+        EQ -> S.singleton x
         GT -> S.insert x (ancez z (paetz z x n) n)
     in
       let
