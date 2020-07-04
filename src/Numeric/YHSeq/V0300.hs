@@ -22,15 +22,15 @@ module Numeric.YHSeq.V0300 where
 
   -- 山から階差を得る
   diffz :: Mountain -> Int -> Int -> Int
-  diffz z x n = (diff z ! x) ! n
+  diffz z x n = (diff z V.! x) V.! n
 
   -- 山から親の情報を得る
   paetz :: Mountain -> Int -> Int -> Int
-  paetz z x n = (paet z ! x) ! n
+  paetz z x n = (paet z V.! x) V.! n
 
   -- 山から先祖の情報を得る
   ancez :: Mountain -> Int -> Int -> IntSet
-  ancez z x n = (ance z ! x) ! n
+  ancez z x n = (ance z V.! x) V.! n
 
   -- 数列から山を構築する
   fromSeqToMt :: Sequence -> Mountain
@@ -68,7 +68,7 @@ module Numeric.YHSeq.V0300 where
         GT -> S.member p (ances s x (n - 1))
     in
       let
-        len_s = V.length s
+        len_s = V.length (unSeq s)
         z = Mountain
           { diff = V.generate len_s (\x -> V.generate len_s (\n -> diffs z s x n))
           , paet = V.generate len_s (\x -> V.generate len_s (\n -> paets z x n))
