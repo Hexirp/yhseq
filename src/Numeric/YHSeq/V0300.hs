@@ -8,7 +8,7 @@ module Numeric.YHSeq.V0300 where
   import qualified Data.Vector as V
 
   -- 数列
-  newtype Sequence = Sequence { unSeq :: Vector Int }
+  newtype Sequence = Sequence { unSeq :: Vector Int } deriving (Eq, Ord, Show)
 
   -- 山
   data Mountain = Mountain
@@ -18,7 +18,7 @@ module Numeric.YHSeq.V0300 where
       paet :: Vector (Vector Int)
     , -- 先祖の情報
       ance :: Vector (Vector IntSet)
-    }
+    } deriving (Eq, Ord, Show)
 
   -- 山から階差を得る
   diffz :: Mountain -> Int -> Int -> Int
