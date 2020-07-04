@@ -59,19 +59,19 @@ module Numeric.YHSeq.V0300 where
       paets' z x n p = case p `compare` 0 of
         LT -> undefined
         EQ -> 0
-        GT -> if diffz z p n < diffz z x n && in_ances z x n p
+        GT -> if diffz z p n < diffz z x n && is_ancez z x n p
           then p
           else paets' z x n (p - 1)
+      is_ancez :: Mountain -> Int -> Int -> Int -> Bool
+      is_ancez z x n p = case n `compare` 1 of
+        LT -> undefined
+        EQ -> True
+        GT -> S.member p (ancez z x (n - 1))
       ances :: Mountain -> Int -> Int -> IntSet
       ances z x n = case x `compare` 0 of
         LT -> undefined
         EQ -> S.empty
-        GT -> S.insert x (ances z (paets z x n) n)
-      in_ances :: Mountain -> Int -> Int -> Int -> Bool
-      in_ances z x n p = case n `compare` 1 of
-        LT -> undefined
-        EQ -> True
-        GT -> S.member p (ances z x (n - 1))
+        GT -> S.insert x (ancez z (paetz z x n) n)
     in
       let
         len_s = V.length (unSeq s)
