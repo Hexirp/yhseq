@@ -91,7 +91,7 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラス分け
 
-  data Class = IsZero | IsSucc | IsLim Int
+  data Class = IsZero | IsSucc | IsLim Int deriving (Eq, Ord, Show)
 
   -- 0 ではない階差が存在する最も大きい深さ
   mtBottom :: Mountain -> Int -> Int
