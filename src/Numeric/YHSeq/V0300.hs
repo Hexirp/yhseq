@@ -87,6 +87,10 @@ module Numeric.YHSeq.V0300 where
       in
         z
 
+  -- 通常のリストから山を構築する
+  fromListToMt :: [Int] -> Mountain
+  fromListToMt x = fromSeqToMt (Sequence (V.fromList x))
+
   -- 0 ではない階差が存在する最も大きい深さ
   mtBottom :: Mountain -> Int -> Int
   mtBottom z x = mtBottom' z x 1
@@ -104,3 +108,7 @@ module Numeric.YHSeq.V0300 where
   test = do
     print "fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
     print (fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8])
+    print "mtClass $ fromListToMt [1,2,4,8,10,8]"
+    print (mtClass $ fromListToMt [1,2,4,8,10,8])
+    print "mtClass $ fromListToMt [1,3,4,2,5,6,5]"
+    print (mtClass $ fromListToMt [1,3,4,2,5,6,5])
