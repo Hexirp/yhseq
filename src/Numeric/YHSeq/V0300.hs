@@ -43,7 +43,7 @@ module Numeric.YHSeq.V0300 where
         GT -> case paetz z x (n - 1) `compare` 0 of
           LT -> undefined
           EQ -> 0
-          GT -> case diffz z (paetz z x (n - 1)) (n - 1) of
+          GT -> case diffz z (paetz z x (n - 1)) (n - 1) `compare` 0 of
             LT -> undefined
             EQ -> 0
             GT -> diffz z x (n - 1) - diffz z (paetz z x (n - 1)) (n - 1)
@@ -61,11 +61,11 @@ module Numeric.YHSeq.V0300 where
         LT -> undefined
         EQ -> S.empty
         GT -> S.insert x (ances z (paets z x n) n)
-      in_ances :: Mountain -> Int -> Int -> Bool
+      in_ances :: Mountain -> Int -> Int -> Int -> Bool
       in_ances z x n p = case n `compare` 1 of
         LT -> undefined
         EQ -> True
-        GT -> S.member p (ances s x (n - 1))
+        GT -> S.member p (ances z x (n - 1))
     in
       let
         len_s = V.length (unSeq s)
