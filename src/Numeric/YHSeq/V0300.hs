@@ -39,7 +39,7 @@ module Numeric.YHSeq.V0300 where
       diffs :: Mountain -> Sequence -> Int -> Int -> Int
       diffs z s x n = case n `compare` 1 of
         LT -> undefined
-        EQ -> unSeq s S.! x
+        EQ -> unSeq s V.! x
         GT -> case paetz z x (n - 1) `compare` 0 of
           LT -> undefined
           EQ -> 0
@@ -72,7 +72,7 @@ module Numeric.YHSeq.V0300 where
         z = Mountain
           { diff = V.generate len_s (\x -> V.generate len_s (\n -> diffs z s x n))
           , paet = V.generate len_s (\x -> V.generate len_s (\n -> paets z x n))
-          , ance = V.generare len_s (\x -> V.generate len_s (\n -> ances z x n))
+          , ance = V.generate len_s (\x -> V.generate len_s (\n -> ances z x n))
           }
       in
         z
