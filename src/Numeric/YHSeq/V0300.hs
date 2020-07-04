@@ -86,5 +86,5 @@ module Numeric.YHSeq.V0300 where
 
   test :: IO ()
   test = do
-    print "fromSeqToMt $ V.fromList $ [1,2,4,8,10,8]"
-    print (fromSeqToMt $ V.fromList $ [1,2,4,8,10,8])
+    print "fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
+    print (fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8])
