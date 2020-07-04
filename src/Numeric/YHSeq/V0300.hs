@@ -18,7 +18,9 @@ module Numeric.YHSeq.V0300 where
 
   -- 山
   data Mountain = Mountain
-    { -- 階差
+    { -- サイズ
+      size :: Int
+    , -- 階差
       diff :: Vector (Vector Int)
     , -- 親の情報
       paet :: Vector (Vector Int)
@@ -77,7 +79,8 @@ module Numeric.YHSeq.V0300 where
         len_s = V.length (unSeq s)
         gen_s = \f -> V.map f (V.enumFromTo 1 len_s)
         z = Mountain
-          { diff = gen_s (\x -> gen_s (\n -> diffs z s x n))
+          { size = len_s
+          , diff = gen_s (\x -> gen_s (\n -> diffs z s x n))
           , paet = gen_s (\x -> gen_s (\n -> paets z x n))
           , ance = gen_s (\x -> gen_s (\n -> ances z x n))
           }
@@ -95,7 +98,7 @@ module Numeric.YHSeq.V0300 where
 
   -- 山のクラス
   mtClass :: Mountain -> Int
-  mtClass z = diffz z (len z) (mtBottom z (len z))
+  mtClass z = diffz z (size z) (mtBottom z (size z))
 
   test :: IO ()
   test = do
