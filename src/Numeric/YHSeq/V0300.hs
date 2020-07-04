@@ -13,6 +13,8 @@ module Numeric.YHSeq.V0300 where
   import           Data.Vector      ( Vector )
   import qualified Data.Vector as V
 
+  -- * 数列と山
+
   -- 数列
   newtype Sequence = Sequence { unSeq :: Vector Int } deriving (Eq, Ord, Show)
 
@@ -87,9 +89,7 @@ module Numeric.YHSeq.V0300 where
       in
         z
 
-  -- 通常のリストから山を構築する
-  fromListToMt :: [Int] -> Mountain
-  fromListToMt x = fromSeqToMt (Sequence (V.fromList x))
+  -- * クラス分け
 
   -- 0 ではない階差が存在する最も大きい深さ
   mtBottom :: Mountain -> Int -> Int
@@ -104,6 +104,13 @@ module Numeric.YHSeq.V0300 where
   mtClass :: Mountain -> Int
   mtClass z = diffz z (size z) (mtBottom z (size z))
 
+  -- * テスト
+
+  -- 通常のリストから山を構築する
+  fromListToMt :: [Int] -> Mountain
+  fromListToMt x = fromSeqToMt (Sequence (V.fromList x))
+
+  -- テスト
   test :: IO ()
   test = do
     print "fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
