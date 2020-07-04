@@ -84,6 +84,19 @@ module Numeric.YHSeq.V0300 where
       in
         z
 
+  -- 0 ではない階差が存在する最も大きい深さ
+  mtBottom :: Mountain -> Int -> Int
+  mtBottom z x = mtBottom' z x 1
+  mtBottom' :: Mountain -> Int -> Int -> Int
+  mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of
+    LT -> undefined
+    EQ -> n
+    GT -> mtBottom' z x (n + 1)
+
+  -- 山のクラス
+  mtClass :: Mountain -> Int
+  mtClass z = diffz z (len z) (mtBottom z (len z))
+
   test :: IO ()
   test = do
     print "fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
