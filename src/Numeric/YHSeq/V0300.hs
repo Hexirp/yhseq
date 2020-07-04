@@ -30,15 +30,15 @@ module Numeric.YHSeq.V0300 where
 
   -- 山から階差を得る
   diffz :: Mountain -> Int -> Int -> Int
-  diffz z x n = (diff z V.! (x - 1)) V.! (n - 1)
+  diffz z x n = diff z V.! (x - 1) V.! (n - 1)
 
   -- 山から親の情報を得る
   paetz :: Mountain -> Int -> Int -> Int
-  paetz z x n = (paet z V.! (x - 1)) V.! (n - 1)
+  paetz z x n = paet z V.! (x - 1) V.! (n - 1)
 
   -- 山から先祖の情報を得る
   ancez :: Mountain -> Int -> Int -> IntSet
-  ancez z x n = (ance z V.! (x - 1)) V.! (n - 1)
+  ancez z x n = ance z V.! (x - 1) V.! (n - 1)
 
   -- 数列から山を構築する
   fromSeqToMt :: Sequence -> Mountain
