@@ -104,6 +104,11 @@ module Numeric.YHSeq.V0300 where
   mtClass :: Mountain -> Int
   mtClass z = diffz z (size z) (mtBottom z (size z))
 
+  -- * クラスが 1 である山の展開
+
+  expand_1 :: Mountain -> Mountain
+  expand_1 z = undefined
+
   -- * テスト
 
   -- 通常のリストから山を構築する
