@@ -73,7 +73,7 @@ module Numeric.YHSeq.V0300 where
         z = Mountain
           { diff = gen_s (\x -> gen_s (\n -> diffs z s x n))
           , paet = gen_s (\x -> gen_s (\n -> paets z x n))
-          , ance = gen_s (\x -> gen_s (\n -> ance z x n))
+          , ance = gen_s (\x -> gen_s (\n -> ances z x n))
           }
       in
         z
