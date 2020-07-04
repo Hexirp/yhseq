@@ -54,6 +54,8 @@ module Numeric.YHSeq.V0300 where
         LT -> undefined
         EQ -> 0
         GT -> if diffz z p n < diffz z x n && in_ances z x n p
+          then p
+          else paets' z x n (p - 1)
       ances :: Mountain -> Int -> Int -> IntSet
       ances z x n = case x `compare` 0 of
         LT -> undefined
