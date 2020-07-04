@@ -91,6 +91,8 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラス分け
 
+  data Class = IsZero | IsSucc | IsLim Int
+
   -- 0 ではない階差が存在する最も大きい深さ
   mtBottom :: Mountain -> Int -> Int
   mtBottom z x = mtBottom' z x 1
@@ -101,10 +103,16 @@ module Numeric.YHSeq.V0300 where
     GT -> mtBottom' z x (n + 1)
 
   -- 山のクラス
-  mtClass :: Mountain -> Int
-  mtClass z = diffz z (size z) (mtBottom z (size z))
+  mtClass :: Mountain -> Class
+  mtClass z = case size z `compare` 0 of
+    LT -> undefined
+    EQ -> IsZero
+    GT -> case paetz z (size z) (mtBottom z (size z)) `compare` 0 of
+      LT -> undefined
+      EQ -> IsSucc
+      GT -> IsLim (diffz z (size z) (mtBottom z (size z)))
 
-  -- * クラスが 1 である山の展開
+  -- * クラスが IsLim 1 である山の展開
 
   expand_1 :: Mountain -> Mountain
   expand_1 z = undefined
