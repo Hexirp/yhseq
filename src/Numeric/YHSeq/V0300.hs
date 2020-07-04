@@ -65,4 +65,12 @@ module Numeric.YHSeq.V0300 where
         EQ -> True
         GT -> S.member p (ances s x (n - 1))
     in
-      undefined
+      let
+        len_s = V.length s
+        z = Mountain
+          { diff = V.generate len_s (\x -> V.generate len_s (\n -> diffs z s x n))
+          , paet = V.generate len_s (\x -> V.generate len_s (\n -> paets z x n))
+          , ance = V.generare len_s (\x -> V.generate len_s (\n -> ances z x n))
+          }
+      in
+        z
