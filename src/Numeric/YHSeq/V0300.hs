@@ -98,7 +98,7 @@ module Numeric.YHSeq.V0300 where
   mtBottom z x = mtBottom' z x 1
    where
     mtBottom' :: Mountain -> Int -> Int -> Int
-    mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of
+    mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of -- [1,3] のとき、いや、山が確保した配列の一番底の深さまで到達するときにおかしくなる
       LT -> undefined
       EQ -> n
       GT -> mtBottom' z x (n + 1)
@@ -213,6 +213,8 @@ module Numeric.YHSeq.V0300 where
     print (mtClass $ fromListToMt [1,2,1])
     print "mtClass $ fromListToMt [1,2,4,8,10,8]"
     print (mtClass $ fromListToMt [1,2,4,8,10,8])
+    print "mtClass $ fromListToMt [1,3]"
+    print (mtClass $ fromListToMt [1,3])
     print "mtClass $ fromListToMt [1,3,4,2,5,6,5]"
     print (mtClass $ fromListToMt [1,3,4,2,5,6,5])
     print "mtDiagonal $ fromListToMt [1,3]"
