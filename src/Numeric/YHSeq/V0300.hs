@@ -135,8 +135,8 @@ module Numeric.YHSeq.V0300 where
   mtNewSize_L1 z m = mtGoodPartLen_L1 z + mtBadPartLen_L1 z * (1 + m)
 
   -- クラスが IsLim 1 である山を展開する
-  expand_1 :: Mountain -> Int -> Mountain
-  expand_1 z =
+  expand_L1 :: Mountain -> Int -> Mountain
+  expand_L1 z =
     let
       paets :: Mountain -> Int -> Int -> Int
       paets z x n = case x `compare` 1 of
@@ -151,16 +151,16 @@ module Numeric.YHSeq.V0300 where
   -- * クラスが IsLim (n + 1) である山の展開
 
   -- 最大の深さ、ここまでの深さの値だけを展開に使用する
-  mtMaxDepth_n :: Mountain -> Int
-  mtMaxDepth_n z = mtBottom z (size z)
+  mtMaxDepth_Ln :: Mountain -> Int
+  mtMaxDepth_Ln z = mtBottom z (size z)
 
   -- 偽の悪部根、対角列を決定する
   mtFalseBadRoot :: Mountain -> Int
-  mtFalseBadRoot z = paetz z (size z) (mtMaxDepth_n z)
+  mtFalseBadRoot z = paetz z (size z) (mtMaxDepth_Ln z)
 
   -- クラスが IsLim (n + 1) である山を展開する
-  expand_n :: Mountain -> Mountain
-  expand_n z = undefined
+  expand_Ln :: Mountain -> Mountain
+  expand_Ln z = undefined
 
   -- * テスト
 
