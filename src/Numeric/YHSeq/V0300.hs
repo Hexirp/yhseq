@@ -126,6 +126,20 @@ module Numeric.YHSeq.V0300 where
   expand_1 :: Mountain -> Mountain
   expand_1 z = undefined
 
+  -- * クラスが IsLim (n + 1) である山の展開
+
+  -- 最大の深さ、ここまでの深さの値だけを展開に使用する
+  mtMaxDepth_n :: Mountain -> Int
+  mtMaxDepth_n z = mtBottom z (size z)
+
+  -- 偽の悪部根、対角列を決定する
+  mtFalseBadRoot :: Mountain -> Int
+  mtFalseBadRoot z = paetz z (size z) (mtMaxDepth_n z)
+
+  -- クラスが IsLim (n + 1) である山を展開する
+  expand_n :: Mountain -> Mountain
+  expand_n z = undefined
+
   -- * テスト
 
   -- 通常のリストから山を構築する
@@ -137,6 +151,10 @@ module Numeric.YHSeq.V0300 where
   test = do
     print "fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
     print (fromSeqToMt $ Sequence $ V.fromList $ [1,2,4,8,10,8])
+    print "mtClass $ fromListToMt []"
+    print (mtClass $ fromListToMt [])
+    print "mtClass $ fromListToMt [1,2,1]"
+    print (mtClass $ fromListToMt [1,2,1])
     print "mtClass $ fromListToMt [1,2,4,8,10,8]"
     print (mtClass $ fromListToMt [1,2,4,8,10,8])
     print "mtClass $ fromListToMt [1,3,4,2,5,6,5]"
