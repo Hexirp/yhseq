@@ -128,7 +128,12 @@ module Numeric.YHSeq.V0300 where
 
   -- クラスが IsLim 1 である山を展開する
   expand_1 :: Mountain -> Int -> Mountain
-  expand_1 z = undefined
+  expand_1 z =
+    let
+      diffs :: Mountain -> Mountain -> Int -> Int -> Int
+      diffs z z' x n = undefined
+    in
+      undefined
 
   -- * クラスが IsLim (n + 1) である山の展開
 
