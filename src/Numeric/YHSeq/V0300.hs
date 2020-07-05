@@ -215,3 +215,11 @@ module Numeric.YHSeq.V0300 where
     print (mtClass $ fromListToMt [1,2,4,8,10,8])
     print "mtClass $ fromListToMt [1,3,4,2,5,6,5]"
     print (mtClass $ fromListToMt [1,3,4,2,5,6,5])
+    print "mtDiagonal $ fromListToMt [1,3]"
+    print (mtDiagonal $ fromListToMt [1,3])
+    print "mtDiagonal $ fromListToMt [1,3,3]"
+    print (mtDiagonal $ fromListToMt [1,3,3])
+    print "mtDiagonal $ fromListToMt [1,3,5]"
+    print (mtDiagonal $ fromListToMt [1,3,5])
+    print "mtDiagonal $ fromListToMt [1,3,4,2,5,6,5]"
+    print (mtDiagonal $ fromListToMt [1,3,4,2,5,6,5])
