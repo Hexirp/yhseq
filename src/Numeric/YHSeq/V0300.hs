@@ -120,7 +120,7 @@ module Numeric.YHSeq.V0300 where
 
   -- 真の悪部根、良部と悪部を決定する
   mtTrueBadRoot :: Mountain -> Int
-  mtTrueBadRoot z = paetz z (size z) (mtMaxDepthL_1 z)
+  mtTrueBadRoot z = paetz z (size z) (mtMaxDepth_L1 z)
 
   -- 良部の長さ
   mtGoodPartLen_L1 :: Mountain -> Int
@@ -132,7 +132,7 @@ module Numeric.YHSeq.V0300 where
 
   -- 展開後の山のサイズ（数列の長さ）
   mtNewSize_L1 :: Mountain -> Int -> Int
-  mtNewSize_L1 z m = mtBadPartLen + mtBadPartLen z * (1 + m)
+  mtNewSize_L1 z m = mtGoodPartLen_L1 z + mtBadPartLen_L1 z * (1 + m)
 
   -- クラスが IsLim 1 である山を展開する
   expand_1 :: Mountain -> Int -> Mountain
@@ -143,7 +143,7 @@ module Numeric.YHSeq.V0300 where
         LT -> undefined
         _  -> case x `compare` mtTrueBadRoot z of
           LT -> paetz z x n
-          _  -> paetz z ((x - mtGoodPartLen z) `mod` mtBadPartLen_L1 z + mtBadGoodLen_L1 z) n
+          _  -> paetz z ((x - mtGoodPartLen_L1 z) `mod` mtBadPartLen_L1 z + mtGoodPartLen_L1 z) n
     in
       undefined
 
