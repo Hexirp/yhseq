@@ -182,9 +182,15 @@ module Numeric.YHSeq.V0300 where
         EQ -> S.insert x (mtFaBaRoAnce' (paetz z x n) (n - 1))
         GT -> S.insert x (mtFaBaRoAnce' (paetz z x n) n)
 
+  -- 対角列に含めるか
+  mtDiagBool :: Mountain -> Int -> Bool
+  mtDiagBool z x = False
+    || S.member x (mtFaBaRoAnce z)
+    || S.member (mtFalseBadRoot z) (ancez z x (mtFaBaRoDepth z))
+
   -- 対角列
   mtDiagonal :: Mountain -> Sequence
-  mtDiagonal z = Sequence (V.filter (\x -> S.member x (mtFaBaRoAnce z) || S.member (mtFalseBadRoot z) (ancez z x (mtFaBaRoDepth z))) (V.enumFromTo 1 (size z)))
+  mtDiagonal z = Sequence (V.filter (mtDiagBool z) (V.enumFromTo 1 (size z)))
 
   -- クラスが IsLim (n + 1) である山を展開する
   expand_Ln :: Mountain -> Mountain
