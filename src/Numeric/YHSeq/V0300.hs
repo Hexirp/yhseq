@@ -144,7 +144,7 @@ module Numeric.YHSeq.V0300 where
         _  -> case x `compare` mtTrueBadRoot z of
           LT -> paetz z x n
           _  -> let f a b x = ((x - a) `mod` b) + a in
-            paetz z (f (mtGoodPartLen z) (mtBadPartLen z) x) n
+            paetz z (f (mtGoodPartLen_L1 z) (mtBadPartLen_L1 z) x) n
     in
       undefined
 
