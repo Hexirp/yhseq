@@ -124,7 +124,8 @@ module Numeric.YHSeq.V0300 where
 
   -- 展開後の山のサイズ（数列の長さ）
   mtNewSize_1 :: Mountain -> Int -> Int
-  mtNewSize_1 z m = (mtTrueBadRoot z - 1) + (size z - mtTrueBadRoot z) * (1 + m)
+  mtNewSize_1 z m =
+    (mtTrueBadRoot z - 1) + (size z - mtTrueBadRoot z - 1) * (1 + m)
 
   -- クラスが IsLim 1 である山を展開する
   expand_1 :: Mountain -> Int -> Mountain
