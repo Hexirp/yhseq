@@ -115,26 +115,35 @@ module Numeric.YHSeq.V0300 where
   -- * クラスが IsLim 1 である山の展開
 
   -- 最大の深さ、ここまでの深さの値だけを展開に使用する
-  mtMaxDepth_1 :: Mountain -> Int
-  mtMaxDepth_1 z = mtBottom z (size z) - 1
+  mtMaxDepth_L1 :: Mountain -> Int
+  mtMaxDepth_L1 z = mtBottom z (size z) - 1
 
   -- 真の悪部根、良部と悪部を決定する
   mtTrueBadRoot :: Mountain -> Int
-  mtTrueBadRoot z = paetz z (size z) (mtMaxDepth_1 z)
+  mtTrueBadRoot z = paetz z (size z) (mtMaxDepthL_1 z)
+
+  -- 良部の長さ
+  mtGoodPartLen_L1 :: Mountain -> Int
+  mtGoodPartLen_L1 z = mtTrueBadRoot z - 1
+
+  -- 悪部の長さ
+  mtBadPartLen_L1 :: Mountain -> Int
+  mtBadPartLen_L1 z = size z - mtTrueBadRoot z - 1
 
   -- 展開後の山のサイズ（数列の長さ）
-  mtNewSize_1 :: Mountain -> Int -> Int
-  mtNewSize_1 z m =
-    (mtTrueBadRoot z - 1) + (size z - mtTrueBadRoot z - 1) * (1 + m)
+  mtNewSize_L1 :: Mountain -> Int -> Int
+  mtNewSize_L1 z m = mtBadPartLen + mtBadPartLen z * (1 + m)
 
   -- クラスが IsLim 1 である山を展開する
   expand_1 :: Mountain -> Int -> Mountain
   expand_1 z =
     let
-      diffs :: Mountain -> Mountain -> Int -> Int -> Int
-      diffs z z' x n = case x `compare` mtTrueBadRoot z of
-        LT -> diffz z x n
-        _  -> diffz z (((x - (mtTrueBadRoot z - 1)) `mod` (size z - (mtTrueBadRoot z - 1))) + (mtTrueBadRoot z - 1)) n
+      paets :: Mountain -> Int -> Int -> Int
+      paets z x n = case x `compare` 1 of
+        LT -> undefined
+        _  -> case x `compare` mtTrueBadRoot z of
+          LT -> paetz z x n
+          _  -> paetz z ((x - mtGoodPartLen z) `mod` mtBadPartLen_L1 z + mtBadGoodLen_L1 z) n
     in
       undefined
 
