@@ -132,7 +132,9 @@ module Numeric.YHSeq.V0300 where
   expand_1 z =
     let
       diffs :: Mountain -> Mountain -> Int -> Int -> Int
-      diffs z z' x n = undefined
+      diffs z z' x n = case x `compare` mtTrueBadRoot z of
+        LT -> diffz z x n
+        _  -> diffz z (((x - (mtTrueBadRoot z - 1)) `mod` (size z - (mtTrueBadRoot z - 1))) + (mtTrueBadRoot z - 1)) n
     in
       undefined
 
