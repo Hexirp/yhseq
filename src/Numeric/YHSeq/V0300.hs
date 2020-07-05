@@ -96,11 +96,12 @@ module Numeric.YHSeq.V0300 where
   -- 0 ではない階差が存在する最も大きい深さ
   mtBottom :: Mountain -> Int -> Int
   mtBottom z x = mtBottom' z x 1
-  mtBottom' :: Mountain -> Int -> Int -> Int
-  mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of
-    LT -> undefined
-    EQ -> n
-    GT -> mtBottom' z x (n + 1)
+   where
+    mtBottom' :: Mountain -> Int -> Int -> Int
+    mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of
+      LT -> undefined
+      EQ -> n
+      GT -> mtBottom' z x (n + 1)
 
   -- 山のクラス
   mtClass :: Mountain -> Class
@@ -114,7 +115,7 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラスが IsLim 1 である山の展開
 
-  -- 最大の深さ、ここまでの深さの値だけを展開に使用する
+  -- 上限の深さ、ここまでの深さの値だけを展開に使用する
   mtMaxDepth_L1 :: Mountain -> Int
   mtMaxDepth_L1 z = mtBottom z (size z) - 1
 
@@ -150,13 +151,40 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラスが IsLim (n + 1) である山の展開
 
-  -- 最大の深さ、ここまでの深さの値だけを展開に使用する
+  -- 上限の深さ、ここまでの深さの値だけを展開に使用する
   mtMaxDepth_Ln :: Mountain -> Int
   mtMaxDepth_Ln z = mtBottom z (size z)
 
   -- 偽の悪部根、対角列を決定する
   mtFalseBadRoot :: Mountain -> Int
   mtFalseBadRoot z = paetz z (size z) (mtMaxDepth_Ln z)
+
+  -- 上限の深さを超えない最大の深さ
+  mtBottom_Ln :: Mountain -> Int -> Int
+  mtBottom_Ln z x = mtBottom z x `min` mtMaxDepth_Ln
+
+  -- 偽の悪部根の深さ、対角列を決定する
+  mtFaBaRoDepth :: Mountain -> Int
+  mtFaBaRoDepth z = mtBottom_Ln (mtFalseBadRoot z)
+
+  -- 偽の悪部根の先祖
+  mtFaBaRoAnce :: Mountain -> IntSet
+  mtFaBaRoAnce z = mtFaBaRoAnce' (mtFalseBadRoot z) (mtFaBaRootDepth z)
+   where
+    mtFaBaRoAnce' x n = case n `compare` 1 of
+      LT -> undefined
+      EQ -> case paetz z x n `compare` 0 of
+        LT -> undefined
+        EQ -> S.singleton x
+        GT -> S.insert x (mtFaBaRoAnce' (paetz z x n) n)
+      GT -> case paetz z x n `compare` 0 of
+        LT -> undefined
+        EQ -> S.insert x (mtFaBaRoAnce' (paetz z x n) (n - 1))
+        GT -> S.insert x (mtFaBaRoAnce' (paetz z x n) n)
+
+  -- 対角列
+  mtDiagonal :: Mountain -> Sequence
+  mtDiagonal z = V.filter (\x -> S.member x (mtFaBaRoAnce z) || S.member (mtFalseBadRoot z) (ancez z x (mtFaBaRoDepth z))) (V.enumFromTo 1 (size z))
 
   -- クラスが IsLim (n + 1) である山を展開する
   expand_Ln :: Mountain -> Mountain
