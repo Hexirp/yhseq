@@ -122,8 +122,12 @@ module Numeric.YHSeq.V0300 where
   mtTrueBadRoot :: Mountain -> Int
   mtTrueBadRoot z = paetz z (size z) (mtMaxDepth_1 z)
 
+  -- 展開後の山のサイズ（数列の長さ）
+  mtNewSize_1 :: Mountain -> Int -> Int
+  mtNewSize z m = (mtTrueBadRoot z - 1) + (size z - mtTrueBadRoot z) * (1 + m)
+
   -- クラスが IsLim 1 である山を展開する
-  expand_1 :: Mountain -> Mountain
+  expand_1 :: Mountain -> Int -> Mountain
   expand_1 z = undefined
 
   -- * クラスが IsLim (n + 1) である山の展開
