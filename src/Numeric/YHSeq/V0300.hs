@@ -161,15 +161,15 @@ module Numeric.YHSeq.V0300 where
 
   -- 上限の深さを超えない最大の深さ
   mtBottom_Ln :: Mountain -> Int -> Int
-  mtBottom_Ln z x = mtBottom z x `min` mtMaxDepth_Ln
+  mtBottom_Ln z x = mtBottom z x `min` mtMaxDepth_Ln z
 
   -- 偽の悪部根の深さ、対角列を決定する
   mtFaBaRoDepth :: Mountain -> Int
-  mtFaBaRoDepth z = mtBottom_Ln (mtFalseBadRoot z)
+  mtFaBaRoDepth z = mtBottom_Ln z (mtFalseBadRoot z)
 
-  -- 偽の悪部根の先祖
+  -- 偽の悪部根の先祖、対角列を決定する
   mtFaBaRoAnce :: Mountain -> IntSet
-  mtFaBaRoAnce z = mtFaBaRoAnce' (mtFalseBadRoot z) (mtFaBaRootDepth z)
+  mtFaBaRoAnce z = mtFaBaRoAnce' (mtFalseBadRoot z) (mtFaBaRoDepth z)
    where
     mtFaBaRoAnce' x n = case n `compare` 1 of
       LT -> undefined
@@ -184,7 +184,7 @@ module Numeric.YHSeq.V0300 where
 
   -- 対角列
   mtDiagonal :: Mountain -> Sequence
-  mtDiagonal z = V.filter (\x -> S.member x (mtFaBaRoAnce z) || S.member (mtFalseBadRoot z) (ancez z x (mtFaBaRoDepth z))) (V.enumFromTo 1 (size z))
+  mtDiagonal z = Sequence (V.filter (\x -> S.member x (mtFaBaRoAnce z) || S.member (mtFalseBadRoot z) (ancez z x (mtFaBaRoDepth z))) (V.enumFromTo 1 (size z)))
 
   -- クラスが IsLim (n + 1) である山を展開する
   expand_Ln :: Mountain -> Mountain
