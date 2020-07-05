@@ -18,7 +18,7 @@ module Numeric.YHSeq.V0300 where
   -- 数列
   newtype Sequence = Sequence { unSeq :: Vector Int } deriving (Eq, Ord, Show)
 
-  -- 山
+  -- 山、条件として diff と paet と ance の長さは size に等しい
   data Mountain = Mountain
     { -- サイズ
       size :: Int
@@ -114,6 +114,15 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラスが IsLim 1 である山の展開
 
+  -- 最大の深さ、ここまでの深さの値だけを展開に使用する
+  mtMaxDepth_1 :: Mountain -> Int
+  mtMaxDepth_1 z = mtBottom z (size z) - 1
+
+  -- 真の悪部根、良部と悪部を決定する
+  mtTrueBadRoot :: Mountain -> Int
+  mtTrueBadRoot z = paetz z (size z) (mtMaxDepth_1 z)
+
+  -- クラスが IsLim 1 である山を展開する
   expand_1 :: Mountain -> Mountain
   expand_1 z = undefined
 
