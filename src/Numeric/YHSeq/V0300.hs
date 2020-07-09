@@ -70,13 +70,14 @@ module Numeric.YHSeq.V0300 where
           GT -> diffz z x (n - 1) - diffz z (paetz z x (n - 1)) (n - 1)
     paets :: Mountain -> Int -> Int -> Int
     paets z x n = paets' z x n (x - 1)
-    paets' :: Mountain -> Int -> Int -> Int -> Int
-    paets' z x n p = case p `compare` 0 of
-      LT -> undefined
-      EQ -> 0
-      GT -> if diffz z p n < diffz z x n && is_ancez z x n p
-        then p
-        else paets' z x n (p - 1)
+     where
+      paets' :: Mountain -> Int -> Int -> Int -> Int
+      paets' z x n p = case p `compare` 0 of
+        LT -> undefined
+        EQ -> 0
+        GT -> if diffz z p n < diffz z x n && is_ancez z x n p
+          then p
+          else paets' z x n (p - 1)
     is_ancez :: Mountain -> Int -> Int -> Int -> Bool
     is_ancez z x n p = case n `compare` 1 of
       LT -> undefined
