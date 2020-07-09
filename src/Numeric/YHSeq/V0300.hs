@@ -79,12 +79,12 @@ module Numeric.YHSeq.V0300 where
     in
       let
         len_s = V.length (unSeq s)
-        gen_s = \f -> V.map f (V.enumFromTo 1 len_s)
+        gen x = \f -> V.map f (V.enumFromTo 1 x)
         z = Mountain
           { size = len_s
-          , diff = gen_s (\x -> gen_s (\n -> diffs z s x n))
-          , paet = gen_s (\x -> gen_s (\n -> paets z x n))
-          , ance = gen_s (\x -> gen_s (\n -> ances z x n))
+          , diff = gen len_s (\x -> gen (len_s + 1) (\n -> diffs z s x n))
+          , paet = gen len_s (\x -> gen (len_s + 1) (\n -> paets z x n))
+          , ance = gen len_s (\x -> gen (len_s + 1) (\n -> ances z x n))
           }
       in
         z
@@ -98,7 +98,7 @@ module Numeric.YHSeq.V0300 where
   mtBottom z x = mtBottom' z x 1
    where
     mtBottom' :: Mountain -> Int -> Int -> Int
-    mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of -- [1,3] のとき、いや、山が確保した配列の一番底の深さまで到達するときにおかしくなる
+    mtBottom' z x n = case diffz z x (n + 1) `compare` 0 of
       LT -> undefined
       EQ -> n
       GT -> mtBottom' z x (n + 1)
