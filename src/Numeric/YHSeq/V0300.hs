@@ -46,48 +46,47 @@ module Numeric.YHSeq.V0300 where
   fromSeqToMt :: Sequence -> Mountain
   fromSeqToMt s =
     let
-      diffs :: Mountain -> Sequence -> Int -> Int -> Int
-      diffs z s x n = case n `compare` 1 of
-        LT -> undefined
-        EQ -> unSeq s V.! (x - 1)
-        GT -> case paetz z x (n - 1) `compare` 0 of
-          LT -> undefined
-          EQ -> 0
-          GT -> case diffz z (paetz z x (n - 1)) (n - 1) `compare` 0 of
-            LT -> undefined
-            EQ -> 0
-            GT -> diffz z x (n - 1) - diffz z (paetz z x (n - 1)) (n - 1)
-      paets :: Mountain -> Int -> Int -> Int
-      paets z x n = paets' z x n (x - 1)
-      paets' :: Mountain -> Int -> Int -> Int -> Int
-      paets' z x n p = case p `compare` 0 of
+      len_s = V.length (unSeq s)
+      gen x = \f -> V.map f (V.enumFromTo 1 x)
+      z = Mountain
+        { size = len_s
+        , diff = gen len_s (\x -> gen (len_s + 1) (\n -> diffs z s x n))
+        , paet = gen len_s (\x -> gen (len_s + 1) (\n -> paets z x n))
+        , ance = gen len_s (\x -> gen (len_s + 1) (\n -> ances z x n))
+        }
+    in
+      z
+   where
+    diffs :: Mountain -> Sequence -> Int -> Int -> Int
+    diffs z s x n = case n `compare` 1 of
+      LT -> undefined
+      EQ -> unSeq s V.! (x - 1)
+      GT -> case paetz z x (n - 1) `compare` 0 of
         LT -> undefined
         EQ -> 0
-        GT -> if diffz z p n < diffz z x n && is_ancez z x n p
-          then p
-          else paets' z x n (p - 1)
-      is_ancez :: Mountain -> Int -> Int -> Int -> Bool
-      is_ancez z x n p = case n `compare` 1 of
-        LT -> undefined
-        EQ -> True
-        GT -> S.member p (ancez z x (n - 1))
-      ances :: Mountain -> Int -> Int -> IntSet
-      ances z x n = case paetz z x n `compare` 0 of
-        LT -> undefined
-        EQ -> S.singleton x
-        GT -> S.insert x (ancez z (paetz z x n) n)
-    in
-      let
-        len_s = V.length (unSeq s)
-        gen x = \f -> V.map f (V.enumFromTo 1 x)
-        z = Mountain
-          { size = len_s
-          , diff = gen len_s (\x -> gen (len_s + 1) (\n -> diffs z s x n))
-          , paet = gen len_s (\x -> gen (len_s + 1) (\n -> paets z x n))
-          , ance = gen len_s (\x -> gen (len_s + 1) (\n -> ances z x n))
-          }
-      in
-        z
+        GT -> case diffz z (paetz z x (n - 1)) (n - 1) `compare` 0 of
+          LT -> undefined
+          EQ -> 0
+          GT -> diffz z x (n - 1) - diffz z (paetz z x (n - 1)) (n - 1)
+    paets :: Mountain -> Int -> Int -> Int
+    paets z x n = paets' z x n (x - 1)
+    paets' :: Mountain -> Int -> Int -> Int -> Int
+    paets' z x n p = case p `compare` 0 of
+      LT -> undefined
+      EQ -> 0
+      GT -> if diffz z p n < diffz z x n && is_ancez z x n p
+        then p
+        else paets' z x n (p - 1)
+    is_ancez :: Mountain -> Int -> Int -> Int -> Bool
+    is_ancez z x n p = case n `compare` 1 of
+      LT -> undefined
+      EQ -> True
+      GT -> S.member p (ancez z x (n - 1))
+    ances :: Mountain -> Int -> Int -> IntSet
+    ances z x n = case paetz z x n `compare` 0 of
+      LT -> undefined
+      EQ -> S.singleton x
+      GT -> S.insert x (ancez z (paetz z x n) n)
 
   -- * クラス分け
 
