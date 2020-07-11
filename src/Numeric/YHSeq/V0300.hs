@@ -145,7 +145,12 @@ module Numeric.YHSeq.V0300 where
 
   -- 山から DPN 形式へ
   fromMtToDPN :: Mountain -> DPN
-  fromMtToDPN = undefined
+  fromMtToDPN = \z -> DPN
+    { sDPN = size z
+    , dDPN = V.map (\x -> dz z x) (V.enumFromTo 1 (size z))
+    , pDPN = V.map (\x -> pz z x) (V.enumFromTo 1 (size z))
+    , nDPN = V.map (\x -> nz z x) (V.enumFromTo 1 (size z))
+    }
    where
     dz :: Mountain -> Int -> Int
     dz z x = diffz z x (nz z x)
