@@ -146,6 +146,9 @@ module Numeric.YHSeq.V0300 where
   -- 山から DPN 形式へ
   fromMtToDPN :: Mountain -> DPN
   fromMtToDPN = undefined
+   where
+    nz :: Mountain -> Int -> Int
+    nz z x = mtMaxDepth_L1 z `max` mtBottom z x
 
   -- クラスが IsLim 1 である山を展開する
   expand_L1 :: Mountain -> Int -> Mountain
