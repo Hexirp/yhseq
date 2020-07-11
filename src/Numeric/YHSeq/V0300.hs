@@ -144,7 +144,7 @@ module Numeric.YHSeq.V0300 where
     }
 
   -- 山から DPN 形式へ
-  fromMtToDPN :: Mountain -> Vector (Int, Vector Int, Int)
+  fromMtToDPN :: Mountain -> DPN
   fromMtToDPN = undefined
 
   -- クラスが IsLim 1 である山を展開する
