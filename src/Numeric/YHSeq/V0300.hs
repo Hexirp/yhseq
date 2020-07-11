@@ -115,7 +115,7 @@ module Numeric.YHSeq.V0300 where
 
   -- * クラスが IsLim 1 である山の展開
 
-  -- 上限の深さ、ここまでの深さの値だけを展開に使用する
+  -- 非零最深度、上限の深さ、ここまでの深さの値だけを展開に使用する
   mtMaxDepth_L1 :: Mountain -> Int
   mtMaxDepth_L1 z = mtBottom z (size z) - 1
 
@@ -134,6 +134,14 @@ module Numeric.YHSeq.V0300 where
   -- 展開後の山のサイズ（数列の長さ）
   mtNewSize_L1 :: Mountain -> Int -> Int
   mtNewSize_L1 z m = mtGoodPartLen_L1 z + mtBadPartLen_L1 z * (1 + m)
+
+  -- DPN 形式
+  data DPN = DPN
+    { sDPN :: Int
+    , dDPN :: Vector Int
+    , pDPN :: Vector (Vector Int)
+    , nDPN :: Vector Int
+    }
 
   -- 山から DPN 形式へ
   fromMtToDPN :: Mountain -> Vector (Int, Vector Int, Int)
