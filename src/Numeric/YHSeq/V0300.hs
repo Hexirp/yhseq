@@ -147,6 +147,8 @@ module Numeric.YHSeq.V0300 where
   fromMtToDPN :: Mountain -> DPN
   fromMtToDPN = undefined
    where
+    dz :: Mountain -> Int -> Int
+    dz z x = diffz z x (nz z x)
     pz :: Mountain -> Int -> Vector Int
     pz z x = V.map (\n -> paetz z x n) (V.enumFromTo 1 (nz z x))
     nz :: Mountain -> Int -> Int
