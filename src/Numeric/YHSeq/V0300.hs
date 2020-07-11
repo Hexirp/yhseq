@@ -152,7 +152,7 @@ module Numeric.YHSeq.V0300 where
     pz :: Mountain -> Int -> Vector Int
     pz z x = V.map (\n -> paetz z x n) (V.enumFromTo 1 (nz z x))
     nz :: Mountain -> Int -> Int
-    nz z x = mtMaxDepth_L1 z `max` mtBottom z x
+    nz z x = mtMaxDepth_L1 z `min` mtBottom z x
 
   -- クラスが IsLim 1 である山を展開する
   expand_L1 :: Mountain -> Int -> Mountain
