@@ -148,7 +148,7 @@ module Numeric.YHSeq.V0300 where
   fromMtToDPN = undefined
    where
     pz :: Mountain -> Int -> Vector Int
-    pz z x = V.map (\n -> peatz z x n) (V.enumFromTo 1 (nz z x))
+    pz z x = V.map (\n -> paetz z x n) (V.enumFromTo 1 (nz z x))
     nz :: Mountain -> Int -> Int
     nz z x = mtMaxDepth_L1 z `max` mtBottom z x
 
