@@ -135,6 +135,10 @@ module Numeric.YHSeq.V0300 where
   mtNewSize_L1 :: Mountain -> Int -> Int
   mtNewSize_L1 z m = mtGoodPartLen_L1 z + mtBadPartLen_L1 z * (1 + m)
 
+  -- 山から DPN 形式へ
+  fromMtToDPN :: Mountain -> Vector (Int, Vector Int, Int)
+  fromMtToDPN = undefined
+
   -- クラスが IsLim 1 である山を展開する
   expand_L1 :: Mountain -> Int -> Mountain
   expand_L1 z =
