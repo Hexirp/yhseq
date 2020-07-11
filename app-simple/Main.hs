@@ -6,7 +6,7 @@ module Main where
 
   import System.Environment (getArgs)
 
-  import Numeric.YHSeq.V0210 (fseq)
+  import Numeric.YHSeq.V0200 (fseq)
 
   type OpArg = (String, String)
 
