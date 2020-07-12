@@ -159,19 +159,13 @@ module Numeric.YHSeq.V0300 where
     nz :: Mountain -> Int -> Int
     nz z x = mtMaxDepth_L1 z `min` mtBottom z x
 
+  -- DPN 形式から山へ
+  fromDPNToMt :: DPN -> Mountain
+  fromDPNToMt z = undefined
+
   -- クラスが IsLim 1 である山を展開する
-  expand_L1 :: Mountain -> Int -> Mountain
-  expand_L1 z =
-    let
-      paets :: Mountain -> Int -> Int -> Int
-      paets z x n = case x `compare` 1 of
-        LT -> undefined
-        _  -> case x `compare` mtTrueBadRoot z of
-          LT -> paetz z x n
-          _  -> let f a b x = ((x - a) `mod` b) + a in
-            paetz z (f (mtGoodPartLen_L1 z) (mtBadPartLen_L1 z) x) n
-    in
-      undefined
+  expandDPN_L1 :: DPN -> Int -> DPN
+  expandDPN_L1 z = undefined
 
   -- * クラスが IsLim (n + 1) である山の展開
 
