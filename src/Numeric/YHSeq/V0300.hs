@@ -141,7 +141,7 @@ module Numeric.YHSeq.V0300 where
     , dDPN :: Vector Int
     , pDPN :: Vector (Vector Int)
     , nDPN :: Vector Int
-    }
+    } deriving (Eq, Ord, Show)
 
   -- 山から DPN 形式へ
   fromMtToDPN :: Mountain -> DPN
@@ -241,6 +241,8 @@ module Numeric.YHSeq.V0300 where
     print (mtClass $ fromListToMt [1,3])
     print "mtClass $ fromListToMt [1,3,4,2,5,6,5]"
     print (mtClass $ fromListToMt [1,3,4,2,5,6,5])
+    print "fromMtToDPN $ fromListToMt [1,2,4,8,10,8]"
+    print (fromMtToDPN $ fromListToMt [1,2,4,8,10,8])
     print "mtDiagonal $ fromListToMt [1,3]"
     print (mtDiagonal $ fromListToMt [1,3])
     print "mtDiagonal $ fromListToMt [1,3,3]"
