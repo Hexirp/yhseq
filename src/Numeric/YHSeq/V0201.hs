@@ -1,6 +1,6 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
--- {-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE DerivingVia #-}
 
 -- | YH数列システム 2.0.1 の定義。
 --
@@ -8,6 +8,8 @@
 module Numeric.YHSeq.V0201 where
 
   import Prelude
+
+  import Data.Monoid (Sum)
 
   import           Data.IntSet      ( IntSet )
   import qualified Data.IntSet as S
@@ -25,13 +27,15 @@ module Numeric.YHSeq.V0201 where
 
   -- | 階差。
   newtype Difference = Difference { unDifference :: Int }
-    deriving stock (Eq, Ord, Enum, Bounded)
-    deriving newtype (Show, Read, Num, Real, Integral, Semigroup, Monoid)
+    deriving stock (Eq, Ord, Bounded)
+    deriving newtype (Enum, Show, Read, Num, Real, Integral)
+    deriving (Semigroup, Monoid) via Sum Int
 
   -- | 添字。
   newtype Index = Index { unIndex :: Int }
-    deriving stock (Eq, Ord, Enum, Bounded)
-    deriving newtype (Show, Read, Num, Real, Integral, Semigroup, Monoid)
+    deriving stock (Eq, Ord, Bounded)
+    deriving newtype (Enum, Show, Read, Num, Real, Integral)
+    deriving (Semigroup, Monoid) via Sum Int
 
   -- | 添字の集合。
   newtype IndexSet = IndexSet { unIndexSet :: IntSet }
