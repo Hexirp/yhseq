@@ -49,5 +49,5 @@ module Numeric.YHSeq.V0201 where
     , -- | 親の添字。
       pMt :: Vector (Vector Index)
     , -- | 先祖の集合。
-      pMt :: Vector (Vector IndexSet)
+      aMt :: Vector (Vector IndexSet)
     } deriving (Eq, Ord, Show, Read)
