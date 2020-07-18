@@ -2,6 +2,10 @@
 
 ## Unreleased changes
 
+`yhseq-simple` の名前を `yhseq` に変更しました。
+
+`yhseq-exe` を削除しました。
+
 単純なコマンド `yhseq-simple` を追加しました。
 
 `VXXXX.Cofinal` の構築子をエクスポートするように変更しました。
