@@ -1,51 +1,36 @@
 module Main where
 
   import Prelude
-  import Options.Applicative
 
-  data Config = Config
-    { version :: String
-    , sequence :: [Integer]
-    , number :: Integer
-    , withVersionInfo :: Bool
-    , withDetail :: Bool
-    , forcing :: Bool
-    }
+  import Control.Exception (ErrorCall, catch, evaluate, throwIO)
 
-  optparse :: Parser Config
-  optparse = Config
-    <$> argument auto (metavar "VERSION")
-    <*> argument auto (metavar "SEQ")
-    <*> argument auto (metavar "NUM")
-    <*> switch
-      ( mempty
-      <> long "version"
-      <> short 'v'
-      <> help "Print the command's version"
-      )
-    <*> switch
-      ( mempty
-      <> long "detail"
-      <> short 'd'
-      <> help "Print details"
-      )
-    <*> switch
-      ( mempty
-      <> long "force"
-      <> short 'f'
-      <> help "Force to use deprecated versions"
-      )
+  import System.Environment (getArgs)
+
+  import Numeric.YHSeq.V0200 (fseq)
+
+  type OpArg = (String, String)
+
+  type Arg = ([Integer], Integer)
 
   main :: IO ()
   main = do
-      conf <- execParser opts
-      fooApp conf
-    where
-      opts = info (flip ($) <$> optparse <*> helper)
-        ( mempty
-        <> progDesc "Print a result of foo"
-        <> header "foo - a command for foo"
-        )
+    args <- getArgs
+    opArg <- optparse args
+    arg <- parse opArg
+    res <- calc arg `catch` \e -> const id (e :: ErrorCall) $ do
+      putStrLn "yhseq-simple: Something happened!"
+      throwIO e
+    print res
 
-  fooApp :: Config -> IO ()
-  fooApp = undefined
+  optparse :: [String] -> IO OpArg
+  optparse [seq, num] = return (seq, num)
+  optparse _          = evaluate $ error "The arguments is incorrect!"
+
+  parse :: OpArg -> IO Arg
+  parse (seq, num) = do
+    s <- evaluate $ (read seq :: [Integer])
+    n <- evaluate $ (read num :: Integer)
+    return $ (s, n)
+
+  calc :: Arg -> IO [Integer]
+  calc (seq, num) = evaluate $ fseq seq num
