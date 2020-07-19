@@ -25,7 +25,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | 'Sequence' のための添字演算。
   ixS :: Sequence -> Int -> Int
-  ixS s x = unSeq s V.! (x - 1)
+  ixS s x = unSequence s V.! (x - 1)
 
   -- | 階差。
   --
