@@ -11,7 +11,7 @@ module Numeric.YHSeq.V0201 where
 
   import Prelude
 
-  import Data.Monoid (Sum)
+  import Data.Monoid (Sum (..))
 
   import           Data.IntSet      ( IntSet )
   import qualified Data.IntSet as S
