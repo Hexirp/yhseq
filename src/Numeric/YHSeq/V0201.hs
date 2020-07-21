@@ -63,3 +63,7 @@ module Numeric.YHSeq.V0201 where
     , -- | 先祖の集合。
       aMt :: Vector (Vector IndexSet)
     } deriving (Eq, Ord, Show, Read)
+
+  -- | 山から階差を添字で取得する。
+  ixMtDiff :: Mountain -> Int -> Int -> Difference
+  ixMtDiff z x n = dMt z V.! x - 1 V.! n - 1
