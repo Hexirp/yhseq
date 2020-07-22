@@ -75,3 +75,16 @@ module Numeric.YHSeq.V0201 where
   -- | 山から先祖の集合を添字で取得する。
   ixMtAnce :: Mountain -> Int -> Int -> IndexSet
   ixMtAnce z x n = aMt z V.! (x - 1) V.! (n - 1)
+
+  -- | メモを参照しながら山の階差を計算する。
+  csMtDiffWiM :: Mountain -> Sequence -> Int -> Int -> Difference
+  csMtDiffWiM z s x n = case n `compare` 1 of
+    LT -> undefined
+    EQ -> s `ixS` x
+    GT -> case ixMtPaet z x (n - 1) `compare` 0 of
+      LT -> undefined
+      EQ -> 0
+      GT -> case ixMtDiff z (ixMtPaet z x (n - 1)) (n - 1) `compare` 0 of
+        LT -> undefined
+        EQ -> 0
+        GT -> ixMtDiff z x (n - 1) - ixMtDiff z (ixMtPaet z x (n - 1)) (n - 1)
