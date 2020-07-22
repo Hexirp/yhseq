@@ -67,3 +67,11 @@ module Numeric.YHSeq.V0201 where
   -- | 山から階差を添字で取得する。
   ixMtDiff :: Mountain -> Int -> Int -> Difference
   ixMtDiff z x n = dMt z V.! (x - 1) V.! (n - 1)
+
+  -- | 山から親の添字を添字で取得する。
+  ixMtPaet :: Mountain -> Int -> Int -> Index
+  ixMtPaet z x n = pMt z V.! (x - 1) V.! (n - 1)
+
+  -- | 山から先祖の集合を添字で取得する。
+  ixMtAnce :: Mountain -> Int -> Int -> IndexSet
+  ixMtAnce z x n = aMt z V.! (x - 1) V.! (n - 1)
