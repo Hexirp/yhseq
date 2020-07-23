@@ -127,7 +127,10 @@ module Numeric.YHSeq.V0201 where
   calcMt :: Sequence -> Mountain
   calcMt s =
     let
-      gen x f = V.map f (V.enumFromTo 1 x)
+      gen x f = case x `compare` 0 of
+        LT -> undefined
+        EQ -> V.empty
+        GT -> V.map f (V.enumFromTo 1 x)
       l = V.length (unSequence s)
       z = Mountain
         { sMt = l
