@@ -122,3 +122,18 @@ module Numeric.YHSeq.V0201 where
     LT -> undefined
     EQ -> True
     GT -> unIndex p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
+
+  -- | 山を計算する。
+  calcMt :: Sequence -> Mountain
+  calcMt s =
+    let
+      gen x f = V.map f (V.enumFromTo 1 x)
+      l = V.length (unSequence s)
+      z = Mountain
+        { sMt = l
+        , dMt = gen l (\x -> gen (l + 1) (\n -> calcDiffOnMtWiM z s (Index x) (Depth n)))
+        , pMt = gen l (\x -> gen (l + 1) (\n -> calcPaetOnMtWiM z (Index x) (Depth n)))
+        , aMt = gen l (\x -> gen (l + 1) (\n -> calcAnceOnMtWiM z (Index x) (Depth n)))
+        }
+    in
+      z
