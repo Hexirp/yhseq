@@ -24,8 +24,8 @@ module Numeric.YHSeq.V0201 where
     deriving newtype (Semigroup, Monoid)
 
   -- | 'Sequence' のための添字演算。
-  ixS :: Sequence -> Int -> Int
-  ixS s x = unSequence s V.! (x - 1)
+  ixSeq :: Sequence -> Int -> Int
+  ixSeq s x = unSequence s V.! (x - 1)
 
   -- | 階差。
   --
@@ -73,16 +73,16 @@ module Numeric.YHSeq.V0201 where
     } deriving (Eq, Ord, Show, Read)
 
   -- | 山から階差を添字で取得する。
-  ixMtDiff :: Mountain -> Index -> Depth -> Difference
-  ixMtDiff z x n = dMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixDiFrMt :: Mountain -> Index -> Depth -> Difference
+  ixDiFrMt z x n = dMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | 山から親の添字を添字で取得する。
-  ixMtPaet :: Mountain -> Index -> Depth -> Index
-  ixMtPaet z x n = pMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixPaFrMt :: Mountain -> Index -> Depth -> Index
+  ixPaFrMt z x n = pMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | 山から先祖の集合を添字で取得する。
-  ixMtAnce :: Mountain -> Index -> Depth -> IndexSet
-  ixMtAnce z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixAnFrMt :: Mountain -> Index -> Depth -> IndexSet
+  ixAnFrMt z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | メモを参照しながら山の階差を計算する。
   csMtDiffWiM :: Mountain -> Sequence -> Int -> Int -> Difference
