@@ -88,7 +88,7 @@ module Numeric.YHSeq.V0201 where
   calcDiffOnMtWiM :: Mountain -> Sequence -> Index -> Depth -> Difference
   calcDiffOnMtWiM z s x n = case n `compare` 1 of
     LT -> undefined
-    EQ -> Difference (s `ixS` x)
+    EQ -> Difference (s `ixSeq` x)
     GT -> case ixMtToPaet z x (n - 1) `compare` 0 of
       LT -> undefined
       EQ -> 0
