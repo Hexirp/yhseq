@@ -101,7 +101,7 @@ module Numeric.YHSeq.V0201 where
   calcPaetOnMtWiM :: Mountain -> Index -> Depth -> Index
   calcPaetOnMtWiM z x n = calcPaetOnMtWiM' (x - 1)
    where
-    calcPaetOnMtWiM' :: Mountain -> Index -> Depth -> Index -> Index
+    calcPaetOnMtWiM' :: Index -> Index
     calcPaetOnMtWiM' p = case p `compare` 0 of
       LT -> undefined
       EQ -> 0
