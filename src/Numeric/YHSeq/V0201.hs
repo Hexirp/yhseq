@@ -121,4 +121,4 @@ module Numeric.YHSeq.V0201 where
   isAnceAtSh z x n p = case n `compare` 1 of
     LT -> undefined
     EQ -> True
-    GT -> p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
+    GT -> unIndex p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
