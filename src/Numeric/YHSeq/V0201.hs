@@ -73,16 +73,16 @@ module Numeric.YHSeq.V0201 where
     } deriving (Eq, Ord, Show, Read)
 
   -- | 山から階差を添字で取得する。
-  ixDiOnMt :: Mountain -> Index -> Depth -> Difference
-  ixDiOnMt z x n = dMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixMtToDiff :: Mountain -> Index -> Depth -> Difference
+  ixMtToDiff z x n = dMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | 山から親の添字を添字で取得する。
-  ixPaOnMt :: Mountain -> Index -> Depth -> Index
-  ixPaOnMt z x n = pMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixMtToPaet :: Mountain -> Index -> Depth -> Index
+  ixMtToPaet z x n = pMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | 山から先祖の集合を添字で取得する。
-  ixAnOnMt :: Mountain -> Index -> Depth -> IndexSet
-  ixAnOnMt z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
+  ixMtToAnce :: Mountain -> Index -> Depth -> IndexSet
+  ixMtToAnce z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | メモを参照しながら山の階差を計算する。
   csMtDiffWiM :: Mountain -> Sequence -> Int -> Int -> Difference
