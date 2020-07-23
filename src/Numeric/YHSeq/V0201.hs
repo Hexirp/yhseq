@@ -85,14 +85,14 @@ module Numeric.YHSeq.V0201 where
   ixMtToAnce z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
   -- | メモを参照しながら山の階差を計算する。
-  csMtDiffWiM :: Mountain -> Sequence -> Int -> Int -> Difference
-  csMtDiffWiM z s x n = case n `compare` 1 of
+  calcDiffOnMtWiM :: Mountain -> Sequence -> Index -> Depth -> Difference
+  calcDiffOnMtWiM z s x n = case n `compare` 1 of
     LT -> undefined
-    EQ -> s `ixS` x
-    GT -> case ixMtPaet z x (n - 1) `compare` 0 of
+    EQ -> Difference (s `ixS` x)
+    GT -> case ixMtToPaet z x (n - 1) `compare` 0 of
       LT -> undefined
       EQ -> 0
-      GT -> case ixMtDiff z (ixMtPaet z x (n - 1)) (n - 1) `compare` 0 of
+      GT -> case ixMtToDiff z (ixMtToPaet z x (n - 1)) (n - 1) `compare` 0 of
         LT -> undefined
         EQ -> 0
-        GT -> ixMtDiff z x (n - 1) - ixMtDiff z (ixMtPaet z x (n - 1)) (n - 1)
+        GT -> ixMtToDiff z x (n - 1) - ixMtToDiff z (ixMtToPaet z x (n - 1)) (n - 1)
