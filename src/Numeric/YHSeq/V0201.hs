@@ -84,7 +84,7 @@ module Numeric.YHSeq.V0201 where
   ixMtToAnce :: Mountain -> Index -> Depth -> IndexSet
   ixMtToAnce z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
-  -- | メモを参照しながら山の階差を計算する。
+  -- | メモを参照しながら階差を計算する。
   calcDiffOnMtWiM :: Mountain -> Sequence -> Index -> Depth -> Difference
   calcDiffOnMtWiM z s x n = case n `compare` 1 of
     LT -> undefined
@@ -96,3 +96,29 @@ module Numeric.YHSeq.V0201 where
         LT -> undefined
         EQ -> 0
         GT -> ixMtToDiff z x (n - 1) - ixMtToDiff z (ixMtToPaet z x (n - 1)) (n - 1)
+
+  -- | メモを参照しながら親の添字を計算する。
+  calcPaetOnMtWiM :: Mountain -> Index -> Depth -> Index
+  calcPaetOnMtWiM z x n = calcPaetOnMtWiM' (x - 1)
+   where
+    calcPaetOnMtWiM' :: Mountain -> Index -> Depth -> Index -> Index
+    calcPaetOnMtWiM' p = case p `compare` 0 of
+      LT -> undefined
+      EQ -> 0
+      GT -> if ixMtToDiff z p n < ixMtToDiff z x n && isAnceAtSh z x n p
+        then p
+        else calcPaetOnMtWiM' (p - 1)
+
+  -- | メモを参照しながら先祖の集合を計算する。
+  calcAnceOnMtWiM :: Mountain -> Index -> Depth -> IndexSet
+  calcAnceOnMtWiM z x n = case ixMtToPaet z x n `compare` 0 of
+    LT -> undefined
+    EQ -> IndexSet (S.singleton (unIndex x))
+    GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce z (ixMtToPaet z x n) n)))
+
+  -- | 一つ浅い深さで先祖である。
+  isAnceAtSh :: Mountain -> Index -> Depth -> Index -> Bool
+  isAnceAtSh z x n p = case n `compare` 1 of
+    LT -> undefined
+    EQ -> True
+    GT -> p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
