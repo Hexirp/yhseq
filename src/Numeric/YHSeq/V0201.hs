@@ -116,7 +116,7 @@ module Numeric.YHSeq.V0201 where
     EQ -> IndexSet (S.singleton (unIndex x))
     GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce z (ixMtToPaet z x n) n)))
 
-  -- | 一つ浅い深さで先祖である。
+  -- | 一つ浅い深さで先祖であるか。
   isAnceAtSh :: Mountain -> Index -> Depth -> Index -> Bool
   isAnceAtSh z x n p = case n `compare` 1 of
     LT -> undefined
