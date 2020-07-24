@@ -209,5 +209,5 @@ module Numeric.YHSeq.V0201 where
       GT -> V.map f (V.enumFromTo 1 x)
 
   -- | DPN 形式での深さの部分を計算する。
-  calcNpthOnDpn :: Mountain -> Index -> Deoth
+  calcNpthOnDpn :: Mountain -> Index -> Depth
   calcNpthOnDpn = calcMaxDepth z x
