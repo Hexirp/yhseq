@@ -210,4 +210,4 @@ module Numeric.YHSeq.V0201 where
 
   -- | DPN 形式での深さの部分を計算する。
   calcNpthOnDpn :: Mountain -> Index -> Depth
-  calcNpthOnDpn = calcMaxDepth z x
+  calcNpthOnDpn z x = calcMaxDepth z x
