@@ -166,3 +166,13 @@ module Numeric.YHSeq.V0201 where
       LT -> undefined
       EQ -> n
       GT -> calcBottom' (n + 1)
+
+  -- | 共終数およびクラスを計算する。
+  calcCofinality :: Mountain -> Cofinality
+  calcCofinality z = case sMt z `compare` 0 of
+    LT -> undefined
+    EQ -> IsZero
+    GT -> case ixMtToPaet z (size z) (calcBottom z (size z)) `compare` 0 of
+      LT -> undefined
+      EQ -> IsSucc
+      GT -> IsLim (ixMtToDiff z (size z) (calcBottom z (size z)))
