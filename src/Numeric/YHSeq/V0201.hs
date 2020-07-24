@@ -188,5 +188,9 @@ module Numeric.YHSeq.V0201 where
     } deriving stock (Eq, Ord, Show, Read)
 
   -- | 展開に関わる最も大きい深さを計算する。
-  calcMaxDepth :: Mountain -> Depth
-  calcMaxDepth z = calcBottom z (Index (sMt z )) - 1
+  calcLimitDepth :: Mountain -> Depth
+  calcLimitDepth z = calcBottom z (Index (sMt z)) - 1
+
+  -- | 展開に関わる最も大きい深さを、それぞれの添字について計算する。
+  calcMaxDepth :: Mountain -> Index -> Depth
+  calcMaxDepth z x = calcBottom z x `min` calcLimitDepth z
