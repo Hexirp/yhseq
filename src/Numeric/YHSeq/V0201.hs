@@ -194,3 +194,20 @@ module Numeric.YHSeq.V0201 where
   -- | 展開に関わる最も大きい深さを、それぞれの添字について計算する。
   calcMaxDepth :: Mountain -> Index -> Depth
   calcMaxDepth z x = calcBottom z x `min` calcLimitDepth z
+
+  -- | DPN 形式での階差の部分を計算する。
+  calcDiffOnDpn :: Mountain -> Index -> Difference
+  calcDiffOnDpn z x = ixMtToDiff z x (calcMaxDepth z x)
+
+  -- | DPN 形式での親の添字の部分を計算する。
+  calcPaetOnDpn :: Mountain -> Index -> Vector Index
+  calcPaetOnDpn z x = gen (calcMaxDepth z x) (\n -> ixMtToPaet z x (Depth n))
+   where
+    gen x f = case x `compare` 0 of
+      LT -> undefined
+      EQ -> V.empty
+      GT -> V.map f (V.enumFromTo 1 x)
+
+  -- | DPN 形式での深さの部分を計算する。
+  calcNpthOnDpn :: Mountain -> Index -> Deoth
+  calcNpthOnDpn = calcMaxDepth z x
