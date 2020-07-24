@@ -141,7 +141,19 @@ module Numeric.YHSeq.V0201 where
     in
       z
 
+  -- | クラス。
+  newtype Class = Class { unClass :: Int }
+    deriving stock (Eq, Ord, Bounded)
+    deriving newtype (Enum, Show, Read, Num, Real, Integral)
+    deriving (Semigroup, Monoid) via Sum Int
+
+  -- | 共終数。
+  data Cofinality = IsZero | IsSucc | IsLim Class
+    deriving stock (Eq, Ord, Show, Read, Bounded)
+
   -- | 階差が存在する最も大きい深さを、それぞれの添字について計算する。
+  --
+  -- ここで 0 の深さが現れているが、深さ 1 での階差が 0 でない限り、最終的な計算結果の深さは 0 にならない。
   calcBottom :: Mountain -> Index -> Depth
   calcBottom z x = calcBottom' 0
    where
