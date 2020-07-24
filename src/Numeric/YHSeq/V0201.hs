@@ -181,10 +181,10 @@ module Numeric.YHSeq.V0201 where
   --
   -- 条件として dDPN と pDPN と nDPN の長さはそれぞれ sDPN に等しい。
   data DPN = DPN
-    { sDPN = Int
-    , dDPN = Vector Difference
-    , pDPN = Vector (Vector Index)
-    , nDPN = Vector Depth
+    { sDPN :: Int
+    , dDPN :: Vector Difference
+    , pDPN :: Vector (Vector Index)
+    , nDPN :: Vector Depth
     } deriving stock (Eq, Ord, Show, Read)
 
   -- | 展開に関わる最も大きい深さを計算する。
