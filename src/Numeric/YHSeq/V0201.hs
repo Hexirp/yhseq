@@ -140,3 +140,13 @@ module Numeric.YHSeq.V0201 where
         }
     in
       z
+
+  -- | 階差が存在する最も大きい深さを、それぞれの添字について計算する。
+  calcBottom :: Mountain -> Index -> Depth
+  calcBottom z x = calcBottom' 0
+   where
+    calcBottom' :: Depth -> Depth
+    calcBottom' n = case ixMtToDiff z x (n + 1) `compare` 0 of
+      LT -> undefined
+      EQ -> n
+      GT -> calcBottom' (n + 1)
