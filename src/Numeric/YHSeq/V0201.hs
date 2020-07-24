@@ -172,7 +172,7 @@ module Numeric.YHSeq.V0201 where
   calcCofinality z = case sMt z `compare` 0 of
     LT -> undefined
     EQ -> IsZero
-    GT -> case ixMtToPaet z (sMt z) (calcBottom z (sMt z)) `compare` 0 of
+    GT -> case ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z))) `compare` 0 of
       LT -> undefined
       EQ -> IsSucc
-      GT -> IsLim (ixMtToDiff z (sMt z) (calcBottom z (sMt z)))
+      GT -> IsLim (Class (unDifference (ixMtToDiff z (Index (sMt z)) (calcBottom z (Index (sMt z))))))
