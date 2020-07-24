@@ -201,7 +201,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | DPN 形式での親の添字の部分を計算する。
   calcPaetOnDpn :: Mountain -> Index -> Vector Index
-  calcPaetOnDpn z x = gen (calcMaxDepth z x) (\n -> ixMtToPaet z x (Depth n))
+  calcPaetOnDpn z x = gen (calcMaxDepth z x) (\n -> ixMtToPaet z x n)
    where
     gen x f = case x `compare` 0 of
       LT -> undefined
