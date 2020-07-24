@@ -189,4 +189,4 @@ module Numeric.YHSeq.V0201 where
 
   -- | 展開に関わる最も大きい深さを計算する。
   calcMaxDepth :: Mountain -> Depth
-  calcMaxDepth = calcBottom z (Index (sMt z )) - 1
+  calcMaxDepth z = calcBottom z (Index (sMt z )) - 1
