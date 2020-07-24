@@ -70,7 +70,7 @@ module Numeric.YHSeq.V0201 where
       pMt :: Vector (Vector Index)
     , -- | 先祖の集合。
       aMt :: Vector (Vector IndexSet)
-    } deriving (Eq, Ord, Show, Read)
+    } deriving stock (Eq, Ord, Show, Read)
 
   -- | 山から階差を添字で取得する。
   ixMtToDiff :: Mountain -> Index -> Depth -> Difference
@@ -176,3 +176,15 @@ module Numeric.YHSeq.V0201 where
       LT -> undefined
       EQ -> IsSucc
       GT -> IsLim (Class (unDifference (ixMtToDiff z (Index (sMt z)) (calcBottom z (Index (sMt z))))))
+
+  -- DPN 形式。
+  --
+  -- 条件として dDPN と pDPN と nDPN の長さはそれぞれ sDPN に等しい。
+  data DPN = DPN
+    { sDPN = Int
+    , dDPN = Vector Difference
+    , pDPN = Vector (Vector Index)
+    , nDPN = Vector Depth
+    } deriving stock (Eq, Ord, Show, Read)
+
+  -- | 展開に関わる最も大きい深さを計算する。
