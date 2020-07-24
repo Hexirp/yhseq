@@ -149,7 +149,11 @@ module Numeric.YHSeq.V0201 where
 
   -- | 共終数。
   data Cofinality = IsZero | IsSucc | IsLim Class
-    deriving stock (Eq, Ord, Show, Read, Bounded)
+    deriving stock (Eq, Ord, Show, Read)
+
+  instance Bounded Cofinality where
+    minBound = IsZero
+    maxBound = IsLim maxBound
 
   -- | 階差が存在する最も大きい深さを、それぞれの添字について計算する。
   --
