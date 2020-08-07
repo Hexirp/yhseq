@@ -218,7 +218,7 @@ module Numeric.YHSeq.V0201 where
   calcDpn :: Mountain -> DPN
   calcDpn z = DPN
     { sDPN = sMt z
-    , dDPN = genVec (sMt z) (\x -> calcDiffOnDpn z x)
-    , pDPN = genVec (sMt z) (\x -> calcPaetOnDpn z x)
-    , nDPN = genVec (sMt z) (\x -> calcNpthOnDpn z x)
+    , dDPN = genVec (sMt z) (\x -> calcDiffOnDpn z (Index x))
+    , pDPN = genVec (sMt z) (\x -> calcPaetOnDpn z (Index x))
+    , nDPN = genVec (sMt z) (\x -> calcNpthOnDpn z (Index x))
     }
