@@ -152,11 +152,13 @@ module Numeric.YHSeq.V0201 where
     deriving newtype (Enum, Show, Read, Num, Real, Integral)
     deriving (Semigroup, Monoid) via Sum Int
 
-  -- | 共終数。
-  data Cofinality = IsZero | IsSucc | IsLim Class
+  -- | 共終タイプ。
+  --
+  -- 順序数に対して定義される数学的な共終数ではない。
+  data CofType = IsZero | IsSucc | IsLim Class
     deriving stock (Eq, Ord, Show, Read)
 
-  instance Bounded Cofinality where
+  instance Bounded CofType where
     minBound = IsZero
     maxBound = IsLim maxBound
 
@@ -173,7 +175,7 @@ module Numeric.YHSeq.V0201 where
       GT -> calcBottom' (n + 1)
 
   -- | 共終数およびクラスを計算する。
-  calcCofinality :: Mountain -> Cofinality
+  calcCofinality :: Mountain -> CofType
   calcCofinality z = case sMt z `compare` 0 of
     LT -> undefined
     EQ -> IsZero
