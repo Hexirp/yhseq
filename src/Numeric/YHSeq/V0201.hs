@@ -213,3 +213,12 @@ module Numeric.YHSeq.V0201 where
   -- | DPN 形式での深さの部分を計算する。
   calcNpthOnDpn :: Mountain -> Index -> Depth
   calcNpthOnDpn z x = calcMaxDepth z x
+
+  -- | DPN 形式を計算する。
+  calcDpn :: Mountain -> DPN
+  calcDpn z = DPN
+    { sDPN = sMt z
+    , dDPN = genVec (sMt z) (\x -> calcDiffOnDpn z x)
+    , pDPN = genVec (sMt z) (\x -> calcPaetOnDpn z x)
+    , nDPN = genVec (sMt z) (\x -> calcNpthOnDpn z x)
+    }
