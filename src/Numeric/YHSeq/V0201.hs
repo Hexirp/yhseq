@@ -18,6 +18,15 @@ module Numeric.YHSeq.V0201 where
   import           Data.Vector      ( Vector )
   import qualified Data.Vector as V
 
+  -- | 1 から n までの配列に関数を適用する。
+  --
+  -- 0 が与えられた場合は空の配列を返す。
+  genVec :: Int -> (Int -> a) -> Vector a
+  genVec x f = case x `compare` 0 of
+    LT -> undefined
+    EQ -> V.empty
+    GT -> V.map f (V.enumFromTo 1 x)
+
   -- | 数列、または列。
   newtype Sequence = Sequence { unSequence :: Vector Int }
     deriving stock (Eq, Ord, Show, Read)
@@ -127,16 +136,12 @@ module Numeric.YHSeq.V0201 where
   calcMt :: Sequence -> Mountain
   calcMt s =
     let
-      gen x f = case x `compare` 0 of
-        LT -> undefined
-        EQ -> V.empty
-        GT -> V.map f (V.enumFromTo 1 x)
       l = V.length (unSequence s)
       z = Mountain
         { sMt = l
-        , dMt = gen l (\x -> gen (l + 1) (\n -> calcDiffOnMtWiM z s (Index x) (Depth n)))
-        , pMt = gen l (\x -> gen (l + 1) (\n -> calcPaetOnMtWiM z (Index x) (Depth n)))
-        , aMt = gen l (\x -> gen (l + 1) (\n -> calcAnceOnMtWiM z (Index x) (Depth n)))
+        , dMt = genVec l (\x -> genVec (l + 1) (\n -> calcDiffOnMtWiM z s (Index x) (Depth n)))
+        , pMt = genVec l (\x -> genVec (l + 1) (\n -> calcPaetOnMtWiM z (Index x) (Depth n)))
+        , aMt = genVec l (\x -> genVec (l + 1) (\n -> calcAnceOnMtWiM z (Index x) (Depth n)))
         }
     in
       z
@@ -201,12 +206,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | DPN 形式での親の添字の部分を計算する。
   calcPaetOnDpn :: Mountain -> Index -> Vector Index
-  calcPaetOnDpn z x = gen (calcMaxDepth z x) (\n -> ixMtToPaet z x n)
-   where
-    gen x f = case x `compare` 0 of
-      LT -> undefined
-      EQ -> V.empty
-      GT -> V.map f (V.enumFromTo 1 x)
+  calcPaetOnDpn z x = genVec (calcMaxDepth z x) (\n -> ixMtToPaet z x n)
 
   -- | DPN 形式での深さの部分を計算する。
   calcNpthOnDpn :: Mountain -> Index -> Depth
