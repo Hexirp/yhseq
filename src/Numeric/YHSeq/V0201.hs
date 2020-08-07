@@ -21,7 +21,7 @@ module Numeric.YHSeq.V0201 where
   -- | 1 から n までの配列に関数を適用する。
   --
   -- 0 が与えられた場合は空の配列を返す。
-  genVec :: Int -> (Int -> a) -> Vector a
+  genVec :: (Ord i, Enum i) => i -> (i -> a) -> Vector a
   genVec x f = case x `compare` 0 of
     LT -> undefined
     EQ -> V.empty
