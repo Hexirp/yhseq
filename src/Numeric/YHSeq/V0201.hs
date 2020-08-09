@@ -174,9 +174,9 @@ module Numeric.YHSeq.V0201 where
       EQ -> n
       GT -> calcBottom' (n + 1)
 
-  -- | 共終数およびクラスを計算する。
-  calcCofinality :: Mountain -> CofType
-  calcCofinality z = case sMt z `compare` 0 of
+  -- | 共終タイプを計算する。
+  calcCofType :: Mountain -> CofType
+  calcCofType z = case sMt z `compare` 0 of
     LT -> undefined
     EQ -> IsZero
     GT -> case ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z))) `compare` 0 of
