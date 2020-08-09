@@ -13,6 +13,8 @@ module Numeric.YHSeq.V0201Spec (spec) where
 
   spec :: Spec
   spec = runIO $ do
+    putStrLn ""
+    putStrLn ""
     print "calcMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
     print (calcMt $ Sequence $ V.fromList $ [1,2,4,8,10,8])
     print "calcCofType $ calcMtFromList []"
