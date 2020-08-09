@@ -2,6 +2,12 @@ module Numeric.YHSeq.V0201Spec (spec) where
 
   import Prelude
 
+  import qualified Data.Vector as V
+
+  import Numeric.YHSeq.V0201
+
+  import Test.HSpec
+
   calcMtFromList :: [Int] -> Mountain
   calcMtFromList x = calcMt (Sequence (V.fromList x))
 
