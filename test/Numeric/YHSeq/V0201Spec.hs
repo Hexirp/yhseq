@@ -6,7 +6,7 @@ module Numeric.YHSeq.V0201Spec (spec) where
 
   import Numeric.YHSeq.V0201
 
-  import Test.HSpec
+  import Test.Hspec
 
   calcMtFromList :: [Int] -> Mountain
   calcMtFromList x = calcMt (Sequence (V.fromList x))
