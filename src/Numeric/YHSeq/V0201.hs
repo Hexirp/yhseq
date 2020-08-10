@@ -230,7 +230,7 @@ module Numeric.YHSeq.V0201 where
   -- | 展開する。
   expand :: Mountain -> DPN -> Int -> DPN
   expand zs zz n = DPN
-    { sDPN = (unIndex (calcBadRoot zs) - 1) + (sMt z - unIndex (calcBadRoot zs)) * n
+    { sDPN = (unIndex (calcBadRoot zs) - 1) + (sMt zs - unIndex (calcBadRoot zs)) * n
     , dDPN = undefined
     , pDPN = undefined
     , nDPN = undefined
