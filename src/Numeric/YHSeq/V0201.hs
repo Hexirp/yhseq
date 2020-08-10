@@ -229,9 +229,14 @@ module Numeric.YHSeq.V0201 where
 
   -- | 展開する。
   expand :: Mountain -> DPN -> Int -> DPN
-  expand zs zz n = DPN
-    { sDPN = (unIndex (calcBadRoot zs) - 1) + (sMt zs - unIndex (calcBadRoot zs)) * n
-    , dDPN = undefined
-    , pDPN = undefined
-    , nDPN = undefined
-    }
+  expand zs zz n =
+    let
+      xz = sMt zs
+      rz = unIndex (calcBadRoot zs)
+    in
+      DPN
+        { sDPN = (rz - 1) + (xz - rz) * n
+        , dDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> undefined)
+        , pDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> undefined)
+        , nDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> undefined)
+        }
