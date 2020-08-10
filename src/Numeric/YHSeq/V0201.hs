@@ -222,3 +222,16 @@ module Numeric.YHSeq.V0201 where
     , pDPN = genVec (sMt z) (\x -> calcPaetOnDpn z (Index x))
     , nDPN = genVec (sMt z) (\x -> calcNpthOnDpn z (Index x))
     }
+
+  -- | 悪部根を計算する。
+  calcBadRoot :: Mountain -> Index
+  calcBadRoot z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)) - 1)
+
+  -- | 展開する。
+  expand :: Mountain -> DPN -> Int -> DPN
+  expand zs zz n = DPN
+    { sDPN = (unIndex (calcBadRoot zs) - 1) + (sMt z - unIndex (calcBadRoot zs)) * n
+    , dDPN = undefined
+    , pDPN = undefined
+    , nDPN = undefined
+    }
