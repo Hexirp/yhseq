@@ -1,4 +1,4 @@
--- Y数列 Hexirp 版 3.0 の定義。
+-- | Y数列 Hexirp 版 3.0 の定義。
 --
 -- * https://hackage.haskell.org/package/vector-0.12.1.2/docs/Data-Vector.html
 -- * https://hackage.haskell.org/package/containers-0.6.2.1/docs/Data-IntSet.html
