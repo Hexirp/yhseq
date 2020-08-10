@@ -231,7 +231,7 @@ module Numeric.YHSeq.V0201 where
   calcDiffAtExp :: Mountain -> DPN -> Index -> Difference
   calcDiffAtExp zs zz x = case x >= 1 of
     False -> undefined
-    True -> case x >= unIndex (calcBadRoot zs) of
+    True -> case x >= calcBadRoot zs of
      False -> undefined
      True -> undefined
 
