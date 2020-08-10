@@ -227,6 +227,14 @@ module Numeric.YHSeq.V0201 where
   calcBadRoot :: Mountain -> Index
   calcBadRoot z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)) - 1)
 
+  -- | 展開する際の階差の部分を計算する。
+  calcDiffAtExp :: Mountain -> DPN -> Index -> Difference
+  calcDiffAtExp zs zz x = case x >= 1 of
+    False -> undefined
+    True -> case x >= unIndex (calcBadRoot zs) of
+     False -> undefined
+     True -> undefined
+
   -- | 展開する。
   expand :: Mountain -> DPN -> Int -> DPN
   expand zs zz n =
