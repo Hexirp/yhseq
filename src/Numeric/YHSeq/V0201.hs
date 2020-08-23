@@ -240,9 +240,9 @@ module Numeric.YHSeq.V0201 where
         True ->
           let
             m = (unIndex x - rz) `div` (xz - rz)
-            y = (unIndex x - rz) `mod` (xz - rz) + 1
+            y = Index ((unIndex x - rz) `mod` (xz - rz) + 1)
           in
-            calcDiffOnDpn z ((rz - 1) + y)
+            calcDiffOnDpn z ((Index rz - 1) + y)
 
   -- | 展開する。
   expand :: Mountain -> Int -> DPN
