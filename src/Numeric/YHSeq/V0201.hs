@@ -229,11 +229,20 @@ module Numeric.YHSeq.V0201 where
 
   -- | 展開する際の階差の部分を計算する。
   calcDiffAtExp :: Mountain -> Index -> Difference
-  calcDiffAtExp z x = case x >= 1 of
-    False -> undefined
-    True -> case x >= calcBadRoot z of
-     False -> calcDiffOnDpn z x
-     True -> undefined
+  calcDiffAtExp z x =
+    let
+      xz = sMt z
+      rz = unIndex (calcBadRoot z)
+    in case x >= 1 of
+      False -> undefined
+      True -> case x >= Index rz of
+        False -> calcDiffOnDpn z x
+        True ->
+          let
+            m = (unIndex x - rz) `div` (xz - rz)
+            y = (unIndex x - rz) `mod` (xz - rz) + 1
+          in
+            calcDiffOnDpn z ((rz - 1) + y)
 
   -- | 展開する。
   expand :: Mountain -> Int -> DPN
