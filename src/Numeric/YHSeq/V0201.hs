@@ -262,7 +262,10 @@ module Numeric.YHSeq.V0201 where
             case m `compare` 0 of
               LT -> undefined
               EQ -> calcPaetOnDpn z ((Index rz - 1) + y)
-              GT -> undefined
+              GT -> case y `compare` 1 of
+                LT -> undefined
+                EQ -> undefined
+                GT -> undefined
 
   -- | 展開する際の深さの部分を計算する。
   calcNpthAtExp :: Mountain -> Index -> Depth
