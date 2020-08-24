@@ -244,7 +244,27 @@ module Numeric.YHSeq.V0201 where
           in
             calcDiffOnDpn z ((Index rz - 1) + y)
 
-  -- | 展開する際の階差の部分を計算する。
+  -- | 展開する際の親の添字の部分を計算する。
+  calcPaetAtExp :: Mountain -> Index -> Vector Index
+  calcPaetAtExp z x =
+    let
+      xz = sMt z
+      rz = unIndex (calcBadRoot z)
+    in case x >= 1 of
+      False -> undefined
+      True -> case x >= Index rz of
+        False -> calcPaetOnDpn z x
+        True ->
+          let
+            m = (unIndex x - rz) `div` (xz - rz)
+            y = Index ((unIndex x - rz) `mod` (xz - rz) + 1)
+          in
+            case m `compare` 0 of
+              LT -> undefined
+              EQ -> calcPaetOnDpn z ((Index rz - 1) + y)
+              GT -> undefined
+
+  -- | 展開する際の深さの部分を計算する。
   calcNpthAtExp :: Mountain -> Index -> Depth
   calcNpthAtExp z x =
     let
