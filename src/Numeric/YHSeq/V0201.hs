@@ -294,6 +294,6 @@ module Numeric.YHSeq.V0201 where
       DPN
         { sDPN = (rz - 1) + (xz - rz) * n
         , dDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcDiffAtExp z (Index x))
-        , pDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> undefined)
+        , pDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcPaetAtExp z (Index x))
         , nDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcNpthAtExp z (Index x))
         }
