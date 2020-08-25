@@ -264,7 +264,10 @@ module Numeric.YHSeq.V0201 where
               EQ -> calcPaetOnDpn z ((Index rz - 1) + y)
               GT -> case y `compare` 1 of
                 LT -> undefined
-                EQ -> genVec (calcNpthAtExp z x) (\n -> if rz `S.member` unIndexSet (ixMtToAnce z ((rz - 1) + y) n) then undefined else undefined)
+                EQ -> genVec (calcNpthOnDpn z ((Index rz - 1) + y)) (\n ->
+                  if rz `S.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
+                    then undefined
+                    else undefined)
                 GT -> undefined
 
   -- | 展開する際の深さの部分を計算する。
