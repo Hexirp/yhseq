@@ -9,14 +9,14 @@ module Numeric.YHSeq.V0201Spec (spec) where
   import Test.Hspec
 
   calcMtFromList :: [Int] -> Mountain
-  calcMtFromList x = calcMt (Sequence (V.fromList x))
+  calcMtFromList x = calcMtFromSeq (Sequence (V.fromList x))
 
   spec :: Spec
   spec = runIO $ do
     putStrLn ""
     putStrLn ""
-    print "calcMt $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
-    print (calcMt $ Sequence $ V.fromList $ [1,2,4,8,10,8])
+    print "calcMtFromSeq $ Sequence $ V.fromList $ [1,2,4,8,10,8]"
+    print (calcMtFromSeq $ Sequence $ V.fromList $ [1,2,4,8,10,8])
     print "calcCofType $ calcMtFromList []"
     print (calcCofType $ calcMtFromList [])
     print "calcCofType $ calcMtFromList [1,2,1]"
