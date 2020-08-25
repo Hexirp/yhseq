@@ -31,5 +31,11 @@ module Numeric.YHSeq.V0201Spec (spec) where
     print (calcCofType $ calcMtFromList [1,11])
     print "calcDpn $ calcMtFromList [1,2,4,8,10,8]"
     print (calcDpn $ calcMtFromList [1,2,4,8,10,8])
-    print "expand (calcMtFromList [1,2]) 3"
-    print (expand (calcMtFromList [1,2]) 3)
+    print "expand (calcMtFromList [1,2]) 5"
+    print (expand (calcMtFromList [1,2]) 5)
+    print "expand (calcMtFromList [1,2.2]) 5"
+    print (expand (calcMtFromList [1,2,2]) 5)
+    print "expand (calcMtFromList [1,2,3]) 5"
+    print (expand (calcMtFromList [1,2,3]) 5)
+    print "expand (calcMtFromList [1,2,4]) 5"
+    print (expand (calcMtFromList [1,2,4]) 5)
