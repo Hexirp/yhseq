@@ -268,7 +268,10 @@ module Numeric.YHSeq.V0201 where
                   if rz `S.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
                     then ixMtToPaet z (Index xz) n + (xz - rz) * m
                     else ixMtToPaet z (Index xz) n)
-                GT -> undefined
+                GT -> genVec (calcNpthOnDpn z ((Index rz - 1) + y)) (\n ->
+                  if rz `S.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
+                    then ixMtToPaet z ((Index rz - 1) + y) n + (xz - rz) * m
+                    else ixMtToPaet z ((Index rz - 1) + y) n)
 
   -- | 展開する際の深さの部分を計算する。
   calcNpthAtExp :: Mountain -> Index -> Depth
