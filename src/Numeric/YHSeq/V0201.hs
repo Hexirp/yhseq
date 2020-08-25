@@ -308,7 +308,7 @@ module Numeric.YHSeq.V0201 where
   calcMtFromDpn :: DPN -> Mountain
   calcMtFromDpn zd =
     let
-      l = sDPN s
+      l = sDPN zd
       zm = Mountain
         { sMt = l
         , dMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n)))
