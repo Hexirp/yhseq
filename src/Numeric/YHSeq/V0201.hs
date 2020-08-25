@@ -311,9 +311,9 @@ module Numeric.YHSeq.V0201 where
       l = sDPN s
       zm = Mountain
         { sMt = l
-        , dMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
-        , pMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
-        , aMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
+        , dMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n)))
+        , pMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n)))
+        , aMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n)))
         }
     in
       zm
