@@ -133,8 +133,8 @@ module Numeric.YHSeq.V0201 where
     GT -> unIndex p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
 
   -- | 山を計算する。
-  calcMt :: Sequence -> Mountain
-  calcMt s =
+  calcMtFromSeq :: Sequence -> Mountain
+  calcMtFromSeq s =
     let
       l = V.length (unSequence s)
       z = Mountain
