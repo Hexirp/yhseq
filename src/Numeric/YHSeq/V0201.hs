@@ -303,3 +303,17 @@ module Numeric.YHSeq.V0201 where
         , pDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcPaetAtExp z (Index x))
         , nDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcNpthAtExp z (Index x))
         }
+
+  -- | DPN 形式から山を計算する。
+  calcMtFromDpn :: DPN -> Mountain
+  calcMtFromDpn zd =
+    let
+      l = sDPN s
+      zm = Mountain
+        { sMt = l
+        , dMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
+        , pMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
+        , aMt = genVec l (\x -> genVec (l + 1) (\n -> undefined (Index x) (Depth n))
+        }
+    in
+      zm
