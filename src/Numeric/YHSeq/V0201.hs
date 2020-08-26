@@ -322,7 +322,11 @@ module Numeric.YHSeq.V0201 where
   calcPaetOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Index
   calcPaetOnMtFromDpnWiM zm zd x n = case n >= 1 of
     False -> undefined
-    True -> undefined
+    True -> case n >= (ixDpnToNpth zd x + 1) - V.length (ixDpnToPaet zd x) of
+      False -> ixDpnToPaet zd x V.! (1 - 1)
+      True -> case n >= ixDpnToNpth zd x + 1 of
+        False -> ixDpnToPaet zd x V.! (n - ((ixDpnToNpth zd x + 1) - V.length (ixDpnToPaet zd x)))
+        True -> x - 1
 
   -- | DPN 形式から山を計算する。
   calcMtFromDpn :: DPN -> Mountain
