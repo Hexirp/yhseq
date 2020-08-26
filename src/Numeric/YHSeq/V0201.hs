@@ -324,7 +324,7 @@ module Numeric.YHSeq.V0201 where
     False -> undefined
     True -> case n >= ixDpnToNpth zd x of
       False -> ixMtToDiff zm (ixMtToPaet zm x n) n + ixMtToDiff zm x (n + 1)
-      True -> case n + 1 >= ixDpnToNpth zd x of
+      True -> case n >= ixDpnToNpth zd x + 1 of
         False -> ixDpnToDiff zd x
         True -> 0
 
