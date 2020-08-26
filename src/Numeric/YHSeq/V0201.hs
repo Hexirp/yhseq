@@ -361,4 +361,4 @@ module Numeric.YHSeq.V0201 where
 
   -- | 山から数列を計算する。
   calcSeqFromMt :: Mountain -> Sequence
-  calcSeqFromMt z = Sequence (genVec (sMt z) (\x -> ixMtToDiff z (Index x) 1))
+  calcSeqFromMt z = Sequence (genVec (sMt z) (\x -> unDifference (ixMtToDiff z (Index x) 1)))
