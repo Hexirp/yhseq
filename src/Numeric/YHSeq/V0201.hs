@@ -46,7 +46,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | 添字。
   --
-  -- 添字といっても 'Sequence' の添字ではなく親を参照したりするときに使う添字だ。 'ixS' を見てもらえば分かるように、 'Sequence' の添字は普通の 'Int' だ。
+  -- 添字といっても 'Sequence' の添字ではなく親を参照したりするときに使う添字だ。 'ixSeq' を見てもらえば分かるように、 'Sequence' の添字は普通の 'Int' だ。
   newtype Index = Index { unIndex :: Int }
     deriving stock (Eq, Ord, Bounded)
     deriving newtype (Enum, Show, Read, Num, Real, Integral)
@@ -186,7 +186,7 @@ module Numeric.YHSeq.V0201 where
       EQ -> IsSucc
       GT -> IsLim (Class (unDifference (ixMtToDiff z (Index (sMt z)) (calcBottom z (Index (sMt z))))))
 
-  -- DPN 形式。
+  -- | DPN 形式。
   --
   -- 条件として dDPN と pDPN と nDPN の長さはそれぞれ sDPN に等しい。
   data DPN = DPN
