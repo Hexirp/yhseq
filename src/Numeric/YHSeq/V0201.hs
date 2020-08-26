@@ -318,6 +318,16 @@ module Numeric.YHSeq.V0201 where
         , nDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcNpthAtExp z (Index x))
         }
 
+  -- | メモを参照しながら DPN 形式から山の階差の部分を計算する。
+  calcDiffOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Index
+  calcDiffOnMtFromDpnWiM zm zd x n = case n >= 1 of
+    False -> undefined
+    True -> case n >= ixDpnToNpth zd x of
+      False -> ixMtToDiff zm (ixMtToPaet zm x n) n + ixMtToDiff zm x (n + 1)
+      True -> case n + 1 >= ixDpnToNpth zd x of
+        False -> ixDpnToDiff zd x
+        True -> 0
+
   -- | メモを参照しながら DPN 形式から山の親の添字の部分を計算する。
   calcPaetOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Index
   calcPaetOnMtFromDpnWiM zm zd x n = case n >= 1 of
