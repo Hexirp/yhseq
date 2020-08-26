@@ -198,15 +198,15 @@ module Numeric.YHSeq.V0201 where
 
   -- | DPN 形式から階差を添字で取得する。
   ixDpnToDiff :: DPN -> Index -> Difference
-  ixDpnToDiff z x = dDPN V.! (unIndex x - 1)
+  ixDpnToDiff z x = dDPN z V.! (unIndex x - 1)
 
   -- | DPN 形式から親の添字の列を添字で取得する。
   ixDpnToPaet :: DPN -> Index -> Vector Index
-  ixDpnToPaet z x = pDPN V.! (unIndex x - 1)
+  ixDpnToPaet z x = pDPN z V.! (unIndex x - 1)
 
   -- | DPN 形式から深さを添字で取得する。
   ixDpnToNpth :: DPN -> Index -> Difference
-  ixDpnToNpth z x = nDPN V.! (unIndex x - 1)
+  ixDpnToNpth z x = nDPN z V.! (unIndex x - 1)
 
   -- | 展開に関わる最も大きい深さを計算する。
   calcLimitDepth :: Mountain -> Depth
