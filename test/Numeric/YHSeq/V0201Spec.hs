@@ -8,6 +8,9 @@ module Numeric.YHSeq.V0201Spec (spec) where
 
   import Test.Hspec
 
+  calcSeqFromList :: [Int] -> Sequence
+  calcSeqFromList x = Sequence (V.fromList x)
+
   calcMtFromList :: [Int] -> Mountain
   calcMtFromList x = calcMtFromSeq (Sequence (V.fromList x))
 
@@ -31,11 +34,13 @@ module Numeric.YHSeq.V0201Spec (spec) where
     print (calcCofType $ calcMtFromList [1,11])
     print "calcDpn $ calcMtFromList [1,2,4,8,10,8]"
     print (calcDpn $ calcMtFromList [1,2,4,8,10,8])
-    print "expand (calcMtFromList [1,2]) 5"
-    print (expand (calcMtFromList [1,2]) 5)
-    print "expand (calcMtFromList [1,2.2]) 5"
-    print (expand (calcMtFromList [1,2,2]) 5)
-    print "expand (calcMtFromList [1,2,3]) 5"
-    print (expand (calcMtFromList [1,2,3]) 5)
-    print "expand (calcMtFromList [1,2,4]) 5"
-    print (expand (calcMtFromList [1,2,4]) 5)
+    print "expandMt (calcMtFromList [1,2]) 5"
+    print (expandMt (calcMtFromList [1,2]) 5)
+    print "expandMt (calcMtFromList [1,2.2]) 5"
+    print (expandMt (calcMtFromList [1,2,2]) 5)
+    print "expandMt (calcMtFromList [1,2,3]) 5"
+    print (expandMt (calcMtFromList [1,2,3]) 5)
+    print "expandMt (calcMtFromList [1,2,4]) 5"
+    print (expandMt (calcMtFromList [1,2,4]) 5)
+    print "expandSeq (calcSeqFromList [1,2,4,8,10,8] 5)"
+    print (expandSeq (calcSeqFromList [1,2,4,8,10,8] 5))
