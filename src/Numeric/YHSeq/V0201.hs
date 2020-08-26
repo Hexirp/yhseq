@@ -329,14 +329,21 @@ module Numeric.YHSeq.V0201 where
         True -> 0
 
   -- | メモを参照しながら DPN 形式から山の親の添字の部分を計算する。
-  calcPaetOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Index
-  calcPaetOnMtFromDpnWiM zm zd x n = case n >= 1 of
+  calcPaetOnMtFromDpnWiM :: DPN -> Index -> Depth -> Index
+  calcPaetOnMtFromDpnWiM zd x n = case n >= 1 of
     False -> undefined
     True -> case n >= (ixDpnToNpth zd x + 1) - Depth (V.length (ixDpnToPaet zd x)) of
       False -> ixDpnToPaet zd x V.! 0
       True -> case n >= ixDpnToNpth zd x + 1 of
         False -> ixDpnToPaet zd x V.! (unDepth n - (unDepth (ixDpnToNpth zd x + 1) - V.length (ixDpnToPaet zd x)))
         True -> x - 1
+
+  -- | メモを参照しながら DPN 形式から山の先祖の集合の部分を計算する。
+  calcAnceOnMtFromDpnWiM :: Mountain -> Index -> Depth -> IndexSet
+  calcAnceOnMtFromDpnWiM zm x n = case ixMtToPaet zm x n `compare` 0 of
+    LT -> undefined
+    EQ -> IndexSet (S.singleton (unIndex x))
+    GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce zm (ixMtToPaet zm x n) n)))
 
   -- | DPN 形式から山を計算する。
   calcMtFromDpn :: DPN -> Mountain
