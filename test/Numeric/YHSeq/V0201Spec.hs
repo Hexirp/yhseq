@@ -42,5 +42,5 @@ module Numeric.YHSeq.V0201Spec (spec) where
     print (expandMt (calcMtFromList [1,2,3]) 5)
     print "expandMt (calcMtFromList [1,2,4]) 5"
     print (expandMt (calcMtFromList [1,2,4]) 5)
-    print "expandSeq (calcSeqFromList [1,2,4,8,10,8] 5)"
-    print (expandSeq (calcSeqFromList [1,2,4,8,10,8] 5))
+    print "expandSeq (calcSeqFromList [1,2,4,8,10,8]) 5"
+    print (expandSeq (calcSeqFromList [1,2,4,8,10,8]) 5)
