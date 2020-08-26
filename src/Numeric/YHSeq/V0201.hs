@@ -319,7 +319,7 @@ module Numeric.YHSeq.V0201 where
         }
 
   -- | メモを参照しながら DPN 形式から山の階差の部分を計算する。
-  calcDiffOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Index
+  calcDiffOnMtFromDpnWiM :: Mountain -> DPN -> Index -> Depth -> Difference
   calcDiffOnMtFromDpnWiM zm zd x n = case n >= 1 of
     False -> undefined
     True -> case n >= ixDpnToNpth zd x of
