@@ -205,7 +205,7 @@ module Numeric.YHSeq.V0201 where
   ixDpnToPaet z x = pDPN z V.! (unIndex x - 1)
 
   -- | DPN 形式から深さを添字で取得する。
-  ixDpnToNpth :: DPN -> Index -> Difference
+  ixDpnToNpth :: DPN -> Index -> Depth
   ixDpnToNpth z x = nDPN z V.! (unIndex x - 1)
 
   -- | 展開に関わる最も大きい深さを計算する。
