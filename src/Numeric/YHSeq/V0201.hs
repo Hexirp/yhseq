@@ -304,9 +304,9 @@ module Numeric.YHSeq.V0201 where
           in
             calcNpthOnDpn z ((Index rz - 1) + y)
 
-  -- | 展開する。
-  expand :: Mountain -> Int -> DPN
-  expand z n =
+  -- | 山を展開する。
+  expandMt :: Mountain -> Int -> DPN
+  expandMt z n =
     let
       xz = sMt z
       rz = unIndex (calcBadRoot z)
@@ -362,3 +362,7 @@ module Numeric.YHSeq.V0201 where
   -- | 山から数列を計算する。
   calcSeqFromMt :: Mountain -> Sequence
   calcSeqFromMt z = Sequence (genVec (sMt z) (\x -> unDifference (ixMtToDiff z (Index x) 1)))
+
+  -- | 数列を展開する。
+  expandSeq :: Sequence -> Int -> Sequence
+  expandSeq s n = calcSeqFromMt (calcMtFromDpn (expandMt (calcMtFromSeq s) n))
