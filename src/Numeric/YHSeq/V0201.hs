@@ -196,6 +196,18 @@ module Numeric.YHSeq.V0201 where
     , nDPN :: Vector Depth
     } deriving stock (Eq, Ord, Show, Read)
 
+  -- | DPN 形式から階差を添字で取得する。
+  ixDpnToDiff :: DPN -> Index -> Difference
+  ixDpnToDiff z x = dDPN V.! (unIndex x - 1)
+
+  -- | DPN 形式から親の添字の列を添字で取得する。
+  ixDpnToPaet :: DPN -> Index -> Vector Index
+  ixDpnToPaet z x = pDPN V.! (unIndex x - 1)
+
+  -- | DPN 形式から深さを添字で取得する。
+  ixDpnToNpth :: DPN -> Index -> Difference
+  ixDpnToNpth z x = nDPN V.! (unIndex x - 1)
+
   -- | 展開に関わる最も大きい深さを計算する。
   calcLimitDepth :: Mountain -> Depth
   calcLimitDepth z = calcBottom z (Index (sMt z)) - 1
