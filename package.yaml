@@ -20,9 +20,9 @@ category:            Math
 description:         Please see the README on GitHub at <https://github.com/Hexirp/yhseq#readme>
 
 dependencies:
-  - base >= 4.7.0.0 && < 4.14.0.0
-  - containers
-  - vector
+  - base >= 4.12.0.0 && < 4.13.0.0
+  - containers >= 0.6.0.1 && < 0.7
+  - vector >= 0.12.1.2 && < 0.13
 
 library:
   source-dirs: src
@@ -50,5 +50,5 @@ tests:
       - -with-rtsopts=-N
     dependencies:
       - yhseq
-      - hspec >= 2.5.0 && < 3.0.0
-      - hspec-discover >= 2.5.0 && < 3.0.0
+      - hspec >= 2.7.1 && < 3.0.0
+      - hspec-discover >= 2.7.1 && < 3.0.0
