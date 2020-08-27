@@ -375,7 +375,7 @@ module Numeric.YHSeq.V0201 where
   data ExpandingError = OutOfIndexOnFunSeq | OutOfClass
 
   -- | 数列を展開する。
-  expandSeq :: Sequence -> Int -> Either ExpandSeqError Sequence
+  expandSeq :: Sequence -> Int -> Either ExpandingError Sequence
   expandSeq s n = case calcCofType (calcMtFromSeq s) of
     IsZero -> Left OutOfIndexOnFunSeq
     IsSucc -> case n `compare` 0 of
