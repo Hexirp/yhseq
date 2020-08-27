@@ -316,10 +316,10 @@ module Numeric.YHSeq.V0201 where
       rz = unIndex (calcBadRoot z)
     in
       DPN
-        { sDPN = (rz - 1) + (xz - rz) * n
-        , dDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcDiffAtExp z (Index x))
-        , pDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcPaetAtExp z (Index x))
-        , nDPN = genVec ((rz - 1) + (xz - rz) * n) (\x -> calcNpthAtExp z (Index x))
+        { sDPN = (rz - 1) + (xz - rz) * (n + 1)
+        , dDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcDiffAtExp z (Index x))
+        , pDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcPaetAtExp z (Index x))
+        , nDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcNpthAtExp z (Index x))
         }
 
   -- | メモを参照しながら DPN 形式から山の階差の部分を計算する。
