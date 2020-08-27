@@ -369,7 +369,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | 共終タイプが @'IsLim' 1@ である場合において数列を展開する。
   expandSeqAtLim1 :: Sequence -> Int -> Sequence
-  expandSeqAtLim1 s n = calcSeqFromMt (calcMtFromDpn (expandMt (calcMtFromSeq s) n))
+  expandSeqAtLim1 s n = calcSeqFromMt (calcMtFromDpn (expandMtAtLim1 (calcMtFromSeq s) n))
 
   -- | 'expandSeq' および 'exoandList' におけるエラーを表現する型。
   data ExpandingError = OutOfIndexOnFunSeq | OutOfClass
