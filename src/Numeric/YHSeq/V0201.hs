@@ -36,6 +36,10 @@ module Numeric.YHSeq.V0201 where
   ixSeq :: Sequence -> Int -> Int
   ixSeq s x = unSequence s V.! (x - 1)
 
+  -- | リストから数列を作る。
+  makeSeqFromList :: [Int] -> Sequence
+  makeSeqFromList sl = Sequence (V.fromList sl)
+
   -- | 階差。
   --
   -- 数列の階差を取った列を階差列と呼ぶことにする。たとえば (1,2,4,8,16,...) の階差列は (0,1,2,4,8,...) だ。
