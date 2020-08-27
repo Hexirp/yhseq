@@ -6,11 +6,11 @@ module Main where
 
   import System.Environment (getArgs)
 
-  import Numeric.YHSeq.V0200 (fseq)
+  import Numeric.YHSeq.V0201 (expandList)
 
   type OpArg = (String, String)
 
-  type Arg = ([Integer], Integer)
+  type Arg = ([Int], Int)
 
   main :: IO ()
   main = do
@@ -28,9 +28,11 @@ module Main where
 
   parse :: OpArg -> IO Arg
   parse (seq, num) = do
-    s <- evaluate (read seq :: [Integer])
-    n <- evaluate (read num :: Integer)
+    s <- evaluate (read seq :: [Int])
+    n <- evaluate (read num :: Int)
     return (s, n)
 
-  calc :: Arg -> IO [Integer]
-  calc (seq, num) = evaluate (fseq seq num)
+  calc :: Arg -> IO [Int]
+  calc (seq, num) = case expandList seq num of
+    Left e -> evaluate (error (show e))
+    Right x -> return x
