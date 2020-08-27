@@ -373,6 +373,7 @@ module Numeric.YHSeq.V0201 where
 
   -- | 'expandSeq' および 'exoandList' におけるエラーを表現する型。
   data ExpandingError = OutOfIndexOnFunSeq | OutOfClass
+    deriving (Eq, Ord, Bounded, Enum, Show, Read)
 
   -- | 数列を展開する。
   expandSeq :: Sequence -> Int -> Either ExpandingError Sequence
