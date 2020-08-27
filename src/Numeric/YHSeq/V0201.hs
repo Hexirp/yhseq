@@ -308,9 +308,9 @@ module Numeric.YHSeq.V0201 where
           in
             calcNpthOnDpn z ((Index rz - 1) + y)
 
-  -- | 山を展開する。
-  expandMt :: Mountain -> Int -> DPN
-  expandMt z n =
+  -- | 共終タイプが @'IsLim' 1@ である場合において山を展開する。
+  expandMtAtLim1 :: Mountain -> Int -> DPN
+  expandMtAtLim1 z n =
     let
       xz = sMt z
       rz = unIndex (calcBadRoot z)
@@ -367,6 +367,22 @@ module Numeric.YHSeq.V0201 where
   calcSeqFromMt :: Mountain -> Sequence
   calcSeqFromMt z = Sequence (genVec (sMt z) (\x -> unDifference (ixMtToDiff z (Index x) 1)))
 
+  -- | 共終タイプが @'IsLim' 1@ である場合において数列を展開する。
+  expandSeqAtLim1 :: Sequence -> Int -> Sequence
+  expandSeqAtLim1 s n = calcSeqFromMt (calcMtFromDpn (expandMt (calcMtFromSeq s) n))
+
+  -- | 'expandSeq' および 'exoandList' におけるエラーを表現する型。
+  data ExpandingError = OutOfIndexOnFunSeq | OutOfClass
+
   -- | 数列を展開する。
-  expandSeq :: Sequence -> Int -> Sequence
-  expandSeq s n = calcSeqFromMt (calcMtFromDpn (expandMt (calcMtFromSeq s) n))
+  expandSeq :: Sequence -> Int -> Either ExpandSeqError Sequence
+  expandSeq s n = case calcCofType (calcMtFromSeq s) of
+    IsZero -> Left OutOfIndexOnFunSeq
+    IsSucc -> case n `compare` 0 of
+      LT -> undefined
+      EQ -> Right (Sequence (genVec (V.length (unSequence s) - 1) (\x -> ixSeq s x)))
+      GT -> Left OutOfIndexOnFunSeq
+    IsLim c -> case c `compare` 1 of
+      LT -> undefined
+      EQ -> Right (expandSeqAtLim1 s n)
+      GT -> Left OutOfClass
