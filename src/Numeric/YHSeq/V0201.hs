@@ -374,7 +374,9 @@ module Numeric.YHSeq.V0201 where
   expandSeqAtLim1 s n = calcSeqFromMt (calcMtFromDpn (expandMtAtLim1 (calcMtFromSeq s) n))
 
   -- | 'expandSeq' および 'exoandList' におけるエラーを表現する型。
-  data ExpandingError = OutOfIndexOnFunSeq | OutOfClass
+  data ExpandingError
+    = OutOfIndexOnFunSeq -- ^ 基本列において範囲から外れている時。
+    | OutOfClass         -- ^ クラスが範囲から外れている時。
     deriving (Eq, Ord, Bounded, Enum, Show, Read)
 
   -- | 数列を展開する。
