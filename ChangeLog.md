@@ -2,13 +2,15 @@
 
 ## Unreleased changes
 
+`Numeric.YHSeq.V0201` を追加しました。 `Numeric.YHSeq.V0200` を元にして定義の単純化と演算の高速化が試みられています。
+
 `yhseq-simple` の名前を `yhseq` に変更しました。
 
 `yhseq-exe` を削除しました。
 
 単純なコマンド `yhseq-simple` を追加しました。
 
-`VXXXX.Cofinal` の構築子をエクスポートするように変更しました。
+`Numeric.VXXXX.Cofinal` の構築子をエクスポートするように変更しました。
 
 ## 0.2.1.2
 
