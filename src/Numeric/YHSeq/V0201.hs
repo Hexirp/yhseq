@@ -391,3 +391,11 @@ module Numeric.YHSeq.V0201 where
       LT -> undefined
       EQ -> Right (expandSeqAtLim1 s n)
       GT -> Left OutOfClass
+
+  -- | 数列からリストを作る。
+  makeListFromSeq :: Sequence -> [Int]
+  makeListFromSeq s = V.toList (unSequence s)
+
+  -- | リストを展開する。
+  expandList :: [Int] -> Int -> Either ExpandingError [Int]
+  expandList s n = fmap makeListFromSeq (expandSeq (makeSeqFromList s) n)
