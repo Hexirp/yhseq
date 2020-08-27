@@ -2,6 +2,10 @@
 
 ## Unreleased changes
 
+## 0.3.0.0
+
+依存関係の指定をより厳密なものにしました。
+
 `Numeric.YHSeq.V0201` を追加しました。 `Numeric.YHSeq.V0200` を元にして定義の単純化と演算の高速化が試みられています。
 
 `yhseq-simple` の名前を `yhseq` に変更しました。
