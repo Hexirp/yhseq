@@ -93,9 +93,9 @@ module Numeric.YHSeq.V0201 where
   ixMtToAnce :: Mountain -> Index -> Depth -> IndexSet
   ixMtToAnce z x n = aMt z V.! (unIndex x - 1) V.! (unDepth n - 1)
 
-  -- | メモを参照しながら階差を計算する。
-  calcDiffOnMtWiM :: Mountain -> Sequence -> Index -> Depth -> Difference
-  calcDiffOnMtWiM z s x n = case n `compare` 1 of
+  -- | メモを参照しながら数列から山の階差の部分を計算する。
+  calcDiffOnMtFromSeqWiM :: Mountain -> Sequence -> Index -> Depth -> Difference
+  calcDiffOnMtFromSeqWiM z s x n = case n `compare` 1 of
     LT -> undefined
     EQ -> Difference (s `ixSeq` unIndex x)
     GT -> case ixMtToPaet z x (n - 1) `compare` 0 of
@@ -106,9 +106,9 @@ module Numeric.YHSeq.V0201 where
         EQ -> 0
         GT -> ixMtToDiff z x (n - 1) - ixMtToDiff z (ixMtToPaet z x (n - 1)) (n - 1)
 
-  -- | メモを参照しながら親の添字を計算する。
-  calcPaetOnMtWiM :: Mountain -> Index -> Depth -> Index
-  calcPaetOnMtWiM z x n = calcPaetOnMtWiM' (x - 1)
+  -- | メモを参照しながら数列から山の親の添字の部分を計算する。
+  calcPaetOnMtFromSeqWiM :: Mountain -> Index -> Depth -> Index
+  calcPaetOnMtFromSeqWiM z x n = calcPaetOnMtWiM' (x - 1)
    where
     calcPaetOnMtWiM' :: Index -> Index
     calcPaetOnMtWiM' p = case p `compare` 0 of
@@ -118,9 +118,9 @@ module Numeric.YHSeq.V0201 where
         then p
         else calcPaetOnMtWiM' (p - 1)
 
-  -- | メモを参照しながら先祖の集合を計算する。
-  calcAnceOnMtWiM :: Mountain -> Index -> Depth -> IndexSet
-  calcAnceOnMtWiM z x n = case ixMtToPaet z x n `compare` 0 of
+  -- | メモを参照しながら数列から山の先祖の集合の部分を計算する。
+  calcAnceOnMtFromSeqWiM :: Mountain -> Index -> Depth -> IndexSet
+  calcAnceOnMtFromSeqWiM z x n = case ixMtToPaet z x n `compare` 0 of
     LT -> undefined
     EQ -> IndexSet (S.singleton (unIndex x))
     GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce z (ixMtToPaet z x n) n)))
@@ -134,16 +134,16 @@ module Numeric.YHSeq.V0201 where
     EQ -> True
     GT -> unIndex p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
 
-  -- | 山を計算する。
+  -- | 数列から山を計算する。
   calcMtFromSeq :: Sequence -> Mountain
   calcMtFromSeq s =
     let
       l = V.length (unSequence s)
       z = Mountain
         { sMt = l
-        , dMt = genVec l (\x -> genVec (l + 1) (\n -> calcDiffOnMtWiM z s (Index x) (Depth n)))
-        , pMt = genVec l (\x -> genVec (l + 1) (\n -> calcPaetOnMtWiM z (Index x) (Depth n)))
-        , aMt = genVec l (\x -> genVec (l + 1) (\n -> calcAnceOnMtWiM z (Index x) (Depth n)))
+        , dMt = genVec l (\x -> genVec (l + 1) (\n -> calcDiffOnMtFromSeqWiM z s (Index x) (Depth n)))
+        , pMt = genVec l (\x -> genVec (l + 1) (\n -> calcPaetOnMtFromSeqWiM z (Index x) (Depth n)))
+        , aMt = genVec l (\x -> genVec (l + 1) (\n -> calcAnceOnMtFromSeqWiM z (Index x) (Depth n)))
         }
     in
       z
