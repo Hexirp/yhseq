@@ -1,17 +1,17 @@
 name:                yhseq
-version:             0.2.1.2
+version:             0.3.0.0
 github:              "Hexirp/yhseq"
 license:             Apache-2.0
 author:              "Hexirp"
 maintainer:          "https://github.com/Hexirp/yhseq"
-copyright:           "(C) Hexirp 2019"
+copyright:           "(C) Hexirp 2019-2020"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+  - README.md
+  - ChangeLog.md
 
 # Metadata used when publishing your package
-synopsis:            Calculation of Y-sequence Hexirp edition
+synopsis:            Calculation of YH sequence system
 category:            Math
 
 # To avoid duplicated efforts in documentation and dealing with the
@@ -20,20 +20,35 @@ category:            Math
 description:         Please see the README on GitHub at <https://github.com/Hexirp/yhseq#readme>
 
 dependencies:
-- base >= 4.7.0.0 && < 4.14.0.0
+  - base >= 4.12.0.0 && < 4.13.0.0
+  - containers >= 0.6.0.1 && < 0.7
+  - vector >= 0.12.1.2 && < 0.13
 
 library:
   source-dirs: src
+  other-modules:
+    - Numeric.YHSeq.V0300
+
+executables:
+  yhseq:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - yhseq
 
 tests:
   yhseq-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - yhseq
-    - hspec >= 2.5.0 && < 3.0.0
-    - hspec-discover >= 2.5.0 && < 3.0.0
+      - yhseq
+      - hspec >= 2.7.1 && < 3.0.0
+      - hspec-discover >= 2.7.1 && < 3.0.0
