@@ -375,13 +375,13 @@ module Numeric.YHSeq.V0300 where
 
   -- | 斜め親を計算する。
   calcDiPa :: Mountain -> Index -> Depth -> Maybe (Index, Depth)
-  calcDiPa z x n = case ixPaetOnMt z x n `compare` 0 of
+  calcDiPa z x n = case ixMtOnPaet z x n `compare` 0 of
     LT -> undefined
     EQ -> Nothing
     GT -> case n `compare` 1 of
       LT -> undefined
       EQ -> Nothing
-      GT -> Just (ixPaetOnMt z x n, n - 1)
+      GT -> Just (ixMtOnPaet z x n, n - 1)
 
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
