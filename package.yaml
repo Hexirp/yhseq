@@ -26,8 +26,6 @@ dependencies:
 
 library:
   source-dirs: src
-  other-modules:
-    - Numeric.YHSeq.V0300
 
 executables:
   yhseq:
