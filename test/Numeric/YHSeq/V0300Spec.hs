@@ -45,5 +45,9 @@ module Numeric.YHSeq.V0300Spec (spec) where
     print (expandList [1,2,4,8,10,8] 5)
     print "expandList [1,3] 5"
     print (expandList [1,3] 5)
+    print "calcDiPa (calcMtFromList [1,3,5]) 1 1"
+    print (calcDiPa (calcMtFromList [1,3,5]) 1 1)
+    print "calcDiPa (calcMtFromList [1,3,5]) 2 2"
+    print (calcDiPa (calcMtFromList [1,3,5]) 2 2)
     print "calcDiPa (calcMtFromList [1,3,5]) 3 2"
     print (calcDiPa (calcMtFromList [1,3,5]) 3 2)
