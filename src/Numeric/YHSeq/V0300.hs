@@ -373,6 +373,16 @@ module Numeric.YHSeq.V0300 where
   expandSeqAtLim1 :: Sequence -> Int -> Sequence
   expandSeqAtLim1 s n = calcSeqFromMt (calcMtFromDpn (expandMtAtLim1 (calcMtFromSeq s) n))
 
+  -- | 斜め親を計算する。
+  calcDiPa :: Mountain -> Index -> Depth -> Maybe (Index, Depth)
+  calcDiPa z x n = case ixPaetOnMt z x n `compare` 0 of
+    LT -> undefined
+    EQ -> Nothing
+    GT -> case n `compare` 1 of
+      LT -> undefined
+      EQ -> Nothing
+      GT -> Just (ixPaetOnMt z x n, n - 1)
+
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
     = OutOfIndexOnFunSeq -- ^ 基本列において範囲から外れている時。
