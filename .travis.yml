@@ -8,16 +8,25 @@
 # Copy these contents into the root directory of your Github project in a file
 # named .travis.yml
 
+# Choose a OS
+os: linux
+
 # Choose a build environment
 dist: xenial
 
 # Do not choose a language; we provide our own build tools.
-language: generic
+language: shell
+
+# Use Build Matrix to build multiple stack resolvers.
+env:
+  - STACK_YAML='lts-13.30.yaml'
+  - STACK_YAML='lts-14.27.yaml'
+  - STACK_YAML='lts-15.16.yaml'
 
 # Caching so the next build will be fast too.
 cache:
   directories:
-  - $HOME/.stack
+    - $HOME/.stack
 
 # Ensure necessary system libraries are present
 addons:
@@ -27,14 +36,14 @@ addons:
 
 before_install:
 # Download and unpack the stack executable
-- mkdir -p ~/.local/bin
-- export PATH=$HOME/.local/bin:$PATH
-- travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - mkdir -p ~/.local/bin
+  - export PATH=$HOME/.local/bin:$PATH
+  - travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 
 install:
 # Build dependencies
-- stack --no-terminal --install-ghc test --only-dependencies
+  - stack --no-terminal --install-ghc test --only-dependencies
 
 script:
 # Build the package, its tests, and its docs and run the tests
-- stack --no-terminal test --haddock --no-haddock-deps
+  - stack --no-terminal test --haddock --no-haddock-deps
