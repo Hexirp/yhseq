@@ -39,8 +39,8 @@ module Numeric.YHSeq.V0300Spec (spec) where
     print (expandMtAtLim1 (calcMtFromList [1,2,3]) 5)
     print "expandMtAtLim1 (calcMtFromList [1,2,4]) 5"
     print (expandMtAtLim1 (calcMtFromList [1,2,4]) 5)
-    print "expandSeq (calcSeqFromList [1,2,4,8,10,8]) 5"
-    print (expandSeq (calcSeqFromList [1,2,4,8,10,8]) 5)
+    print "expandSeq (makeSeqFromList [1,2,4,8,10,8]) 5"
+    print (expandSeq (makeSeqFromList [1,2,4,8,10,8]) 5)
     print "expandList [1,2,4,8,10,8] 5"
     print (expandList [1,2,4,8,10,8] 5)
     print "expandList [1,3] 5"
