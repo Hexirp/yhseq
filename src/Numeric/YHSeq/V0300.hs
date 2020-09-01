@@ -17,6 +17,8 @@ module Numeric.YHSeq.V0300 where
 
   import           Data.IntSet      ( IntSet )
   import qualified Data.IntSet as S
+  import           Data.Map         ( Map )
+  import qualified Data.Map    as M
   import           Data.Vector      ( Vector )
   import qualified Data.Vector as V
 
@@ -382,6 +384,12 @@ module Numeric.YHSeq.V0300 where
       LT -> undefined
       EQ -> Nothing
       GT -> Just (ixMtToPaet z x n, n - 1)
+
+  -- | 斜め親を辿った結果を 'Map' にする。
+  calcMapOfDiPa :: Mountain -> Index -> Depth -> Map Index Depth
+  calcMapOfDiPa z x n = case calcDiPa z x n of
+    Nothing -> M.singleton x n
+    Just (x', n') -> M.insert x n (calcMapOfDiPa z x' n')
 
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
