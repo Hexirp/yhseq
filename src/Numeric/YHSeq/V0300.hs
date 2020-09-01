@@ -391,6 +391,18 @@ module Numeric.YHSeq.V0300 where
     Nothing -> M.singleton x n
     Just (x', n') -> M.insert x n (calcMapOfDiPa z x' n')
 
+  -- | 切り落とされる頭 (cutted head) から斜め親を辿った結果を 'Map' にする。
+  calcMapOfDiPaOfCu :: Mountain -> Map Index Depth
+  calcMapOfDiPaOfCu z = calcMapOfDiPa z (Index (sMt z)) (calcBottom z (Index (sMt z)))
+
+  -- | 対角列に含まれるかを判定する。
+  isInDiSeq :: Mountain -> Index -> Bool
+  isInDiSeq z x = x `M.member` calcMapOfDiPaOfCu z
+
+  -- | 対角列 (diagonal sequence) を計算する。
+  calcDiSeq :: Mountain -> Sequence
+  calcDiSeq z = undefined
+
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
     = OutOfIndexOnFunSeq -- ^ 基本列において範囲から外れている時。
