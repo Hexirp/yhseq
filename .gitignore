@@ -23,5 +23,5 @@ cabal.project.local~
 
 # by Stack
 
-yhseq.cabal
+.stack-work/
 *~
