@@ -15,11 +15,13 @@ module Numeric.YHSeq.V0300 where
 
   import Data.Monoid (Sum (..))
 
-  import           Data.IntSet      ( IntSet )
+  import           Data.IntSet       ( IntSet )
   import qualified Data.IntSet as IS
-  import           Data.Map         ( Map )
+  import           Data.Map          ( Map )
   import qualified Data.Map    as M
-  import           Data.Vector      ( Vector )
+  import           Data.Set          ( Set )
+  import qualified Data.Set    as S
+  import           Data.Vector       ( Vector )
   import qualified Data.Vector as V
 
   -- | 1 から n までの配列に関数を適用する。
@@ -397,34 +399,25 @@ module Numeric.YHSeq.V0300 where
   calcMapOfDiPaOfCu z = calcMapOfDiPa z (Index (sMt z)) (calcBottom z (Index (sMt z)))
 
   -- | 元の列の添字と対角列の添字の対応関係を計算する。
-  calcCorBetBsIxAndDiIx :: Mountain -> [(Index, Index)]
-  calcCorBetBsIxAndDiIx z = M.keys (calcMapOfDiPaOfCu z)
+  calcCorBetBsIxAndDiIx :: Mountain -> Set (Index, Index)
+  calcCorBetBsIxAndDiIx z = M.keysSet (calcMapOfDiPaOfCu z)
 
   -- | 対角列に含まれるかを判定する。
   isInDiSeq :: Mountain -> Index -> Bool
-  isInDiSeq z x = null (filter (\(x', _) -> x == x') (calcCorBetBsIxAndDiIx z))
+  isInDiSeq z x = S.null (S.filter (\(x', _) -> x == x') (calcCorBetBsIxAndDiIx z))
 
   -- | 元の列の添字を対角列の添字に変換する。
   convBsIxToDiIx :: Mountain -> Index -> Maybe Index
-  convBsIxToDiIx z x = case isInDiSeq z x of
-    False -> Nothing
-    True -> Just (convBsIxToDiIx' x)
-   where
-    convBsIxToDiIx' :: Index -> Index
-    convBsIxToDiIx' x = case x `compare` 1 of
-      LT -> undefined
-      EQ -> case isInDiSeq z x of
-        False -> 0
-        True -> 1
-      GT -> case x >= Index (sMt z + 1) of
-        False -> case isInDiSeq z x of
-          False -> convBsIxToDiIx' (x - 1)
-          True -> convBsIxToDiIx' (x - 1) + 1
-        True -> undefined
+  convBsIxToDiIx z x = case S.toList (S.filter (\(x', _) -> x == x') (calcCorBetBsIxAndDiIx z)) of
+    [] -> Nothing
+    (_, y) : [] -> Just y
+    _ -> undefined
 
   -- | 対角列の添字を元の列の添字に変換する。
   convDiIxToBsIx :: Mountain -> Index -> Index
-  convDiIxToBsIx z x = undefined
+  convDiIxToBsIx z y = case S.toList (S.filter (\(_, y') -> y == y') (calcCorBetBsIxAndDiIx z)) of
+    (x, _) : [] -> x
+    _ -> undefined
 
   -- | 対角列 (diagonal sequence) を計算する。
   calcDiSeq :: Mountain -> Sequence
