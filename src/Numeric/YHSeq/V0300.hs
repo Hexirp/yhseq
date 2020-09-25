@@ -390,7 +390,7 @@ module Numeric.YHSeq.V0300 where
   calcMapOfDiPa z x n = case calcDiPa z x n of
     Nothing -> M.singleton (x, 1) n
     Just (x', n') -> let m = calcMapOfDiPa z x' n' in
-      M.insert (x, M.size m + 1) n m
+      M.insert (x, Index (M.size m + 1)) n m
 
   -- | 切り落とされる頭 (cutted head) から斜め親を辿った結果を 'Map' にする。
   calcMapOfDiPaOfCu :: Mountain -> Map (Index, Index) Depth
@@ -416,7 +416,7 @@ module Numeric.YHSeq.V0300 where
       EQ -> case isInDiSeq z x of
         False -> 0
         True -> 1
-      GT -> case x >= sMt z + 1 of
+      GT -> case x >= Index (sMt z + 1) of
         False -> case isInDiSeq z x of
           False -> convBsIxToDiIx' (x - 1)
           True -> convBsIxToDiIx' (x - 1) + 1
