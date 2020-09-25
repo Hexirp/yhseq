@@ -399,6 +399,17 @@ module Numeric.YHSeq.V0300 where
   isInDiSeq :: Mountain -> Index -> Bool
   isInDiSeq z x = x `M.member` calcMapOfDiPaOfCu z
 
+  -- | 元の列の添字と対角列の添字の対応を計算する。
+  calcCorBetBsIxAndDiIx :: Mountain -> Set (Int, Int)
+  calcCorBetBsIxAndDiIx z = calcCorBetBsIxAndDiIx' (sMt n)
+   where
+    calcCorBetBsIxAndDiIx' :: Index -> Set (Int, Int)
+    calcCorBetBsIxAndDiIx' x = case x `compare` 1 of
+      LT -> undefined
+      EQ -> case isInDiSeq z x of
+        False -> S.empty
+        True -> S.singleton (x,
+
   -- | 元の列の添字を対角列の添字に変換する。
   convBsIxToDiIx :: Mountain -> Index -> Maybe Index
   convBsIxToDiIx z x = case isInDiSeq z x of
