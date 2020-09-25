@@ -16,7 +16,7 @@ module Numeric.YHSeq.V0300 where
   import Data.Monoid (Sum (..))
 
   import           Data.IntSet      ( IntSet )
-  import qualified Data.IntSet as S
+  import qualified Data.IntSet as IS
   import           Data.Map         ( Map )
   import qualified Data.Map    as M
   import           Data.Vector      ( Vector )
@@ -130,8 +130,8 @@ module Numeric.YHSeq.V0300 where
   calcAnceOnMtFromSeqWiM :: Mountain -> Index -> Depth -> IndexSet
   calcAnceOnMtFromSeqWiM z x n = case ixMtToPaet z x n `compare` 0 of
     LT -> undefined
-    EQ -> IndexSet (S.singleton (unIndex x))
-    GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce z (ixMtToPaet z x n) n)))
+    EQ -> IndexSet (IS.singleton (unIndex x))
+    GT -> IndexSet (IS.insert (unIndex x) (unIndexSet (ixMtToAnce z (ixMtToPaet z x n) n)))
 
   -- | 一つ浅い深さで先祖であるか。
   --
@@ -140,7 +140,7 @@ module Numeric.YHSeq.V0300 where
   isAnceAtSh z x n p = case n `compare` 1 of
     LT -> undefined
     EQ -> True
-    GT -> unIndex p `S.member` unIndexSet (ixMtToAnce z x (n - 1))
+    GT -> unIndex p `IS.member` unIndexSet (ixMtToAnce z x (n - 1))
 
   -- | 数列から山を計算する。
   calcMtFromSeq :: Sequence -> Mountain
@@ -287,11 +287,11 @@ module Numeric.YHSeq.V0300 where
               GT -> case y `compare` 1 of
                 LT -> undefined
                 EQ -> genVec (calcNpthOnDpn z ((Index rz - 1) + y)) (\n ->
-                  if rz `S.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
+                  if rz `IS.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
                     then ixMtToPaet z (Index xz) n + Index ((xz - rz) * (m - 1))
                     else ixMtToPaet z (Index xz) n)
                 GT -> genVec (calcNpthOnDpn z ((Index rz - 1) + y)) (\n ->
-                  if rz `S.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
+                  if rz `IS.member` unIndexSet (ixMtToAnce z ((Index rz - 1) + y) n)
                     then ixMtToPaet z ((Index rz - 1) + y) n + Index ((xz - rz) * m)
                     else ixMtToPaet z ((Index rz - 1) + y) n)
 
@@ -350,8 +350,8 @@ module Numeric.YHSeq.V0300 where
   calcAnceOnMtFromDpnWiM :: Mountain -> Index -> Depth -> IndexSet
   calcAnceOnMtFromDpnWiM zm x n = case ixMtToPaet zm x n `compare` 0 of
     LT -> undefined
-    EQ -> IndexSet (S.singleton (unIndex x))
-    GT -> IndexSet (S.insert (unIndex x) (unIndexSet (ixMtToAnce zm (ixMtToPaet zm x n) n)))
+    EQ -> IndexSet (IS.singleton (unIndex x))
+    GT -> IndexSet (IS.insert (unIndex x) (unIndexSet (ixMtToAnce zm (ixMtToPaet zm x n) n)))
 
   -- | DPN 形式から山を計算する。
   calcMtFromDpn :: DPN -> Mountain
