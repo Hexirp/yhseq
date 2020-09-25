@@ -398,7 +398,7 @@ module Numeric.YHSeq.V0300 where
 
   -- | 元の列の添字と対角列の添字の対応関係を計算する。
   calcCorBetBsIxAndDiIx :: Mountain -> [(Index, Index)]
-  calcCorBetBsIsAndDiIx z = M.keys (calcMapOfDiPaOfCu z)
+  calcCorBetBsIxAndDiIx z = M.keys (calcMapOfDiPaOfCu z)
 
   -- | 対角列に含まれるかを判定する。
   isInDiSeq :: Mountain -> Index -> Bool
