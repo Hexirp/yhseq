@@ -386,29 +386,23 @@ module Numeric.YHSeq.V0300 where
       GT -> Just (ixMtToPaet z x n, n - 1)
 
   -- | 斜め親を辿った結果を 'Map' にする。
-  calcMapOfDiPa :: Mountain -> Index -> Depth -> Map Index Depth
+  calcMapOfDiPa :: Mountain -> Index -> Depth -> Map (Index, Index) Depth
   calcMapOfDiPa z x n = case calcDiPa z x n of
-    Nothing -> M.singleton x n
-    Just (x', n') -> M.insert x n (calcMapOfDiPa z x' n')
+    Nothing -> M.singleton (x, 1) n
+    Just (x', n') -> let m = calcMapOfDiPa z x' n' in
+      M.insert (x, M.size m + 1) n m
 
   -- | 切り落とされる頭 (cutted head) から斜め親を辿った結果を 'Map' にする。
-  calcMapOfDiPaOfCu :: Mountain -> Map Index Depth
+  calcMapOfDiPaOfCu :: Mountain -> Map (Index, Index) Depth
   calcMapOfDiPaOfCu z = calcMapOfDiPa z (Index (sMt z)) (calcBottom z (Index (sMt z)))
+
+  -- | 元の列の添字と対角列の添字の対応関係を計算する。
+  calcCorBetBsIxAndDiIx :: Mountain -> [(Index, Index)]
+  calcCorBetBsIsAndDiIx z = M.keys (calcMapOfDiPaOfCu z)
 
   -- | 対角列に含まれるかを判定する。
   isInDiSeq :: Mountain -> Index -> Bool
-  isInDiSeq z x = x `M.member` calcMapOfDiPaOfCu z
-
-  -- | 元の列の添字と対角列の添字の対応を計算する。
-  calcCorBetBsIxAndDiIx :: Mountain -> Set (Int, Int)
-  calcCorBetBsIxAndDiIx z = calcCorBetBsIxAndDiIx' (sMt n)
-   where
-    calcCorBetBsIxAndDiIx' :: Index -> Set (Int, Int)
-    calcCorBetBsIxAndDiIx' x = case x `compare` 1 of
-      LT -> undefined
-      EQ -> case isInDiSeq z x of
-        False -> S.empty
-        True -> S.singleton (x,
+  isInDiSeq z x = null (filter (\(x', _) -> x == x') (calcCorBetBsIxAndDiIx z))
 
   -- | 元の列の添字を対角列の添字に変換する。
   convBsIxToDiIx :: Mountain -> Index -> Maybe Index
