@@ -425,7 +425,7 @@ module Numeric.YHSeq.V0300 where
 
   -- | 対角列の要素を計算する。
   calcElemOfDiSeq :: Mountain -> Index -> Difference
-  calcElemOfDiSeq z y = case M.toList (M.filterWithKey (\(_, y') _ -> y == y') (calcMapOfDiSeqOfCu z)) of
+  calcElemOfDiSeq z y = case M.toList (M.filterWithKey (\(_, y') _ -> y == y') (calcMapOfDiPaOfCu z)) of
     ((x, _), n) : [] -> ixMtToDiff z x n
     _ -> undefined
 
