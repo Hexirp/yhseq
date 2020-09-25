@@ -399,6 +399,28 @@ module Numeric.YHSeq.V0300 where
   isInDiSeq :: Mountain -> Index -> Bool
   isInDiSeq z x = x `M.member` calcMapOfDiPaOfCu z
 
+  -- | 元の列の添字を対角列の添字に変換する。
+  convBsIxToDiIx :: Mountain -> Index -> Maybe Index
+  convBsIxToDiIx z x = case isInDiSeq z x of
+    False -> Nothing
+    True -> Just (convBsIxToDiIx' x)
+   where
+    convBsIxToDiIx' :: Index -> Index
+    convBsIxToDiIx' x = case x `compare` 1 of
+      LT -> undefined
+      EQ -> case isInDiSeq z x of
+        False -> 0
+        True -> 1
+      GT -> case x >= sMt z + 1 of
+        False -> case isInDiSeq z x of
+          False -> convBsIxToDiIx' (x - 1)
+          True -> convBsIxToDiIx' (x - 1) + 1
+        True -> undefined
+
+  -- | 対角列の添字を元の列の添字に変換する。
+  convDiIxToBsIx :: Mountain -> Index -> Index
+  convDiIxToBsIx z x = undefined
+
   -- | 対角列 (diagonal sequence) を計算する。
   calcDiSeq :: Mountain -> Sequence
   calcDiSeq z = undefined
