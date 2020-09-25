@@ -431,7 +431,7 @@ module Numeric.YHSeq.V0300 where
 
   -- | 対角列 (diagonal sequence) を計算する。
   calcDiSeq :: Mountain -> Sequence
-  calcDiSeq z = Sequence (genVec (calcSizeOfDiSeq z) (\x -> calcElemOfDiSeq z x))
+  calcDiSeq z = Sequence (genVec (calcSizeOfDiSeq z) (\x -> unDifference (calcElemOfDiSeq z (Index x))))
 
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
