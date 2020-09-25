@@ -398,6 +398,10 @@ module Numeric.YHSeq.V0300 where
   calcMapOfDiPaOfCu :: Mountain -> Map (Index, Index) Depth
   calcMapOfDiPaOfCu z = calcMapOfDiPa z (Index (sMt z)) (calcBottom z (Index (sMt z)))
 
+  -- | 対角列のサイズを計算する。
+  calcSizeOfDiSeq :: Mountain -> Int
+  calcSizeOfDiSeq z = M.size (calcMapOfDiPaOfCu z)
+
   -- | 元の列の添字と対角列の添字の対応関係を計算する。
   calcCorBetBsIxAndDiIx :: Mountain -> Set (Index, Index)
   calcCorBetBsIxAndDiIx z = M.keysSet (calcMapOfDiPaOfCu z)
@@ -419,9 +423,15 @@ module Numeric.YHSeq.V0300 where
     (x, _) : [] -> x
     _ -> undefined
 
+  -- | 対角列の要素を計算する。
+  calcElemOfDiSeq :: Mountain -> Index -> Difference
+  calcElemOfDiSeq z y = case M.toList (M.filterWithKey (\(_, y') _ -> y == y') (calcMapOfDiSeqOfCu z)) of
+    ((x, _), n) : [] -> ixMtToDiff z x n
+    _ -> undefined
+
   -- | 対角列 (diagonal sequence) を計算する。
   calcDiSeq :: Mountain -> Sequence
-  calcDiSeq z = undefined
+  calcDiSeq z = Sequence (genVec (calcSizeOfDiSeq z) (\x -> calcElemOfDiSeq z x))
 
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
