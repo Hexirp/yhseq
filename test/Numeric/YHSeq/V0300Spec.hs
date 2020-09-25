@@ -53,3 +53,17 @@ module Numeric.YHSeq.V0300Spec (spec) where
     print (calcDiPa (calcMtFromList [1,3,5]) 2 2)
     print "calcDiPa (calcMtFromList [1,3,5]) 3 2"
     print (calcDiPa (calcMtFromList [1,3,5]) 3 2)
+    print "calcDiSeq (calcMtFromList [1,3])"
+    print (calcDiSeq (calcMtFromList [1,3]))
+    print "calcDiSeq (calcMtFromList [1,3,3])"
+    print (calcDiSeq (calcMtFromList [1,3,3]))
+    print "calcDiSeq (calcMtFromList [1,3,5])"
+    print (calcDiSeq (calcMtFromList [1,3,5]))
+    print "calcDiSeq (calcMtFromList [1,3,6])"
+    print (calcDiSeq (calcMtFromList [1,3,6]))
+    print "calcDiSeq (calcMtFromList [1,3,7])"
+    print (calcDiSeq (calcMtFromList [1,3,7]))
+    print "calcDiSeq (calcMtFromList [1,3,8])"
+    print (calcDiSeq (calcMtFromList [1,3,8]))
+    print "calcDiSeq (calcMtFromList [1,3,9])"
+    print (calcDiSeq (calcMtFromList [1,3,9]))
