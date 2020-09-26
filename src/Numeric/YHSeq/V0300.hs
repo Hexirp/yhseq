@@ -433,15 +433,26 @@ module Numeric.YHSeq.V0300 where
   calcDiSeq :: Mountain -> Sequence
   calcDiSeq z = Sequence (genVec (calcSizeOfDiSeq z) (\x -> unDifference (calcElemOfDiSeq z (Index x))))
 
+  -- | 共終タイプが @'IsLim' n@ かつ n が 1 より大きい場合において悪部根を計算する。
+  calcBadRootAtLimN :: Mountain -> Index
+  calcBadRootAtLimN z = let diZ = calcDiSeq z in
+    case calcCofType diZ of
+      IsZero -> undefined
+      IsSucc -> undefined
+      IsLim nDiZ -> case nDiZ `compare` 1 of
+        LT -> undefined
+        EQ -> convDiIxToBsIx (calcBadRootAtLim1 diZ)
+        GT -> convDiIxToBsIx (calcBadRootAtLimN diZ)
+
   -- | 偽の悪部根 (false bad root) を計算する。
   calcFalseBadRoot :: Mountain -> Index
   calcFalseBadRoot z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)))
 
   -- | 真の悪部根 (true bad root) を計算する。
   calcTrueBadRoot :: Mountain -> Index
-  calcTrueBadRoot = undefined
+  calcTrueBadRoot z = calcBadRootAtLimN z
 
-  -- | 共終タイプが @'IsLim' n@ である場合において数列を展開する。
+  -- | 共終タイプが @'IsLim' n@ かつ n が 1 より大きい場合において数列を展開する。
   expandSeqAtLimN :: Sequence -> Int -> Sequence
   expandSeqAtLimN = undefined
 
