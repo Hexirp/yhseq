@@ -435,14 +435,14 @@ module Numeric.YHSeq.V0300 where
 
   -- | 共終タイプが @'IsLim' n@ かつ n が 1 より大きい場合において悪部根を計算する。
   calcBadRootAtLimN :: Mountain -> Index
-  calcBadRootAtLimN z = let diZ = calcDiSeq z in
+  calcBadRootAtLimN z = let diZ = calcMtFromSeq (calcDiSeq z) in
     case calcCofType diZ of
       IsZero -> undefined
       IsSucc -> undefined
       IsLim nDiZ -> case nDiZ `compare` 1 of
         LT -> undefined
-        EQ -> convDiIxToBsIx (calcBadRootAtLim1 diZ)
-        GT -> convDiIxToBsIx (calcBadRootAtLimN diZ)
+        EQ -> convDiIxToBsIx z (calcBadRootAtLim1 diZ)
+        GT -> convDiIxToBsIx z (calcBadRootAtLimN diZ)
 
   -- | 偽の悪部根 (false bad root) を計算する。
   calcFalseBadRoot :: Mountain -> Index
