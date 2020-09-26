@@ -65,3 +65,9 @@ module Numeric.YHSeq.V0300Spec (spec) where
     print (calcDiSeq (calcMtFromList [1,3,8]))
     print "calcDiSeq (calcMtFromList [1,3,9])"
     print (calcDiSeq (calcMtFromList [1,3,9]))
+    print "calcDiSeq (calcMtFromList [1,3,9,11,9])"
+    print (calcDiSeq (calcMtFromList [1,3,9,11,9]))
+    print "calcDiSeq (calcMtFromList [1,3,9,21,9])"
+    print (calcDiSeq (calcMtFromList [1,3,9,21,9]))
+    print "calcDiSeq (calcMtFromList [1,4.8,11])"
+    print (calcDiSeq (calcMtFromList [1,4,8,11]))
