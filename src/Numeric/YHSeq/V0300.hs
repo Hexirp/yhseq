@@ -248,15 +248,15 @@ module Numeric.YHSeq.V0300 where
     }
 
   -- | 悪部根を計算する。
-  calcBadRoot :: Mountain -> Index
-  calcBadRoot z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)) - 1)
+  calcBadRootAtLim1 :: Mountain -> Index
+  calcBadRootAtLim1 z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)) - 1)
 
   -- | 展開する際の階差の部分を計算する。
-  calcDiffAtExp :: Mountain -> Index -> Difference
-  calcDiffAtExp z x =
+  calcDiffAtExpAtLim1 :: Mountain -> Index -> Difference
+  calcDiffAtExpAtLim1 z x =
     let
       xz = sMt z
-      rz = unIndex (calcBadRoot z)
+      rz = unIndex (calcBadRootAtLim1 z)
     in case x >= 1 of
       False -> undefined
       True -> case x >= Index rz of
@@ -269,11 +269,11 @@ module Numeric.YHSeq.V0300 where
             calcDiffOnDpn z ((Index rz - 1) + y)
 
   -- | 展開する際の親の添字の部分を計算する。
-  calcPaetAtExp :: Mountain -> Index -> Vector Index
-  calcPaetAtExp z x =
+  calcPaetAtExpAtLim1 :: Mountain -> Index -> Vector Index
+  calcPaetAtExpAtLim1 z x =
     let
       xz = sMt z
-      rz = unIndex (calcBadRoot z)
+      rz = unIndex (calcBadRootAtLim1 z)
     in case x >= 1 of
       False -> undefined
       True -> case x >= Index rz of
@@ -298,11 +298,11 @@ module Numeric.YHSeq.V0300 where
                     else ixMtToPaet z ((Index rz - 1) + y) n)
 
   -- | 展開する際の深さの部分を計算する。
-  calcNpthAtExp :: Mountain -> Index -> Depth
-  calcNpthAtExp z x =
+  calcNpthAtExpAtLim1 :: Mountain -> Index -> Depth
+  calcNpthAtExpAtLim1 z x =
     let
       xz = sMt z
-      rz = unIndex (calcBadRoot z)
+      rz = unIndex (calcBadRootAtLim1 z)
     in case x >= 1 of
       False -> undefined
       True -> case x >= Index rz of
@@ -319,13 +319,13 @@ module Numeric.YHSeq.V0300 where
   expandMtAtLim1 z n =
     let
       xz = sMt z
-      rz = unIndex (calcBadRoot z)
+      rz = unIndex (calcBadRootAtLim1 z)
     in
       DPN
         { sDPN = (rz - 1) + (xz - rz) * (n + 1)
-        , dDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcDiffAtExp z (Index x))
-        , pDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcPaetAtExp z (Index x))
-        , nDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcNpthAtExp z (Index x))
+        , dDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcDiffAtExpAtLim1 z (Index x))
+        , pDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcPaetAtExpAtLim1 z (Index x))
+        , nDPN = genVec ((rz - 1) + (xz - rz) * (n + 1)) (\x -> calcNpthAtExpAtLim1 z (Index x))
         }
 
   -- | メモを参照しながら DPN 形式から山の階差の部分を計算する。
@@ -432,6 +432,18 @@ module Numeric.YHSeq.V0300 where
   -- | 対角列 (diagonal sequence) を計算する。
   calcDiSeq :: Mountain -> Sequence
   calcDiSeq z = Sequence (genVec (calcSizeOfDiSeq z) (\x -> unDifference (calcElemOfDiSeq z (Index x))))
+
+  -- | 偽の悪部根 (false bad root) を計算する。
+  calcFalseBadRoot :: Mountain -> Index
+  calcFalseBadRoot z = ixMtToPaet z (Index (sMt z)) (calcBottom z (Index (sMt z)))
+
+  -- | 真の悪部根 (true bad root) を計算する。
+  calcTrueBadRoot :: Mountain -> Index
+  calcTrueBadRoot = undefined
+
+  -- | 共終タイプが @'IsLim' n@ である場合において数列を展開する。
+  expandSeqAtLimN :: Sequence -> Int -> Sequence
+  expandSeqAtLimN = undefined
 
   -- | 'expandSeq' および 'expandList' におけるエラーを表現する型。
   data ExpandingError
